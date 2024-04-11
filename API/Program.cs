@@ -3,6 +3,7 @@ using API.Data.Interfaces;
 using API.Data.Repositories;
 using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 namespace API
 {
@@ -27,8 +28,15 @@ namespace API
             builder.Services.AddTransient<IHouse, HouseRepository>();
             builder.Services.AddTransient<IImage,  ImageRepository>();
             builder.Services.AddTransient<IRealtor,  RealtorRepository>();
-
+            
             var app = builder.Build();
+            //La till denna för att lösa "loading" problemet
+            app.UseCors(policy =>
+    policy.WithOrigins("https://localhost:7023", "https://localhost:7256")
+        .AllowAnyMethod()
+        .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization,
+            "x-custom-header")
+        .AllowCredentials());
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -1,4 +1,4 @@
-﻿@* @page "/houses"
+﻿@page "/houses"
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
@@ -14,17 +14,20 @@ else
     @foreach (var house in ListOfHouses)
     {
         <p>House Id: @house.HouseId</p>
+       
     }
-}
+} 
 @code {
 
     private List<House> ListOfHouses { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine("entered OnInitializedAsync method");
-        string apiTe
+        ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
+        // Console.WriteLine("entered OnInitializedAsync method");
+      
 }
- *@
 
 
+
+}
