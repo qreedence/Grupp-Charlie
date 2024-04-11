@@ -1,0 +1,30 @@
+﻿@* @page "/houses"
+@inject HttpClient Http
+@using Models;
+@using System.Net.Http.Json
+
+<h3>Houses</h3>
+
+@if (ListOfHouses == null)
+{
+    <p>Tänk igen idiot</p>
+}
+else
+{
+    @foreach (var house in ListOfHouses)
+    {
+        <p>House Id: @house.HouseId</p>
+    }
+}
+@code {
+
+    private List<House> ListOfHouses { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("entered OnInitializedAsync method");
+        string apiTe
+}
+ *@
+
+

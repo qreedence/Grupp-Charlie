@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Data.Interfaces;
+using API.Data.Repositories;
+using API.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +11,16 @@ namespace API.Controllers
     [ApiController]
     public class HouseController : ControllerBase
     {
+        private readonly IHouse houseRepository;
+        public HouseController(IHouse HouseRepository)
+        {
+            houseRepository = HouseRepository;
+        }
         // GET: api/<HouseController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<House>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await houseRepository.GetAllAsync();
         }
 
         // GET api/<HouseController>/5
@@ -24,8 +32,9 @@ namespace API.Controllers
 
         // POST api/<HouseController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(House house)
         {
+            await houseRepository.AddAsync(house);
         }
 
         // PUT api/<HouseController>/5
