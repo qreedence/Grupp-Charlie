@@ -1,4 +1,4 @@
-﻿using API.Models;
+﻿using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -10,12 +10,12 @@ namespace API.Data
         {
         }
 
-        public DbSet<API.Models.House> Houses { get; set; }
-        public DbSet<API.Models.Agency> Agencies { get; set; }
-        public DbSet<API.Models.County> Counties { get; set; }
-        public DbSet<API.Models.Realtor> Realtors { get; set; }
-        public DbSet<API.Models.Category> Categories { get; set; }
-        public DbSet<API.Models.Image> Images { get; set; }
+        public DbSet<House> Houses { get; set; }
+        public DbSet<Agency> Agencies { get; set; }
+        public DbSet<County> Counties { get; set; }
+        public DbSet<Realtor> Realtors { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Image> Images { get; set; }
 
 
     }

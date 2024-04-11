@@ -1,7 +1,7 @@
-﻿namespace API.Models
+﻿namespace API.Data.Models
 {
     public class House
-    {   
+    {
         public int HouseId { get; set; }
         public Category Category { get; set; }
         public string Adress { get; set; }
@@ -15,9 +15,9 @@
         public int MonthlyFee { get; set; }
         public int OperatingCostPerYear { get; set; }
         public int YearOfConstruction { get; set; }
-        public List<Image> Gallery {  get; set; }
-     
-       
+        public List<Image> Gallery { get; set; }
+
+
 
     }
 }

@@ -1,5 +1,7 @@
-
 using API.Data;
+using API.Data.Interfaces;
+using API.Data.Repositories;
+using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -18,6 +20,14 @@ namespace API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
+            
+            builder.Services.AddTransient<IAgency, AgencyRepository>();
+            builder.Services.AddTransient<ICategory, CategoryRepository>();
+            builder.Services.AddTransient<ICounty, CountyRepository>();
+            builder.Services.AddTransient<IHouse, HouseRepository>();
+            builder.Services.AddTransient<IImage,  ImageRepository>();
+            builder.Services.AddTransient<IRealtor,  RealtorRepository>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
