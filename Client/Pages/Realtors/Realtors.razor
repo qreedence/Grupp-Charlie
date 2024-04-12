@@ -1,0 +1,49 @@
+﻿@page "/realtors"
+@inject HttpClient Http
+@using Models;
+@using System.Net.Http.Json
+
+<h3>Realtors</h3>
+
+@if (ListOfRealtors == null)
+{
+    <p>Loading...</p>
+}
+else if (ListOfRealtors.Count == 0)
+{
+    <p>No realtors found.</p>
+}
+else
+{
+    @foreach (var realtor in ListOfRealtors)
+    {
+        <table>
+            <tr>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @realtor.FirstName
+                </td>
+                <td>
+                    @realtor.LastName
+                </td>
+            </tr>
+        </table>
+    }
+}
+
+@code {
+
+    private List<Realtor> ListOfRealtors { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfRealtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+    }
+}
