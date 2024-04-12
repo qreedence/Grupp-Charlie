@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Data.Interfaces;
+using API.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,44 @@ namespace API.Controllers
     [ApiController]
     public class RealtorController : ControllerBase
     {
+        private readonly IRealtor realtorRepository;
+        public RealtorController(IRealtor RealtorRepository)
+        {
+            realtorRepository = RealtorRepository;
+        }
         // GET: api/<RealtorController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<Realtor>> GetAllAsync()
         {
-            return new string[] { "value1", "value2" };
+            return await realtorRepository.GetAllAsync();
         }
 
         // GET api/<RealtorController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Realtor> GetByIdAsync(int id)
         {
-            return "value";
+            return await realtorRepository.GetByIdAsync(id);
         }
 
         // POST api/<RealtorController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task AddAsync(Realtor realtor)
         {
+            await realtorRepository.AddAsync(realtor);
         }
 
         // PUT api/<RealtorController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task EditAsync(Realtor realtor)
         {
+            await realtorRepository.EditAsync(realtor);
         }
 
         // DELETE api/<RealtorController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
+            await realtorRepository.DeleteAsync(id);
         }
     }
 }

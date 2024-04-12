@@ -1,0 +1,57 @@
+﻿@page "/realtors/create"
+@using Models;
+@inject HttpClient Http
+
+<EditForm Model="Realtor" OnSubmit="Submit" FormName="CreateRealtor">
+    <div>
+        <label>First Name</label>
+        <InputText @bind-Value="Realtor.FirstName"></InputText>
+    </div>
+    <div>
+        <label>Last Name</label>
+        <InputText @bind-Value="Realtor.LastName"></InputText>
+    </div>
+    <div>
+        <label>Email</label>
+        <InputText @bind-Value="Realtor.Email"></InputText>
+    </div>
+    <div>
+        <label>Phone Number</label>
+        <InputNumber @bind-Value="Realtor.Phonenumber"></InputNumber>
+    </div>
+    <div>
+        <label>Avatar URL</label>
+        <InputText @bind-Value="Realtor.Avatar"></InputText>
+    </div>
+    <div>
+        <label>Agency</label>
+        @if (Agencies != null)
+        {
+            <select>
+                @foreach (var agency in Agencies)
+                {
+                    <option>@agency.NameOfAgency</option>
+                }
+            </select>
+        }
+        
+    </div>
+    
+    <button type="submit">Create Realtor</button>
+</EditForm>
+
+@code {
+    public Realtor Realtor { get; set; } = new Realtor();
+
+    public List<Agency> Agencies { get; set; } = new List<Agency>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Agencies = await Http.GetFromJsonAsync<List<Agency>>("api/agency");
+    }
+
+    public async Task Submit()
+    {
+        await Http.PostAsJsonAsync<Realtor>("api/realtor", Realtor);
+    }
+}
