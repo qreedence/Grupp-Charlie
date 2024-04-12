@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Data.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using API.Data.Repositories;
+using API.Data.Models;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +12,45 @@ namespace API.Controllers
     [ApiController]
     public class AgencyController : ControllerBase
     {
+        private readonly IAgency agencyRepository;
+        public AgencyController(IAgency AgencyRepository)
+        {
+            agencyRepository = AgencyRepository;
+        }
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<Agency>> GetAsync()
         {
-            return new string[] { "value1", "value2" };
+            return await agencyRepository.GetAllAsync();
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Agency> GetByIdAsync(int id)
         {
-            return "value";
+            return await agencyRepository.GetByIdAsync(id);
         }
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(Agency agency)
         {
+            await agencyRepository.AddAsync(agency);
         }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(Agency agency)
         {
+            await agencyRepository.UpdateAsync(agency);
         }
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(Agency agency)
         {
+            await agencyRepository.DeleteAsync(agency);
+                    
         }
     }
 }
