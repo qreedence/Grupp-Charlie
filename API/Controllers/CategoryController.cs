@@ -1,43 +1,55 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Data.Interfaces;
+using API.Data.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace API.Controllers
 {
+    //Author; Susanna
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
+        private readonly ICategory categoryReository;
+
+        public CategoryController(ICategory categoryReository)
+        {
+            this.categoryReository = categoryReository;
+        }
         // GET: api/<CategoryController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<Category>> GetAllAsync()
         {
-            return new string[] { "value1", "value2" };
+           return await categoryReository.GetAllAsync();
         }
 
         // GET api/<CategoryController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Category> GetById(int id)
         {
-            return "value";
+            return await categoryReository.GetByIdAsync(id);
         }
 
         // POST api/<CategoryController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(Category category)
         {
+            await categoryReository.AddAsync(category); 
         }
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(Category category)
         {
+            await categoryReository.UpdateAsync(category);
         }
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await categoryReository.DeleteAsync(id);
         }
     }
 }

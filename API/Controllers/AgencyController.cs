@@ -7,7 +7,7 @@ using API.Data.Models;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace API.Controllers
-{
+{   //Author; Susanna
     [Route("api/[controller]")]
     [ApiController]
     public class AgencyController : ControllerBase
@@ -19,7 +19,7 @@ namespace API.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<List<Agency>> GetAsync()
+        public async Task<List<Agency>> GetAllAsync()
         {
             return await agencyRepository.GetAllAsync();
         }
@@ -47,9 +47,9 @@ namespace API.Controllers
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public async Task Delete(Agency agency)
+        public async Task Delete(int id)
         {
-            await agencyRepository.DeleteAsync(agency);
+            await agencyRepository.DeleteAsync(id);
                     
         }
     }
