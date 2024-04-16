@@ -18,9 +18,30 @@ namespace API.Data.Repositories
             await applicationDbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+           var house = await GetByIdAsync(id);
+            if (house != null)
+            {
+                applicationDbContext.Houses.Remove(house);
+                await applicationDbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task<List<House>> GetAllAsync()
         {
             return await applicationDbContext.Houses.ToListAsync();
+        }
+
+        public async Task<House> GetByIdAsync(int id)
+        {
+            return await applicationDbContext.Houses.FindAsync(id);
+        }
+
+        public async Task UpdateAsync(House house)
+        {
+            applicationDbContext.Houses.Update(house);
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }
