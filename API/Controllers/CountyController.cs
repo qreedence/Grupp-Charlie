@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Data.Interfaces;
+using API.Data.Models;
+using API.Data.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,46 @@ namespace API.Controllers
     [ApiController]
     public class CountyController : ControllerBase
     {
-        // GET: api/<CountyController>
+        private readonly ICounty countyRepository;
+
+        public CountyController(ICounty CountyRepository)
+        {
+            countyRepository = CountyRepository;
+        }
+
+        // GET: api/<ImageController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<County>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await countyRepository.GetAllAsync();
         }
 
-        // GET api/<CountyController>/5
+        // GET api/<ImageController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<County> GetByIdAsync(int id)
         {
-            return "value";
+            return await countyRepository.GetByIdAsync(id);
         }
 
-        // POST api/<CountyController>
+        // POST api/<ImageController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(County county)
         {
+            await countyRepository.AddAsync(county);
         }
 
-        // PUT api/<CountyController>/5
+        // PUT api/<ImageController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put([FromBody] County county)
         {
+            await countyRepository.UpdateAsync(county);
         }
 
-        // DELETE api/<CountyController>/5
+        // DELETE api/<ImageController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await countyRepository.DeleteAsync(id);
         }
     }
 }

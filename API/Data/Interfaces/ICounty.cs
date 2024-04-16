@@ -1,6 +1,13 @@
-﻿namespace API.Data.Interfaces
+﻿using API.Data.Models;
+
+namespace API.Data.Interfaces
 {
     public interface ICounty
     {
+        public Task<County> AddAsync(County county);
+        public Task UpdateAsync(County county);
+        public Task DeleteAsync(int id);
+        public Task<List<County>> GetAllAsync();
+        public Task<County> GetByIdAsync(int id);
     }
 }

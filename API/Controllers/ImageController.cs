@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using API.Data.Interfaces;
+using API.Data.Models;
+using API.Data.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,46 @@ namespace API.Controllers
     [ApiController]
     public class ImageController : ControllerBase
     {
+        private readonly IImage imageRepository;
+
+        public ImageController(IImage ImageRepository)
+        {
+            imageRepository = ImageRepository;
+        }
+
         // GET: api/<ImageController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<Image>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await imageRepository.GetAllAsync();
         }
 
         // GET api/<ImageController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Image> GetByIdAsync(int id)
         {
-            return "value";
+            return await imageRepository.GetByIdAsync(id);
         }
 
         // POST api/<ImageController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(Image image)
         {
+            await imageRepository.AddAsync(image);
         }
 
         // PUT api/<ImageController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put([FromBody] Image image)
         {
+            await imageRepository.UpdateAsync(image);
         }
 
         // DELETE api/<ImageController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            await imageRepository.DeleteAsync(id);
         }
     }
 }
