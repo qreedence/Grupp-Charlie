@@ -7,13 +7,16 @@ namespace API.Data.Repositories
     public class RealtorRepository : IRealtor
     {
         private readonly ApplicationDbContext applicationDbContext;
+        private readonly IAgency agencyRepository;
 
-        public RealtorRepository(ApplicationDbContext ApplicationDbContext)
+        public RealtorRepository(ApplicationDbContext ApplicationDbContext, IAgency AgencyRepository)
         {
             applicationDbContext = ApplicationDbContext;
+            agencyRepository = AgencyRepository;
         }
         public async Task AddAsync(Realtor realtor)
         {
+            realtor.Agency = await agencyRepository.GetByIdAsync(realtor.Agency.AgencyId);
             await applicationDbContext.Realtors.AddAsync(realtor);
             await applicationDbContext.SaveChangesAsync();
         }
