@@ -3,6 +3,8 @@
 @using Models;
 @using System.Net.Http.Json
 
+@*Author: Eden Yusof-Ioannidis*@
+
 <h3>Realtors</h3>
 
 @if (ListOfRealtors == null)
@@ -15,8 +17,6 @@ else if (ListOfRealtors.Count == 0)
 }
 else
 {
-    @foreach (var realtor in ListOfRealtors)
-    {
         <table>
             <tr>
                 <th>
@@ -26,7 +26,9 @@ else
                     Last Name
                 </th>
             </tr>
-            <tr>
+            @foreach (var realtor in ListOfRealtors)
+            {
+                  <tr>
                 <td>
                     @realtor.FirstName
                 </td>
@@ -34,8 +36,8 @@ else
                     @realtor.LastName
                 </td>
             </tr>
-        </table>
-    }
+            }
+    </table>
 }
 
 @code {
