@@ -7,7 +7,8 @@
 <div>
     <label>Ange kommun att söka bostad i:</label>
     <InputText @bind-Value="County"></InputText>
-    <button type="button" @onclick="Search">Search</button>
+    <button type="button" @onclick="Search">Sök</button>
+    <button type="button" @onclick="NoFilter">Visa alla bostäder</button>
 
 </div>
 
@@ -34,7 +35,7 @@ else
 
     private List<House> ListOfHouses { get; set; }
 
-    private string County { get; set; }
+    private string County { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -43,7 +44,17 @@ else
 
     public async Task Search()
     {
-        ListOfHouses = ListOfHouses.Where(c => c.County.CountyName == County).ToList();
+        if (ListOfHouses != null && !string.IsNullOrEmpty(County))
+        {
+            ListOfHouses = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County).ToList();
+            StateHasChanged();
+        }
+    }
+
+    public async Task NoFilter()
+    {
+        ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
+        StateHasChanged();
     }
 
 

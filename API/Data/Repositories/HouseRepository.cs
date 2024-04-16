@@ -30,7 +30,7 @@ namespace API.Data.Repositories
 
         public async Task<List<House>> GetAllAsync()
         {
-            return await applicationDbContext.Houses.ToListAsync();
+            return await applicationDbContext.Houses.Include(x => x.County).ToListAsync();
         }
 
         public async Task<House> GetByIdAsync(int id)
