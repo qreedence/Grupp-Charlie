@@ -1,0 +1,51 @@
+﻿@page "/browse"
+@inject HttpClient Http
+@using Models;
+@using System.Net.Http.Json
+
+<h3>Houses</h3>
+<div>
+    <label>Ange kommun att söka bostad i:</label>
+    <InputText @bind-Value="County"></InputText>
+    <button type="button" @onclick="Search">Search</button>
+
+</div>
+
+@if (ListOfHouses == null)
+{
+    <p>Loading...</p>
+}
+else if (ListOfHouses.Count == 0) 
+{
+    <p>No houses found.</p>
+}
+else
+{
+    @foreach (var house in ListOfHouses)
+    {
+        <div>
+            <h3>@house.Adress</h3>
+            <p>Price: @house.Price</p>
+        </div>
+    }
+}
+
+@code {
+
+    private List<House> ListOfHouses { get; set; }
+
+    private string County { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
+    }
+
+    public async Task Search()
+    {
+        ListOfHouses = ListOfHouses.Where(c => c.County.CountyName == County).ToList();
+    }
+
+
+
+}
