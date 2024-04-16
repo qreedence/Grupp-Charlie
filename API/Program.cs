@@ -21,22 +21,21 @@ namespace API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
-            
+
             builder.Services.AddTransient<IAgency, AgencyRepository>();
             builder.Services.AddTransient<ICategory, CategoryRepository>();
             builder.Services.AddTransient<ICounty, CountyRepository>();
             builder.Services.AddTransient<IHouse, HouseRepository>();
-            builder.Services.AddTransient<IImage,  ImageRepository>();
-            builder.Services.AddTransient<IRealtor,  RealtorRepository>();
-            
+            builder.Services.AddTransient<IImage, ImageRepository>();
+            builder.Services.AddTransient<IRealtor, RealtorRepository>();
+
             var app = builder.Build();
             //La till denna för att lösa "loading" problemet
             app.UseCors(policy =>
-    policy.WithOrigins("https://localhost:7023", "https://localhost:7256")
-        .AllowAnyMethod()
-        .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization,
-            "x-custom-header")
-        .AllowCredentials());
+            policy.WithOrigins("https://localhost:7023", "https://localhost:7256")
+                .AllowAnyMethod()
+                .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
+                .AllowCredentials());
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -56,5 +55,5 @@ namespace API
         }
     }
 
-   
+
 }
