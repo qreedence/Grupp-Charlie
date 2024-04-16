@@ -9,7 +9,7 @@ namespace API.Data.Interfaces
         public Task UpdateAsync(Agency agency);
         public Task DeleteAsync(int id);
         public Task<Agency> GetByIdAsync(int id);
-       
+        
     }
 
 }

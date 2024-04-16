@@ -25,9 +25,9 @@ namespace API.Controllers
 
         // GET api/<HouseController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<House> GetByIdAsync(int id)
         {
-            return "value";
+            return await houseRepository.GetByIdAsync(id);
         }
 
         // POST api/<HouseController>
@@ -39,14 +39,17 @@ namespace API.Controllers
 
         // PUT api/<HouseController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(House house)
         {
+            await houseRepository.UpdateAsync(house);
         }
 
         // DELETE api/<HouseController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-        }
+            await houseRepository.DeleteAsync(id);
+
     }
-}
+    } }
+
