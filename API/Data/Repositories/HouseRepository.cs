@@ -30,12 +30,12 @@ namespace API.Data.Repositories
 
         public async Task<List<House>> GetAllAsync()
         {
-            return await applicationDbContext.Houses.ToListAsync();
+            return await applicationDbContext.Houses.Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).ToListAsync();
         }
 
         public async Task<House> GetByIdAsync(int id)
         {
-            return await applicationDbContext.Houses.FindAsync(id);
+            return await applicationDbContext.Houses.Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).FirstOrDefaultAsync(x => x.HouseId == id);
         }
 
         public async Task UpdateAsync(House house)
