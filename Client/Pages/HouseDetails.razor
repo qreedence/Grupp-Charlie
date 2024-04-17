@@ -1,0 +1,51 @@
+﻿@page "/browse/{id:int}"
+@using Models;
+@inject HttpClient Http
+@using System.Net.Http.Json
+
+@*Author: Eden Yusof-Ioannidis*@
+
+@if (House == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <h3>@House.Adress</h3>
+    @if(House.County != null)
+    {
+        <h4>@House.County.CountyName</h4>
+    }
+    @if (House.Category != null)
+    {
+        <p>Bostadstyp: @House.Category.CategoryName</p>
+    }
+    <p>@House.Description</p>
+    @if(House.Gallery != null && House.Gallery.Count > 0)
+    {
+        @foreach (var image in House.Gallery)
+        {
+            <img src="@image.ImageURL" />
+        }
+    }
+    <p>Antal rum: @House.NumberOfRooms</p>
+    <p>Boarea: @House.LivingArea &#13217</p>
+    <p>Biarea: @House.AuxiliaryArea &#13217</p>
+    <p>Tomtarea: @House.PlotArea &#13217</p>
+    <p>Pris: @House.Price.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr</p>
+
+
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private House House { get; set; } = new House();
+
+    protected override async Task OnInitializedAsync()
+    {
+        House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
+        StateHasChanged();
+    }
+}
