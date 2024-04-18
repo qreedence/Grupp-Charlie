@@ -42,6 +42,7 @@ namespace API.Controllers
         public async Task Put(House house)
         {
             await houseRepository.UpdateAsync(house);
+            
         }
 
         // DELETE api/<HouseController>/5
@@ -49,7 +50,9 @@ namespace API.Controllers
         public async Task Delete(int id)
         {
             await houseRepository.DeleteAsync(id);
-
+            //returnera statisk kod
+            //t.ex if statuscodesuccess
+            //<Task>actionresult?
     }
     } }
 

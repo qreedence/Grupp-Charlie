@@ -1,7 +1,10 @@
-﻿namespace Client.Models
+﻿using Microsoft.AspNetCore.Components;
+
+namespace Client.Models
 {
     public class House
-    {   
+    {
+       
         public int HouseId { get; set; }
         public Category Category { get; set; }
         public string Adress { get; set; }
