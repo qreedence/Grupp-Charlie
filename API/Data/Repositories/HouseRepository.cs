@@ -1,4 +1,4 @@
-﻿using API.Data.Interfaces;
+using API.Data.Interfaces;
 using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +20,6 @@ namespace API.Data.Repositories
             countyRepository = CountyRepository;
             realtorRepository = RealtorRepository;
         }
-
         public async Task AddAsync(House house)
         {
             house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
@@ -32,10 +31,15 @@ namespace API.Data.Repositories
 
         public async Task DeleteAsync(int id)
         {
-           var house = await GetByIdAsync(id);
+            
+           //var house = await GetByIdAsync(id);
+            var house = await applicationDbContext.Houses.Include(h => h.Gallery).FirstOrDefaultAsync(h => h.HouseId == id);
             if (house != null)
+       
             {
+                applicationDbContext.Images.RemoveRange(house.Gallery);
                 applicationDbContext.Houses.Remove(house);
+              
                 await applicationDbContext.SaveChangesAsync();
             }
         }

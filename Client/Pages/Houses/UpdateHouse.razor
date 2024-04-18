@@ -1,0 +1,72 @@
+﻿@page "/houses/update/{id:int}"
+@page "/houses/update"
+@inject HttpClient Http
+@using Models;
+@using System.Net.Http.Json
+@inject NavigationManager NavigationManager
+
+@*Autohor: Susanna Renström*@
+
+<h3>UpdateHouse</h3>
+<div>
+    <label>Houses</label>
+    @if (House == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <p>House Id: @House.HouseId</p>
+        <p>Price: @House.Price</p>
+        <p>Adress: @House.Adress</p>
+        
+    }
+
+    <EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit">
+        <div>
+            <label for="adress">Adress</label>
+            <InputText id="adress" @bind-Value="House.Adress" />
+            <label for="price">Price</label>
+            <InputNumber id="price" @bind-Value="House.Price" />
+
+
+        </div>
+        <button type="submit">Save</button>
+    </EditForm>
+
+</div>
+@code {
+
+        [Parameter]
+        public int Id { get; set; }
+ 
+        House House { get; set; } = new House();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
+        if (result != null)
+            House = result;
+    }
+
+    public async Task HandleSubmit()
+    {
+        // if (Id != null)
+        // {
+       
+        await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
+        NavigationManager.NavigateTo($"/houses");
+        // if (result.IsSuccessStatusCode)
+            // {
+                // House = await result.Content.ReadFromJsonAsync<House>();
+            // }
+            // else
+            // {
+            //     Console.WriteLine($"{result.StatusCode}");
+            // }
+    }
+
+
+}
+
+   
