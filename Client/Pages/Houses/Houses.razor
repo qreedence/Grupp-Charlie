@@ -2,7 +2,7 @@
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
-
+@inject NavigationManager NavigationManager
 <h3>Houses</h3>
 
 @if (ListOfHouses == null)
@@ -14,21 +14,29 @@ else
     @foreach (var house in ListOfHouses)
     {
         <p>House Id: @house.HouseId</p>
-       
+        <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
+        <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
     }
-} 
-
+}
 @code {
 
     private List<House> ListOfHouses { get; set; }
+
+
 
     protected override async Task OnInitializedAsync()
     {
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
         // Console.WriteLine("entered OnInitializedAsync method");
-      
-}
 
+    }
 
-
+    void UpdateHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/houses/update/{id}");
+    }
+    void DeleteHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/houses/delete/{id}");
+    }
 }
