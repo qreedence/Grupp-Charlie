@@ -50,9 +50,7 @@ namespace API.Controllers
         public async Task Delete(int id)
         {
             await houseRepository.DeleteAsync(id);
-            //returnera statisk kod
-            //t.ex if statuscodesuccess
-            //<Task>actionresult?
+            
     }
     } }
 
