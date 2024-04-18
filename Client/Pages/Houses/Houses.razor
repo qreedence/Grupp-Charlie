@@ -7,26 +7,51 @@
 
 @if (ListOfHouses == null)
 {
-    <p>Tänk igen idiot</p>
+    <p>Ta det lugnt</p>
 }
 else
 {
-    @foreach (var house in ListOfHouses)
-    {
-        <p>House Id: @house.HouseId</p>
-       
-    }
-} 
 
+    <table>
+        <tr>
+            <th>
+                House Id:
+            </th>
+        </tr>
+        @foreach (var house in ListOfHouses)
+        {
+            <tr>
+                <td>
+                    @house.HouseId
+                </td>
+            </tr>
+            <tr>
+                <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
+                <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
+
+            </tr>
+        }
+    </table>
+}
 @code {
 
     private List<House> ListOfHouses { get; set; }
 
+
+
     protected override async Task OnInitializedAsync()
     {
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
-}
+        // Console.WriteLine("entered OnInitializedAsync method");
 
+    }
 
-
+    void UpdateHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/houses/update/{id}");
+    }
+    void DeleteHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/houses/delete/{id}");
+    }
 }
