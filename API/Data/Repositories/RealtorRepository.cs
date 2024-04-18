@@ -47,7 +47,7 @@ namespace API.Data.Repositories
 
         public async Task<Realtor> GetByIdAsync(int id)
         {
-            return await applicationDbContext.Realtors.FindAsync(id);
+            return await applicationDbContext.Realtors.Include(a => a.Agency).FirstOrDefaultAsync(r => r.RealtorId == id);
         }
 
     }

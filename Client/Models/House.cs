@@ -19,7 +19,7 @@ namespace Client.Models
         public int OperatingCostPerYear { get; set; }
         public int YearOfConstruction { get; set; }
         public List<Image> Gallery {  get; set; }
-        //public Realtor Realtor { get; set; }
+        public Realtor Realtor { get; set; }
         //public Agency Agency { get; set; } 
 
 

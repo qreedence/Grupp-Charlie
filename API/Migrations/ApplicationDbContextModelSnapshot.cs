@@ -22,7 +22,7 @@ namespace API.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("API.Models.Agency", b =>
+            modelBuilder.Entity("API.Data.Models.Agency", b =>
                 {
                     b.Property<int>("AgencyId")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace API.Migrations
                     b.ToTable("Agencies");
                 });
 
-            modelBuilder.Entity("API.Models.Category", b =>
+            modelBuilder.Entity("API.Data.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace API.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("API.Models.County", b =>
+            modelBuilder.Entity("API.Data.Models.County", b =>
                 {
                     b.Property<int>("CountyId")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace API.Migrations
                     b.ToTable("Counties");
                 });
 
-            modelBuilder.Entity("API.Models.House", b =>
+            modelBuilder.Entity("API.Data.Models.House", b =>
                 {
                     b.Property<int>("HouseId")
                         .ValueGeneratedOnAdd()
@@ -141,7 +141,7 @@ namespace API.Migrations
                     b.ToTable("Houses");
                 });
 
-            modelBuilder.Entity("API.Models.Image", b =>
+            modelBuilder.Entity("API.Data.Models.Image", b =>
                 {
                     b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
@@ -163,7 +163,7 @@ namespace API.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("API.Models.Realtor", b =>
+            modelBuilder.Entity("API.Data.Models.Realtor", b =>
                 {
                     b.Property<int>("RealtorId")
                         .ValueGeneratedOnAdd()
@@ -171,7 +171,7 @@ namespace API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RealtorId"));
 
-                    b.Property<int>("AgencyId")
+                    b.Property<int?>("AgencyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Avatar")
@@ -200,21 +200,21 @@ namespace API.Migrations
                     b.ToTable("Realtors");
                 });
 
-            modelBuilder.Entity("API.Models.House", b =>
+            modelBuilder.Entity("API.Data.Models.House", b =>
                 {
-                    b.HasOne("API.Models.Category", "Category")
+                    b.HasOne("API.Data.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Models.County", "County")
+                    b.HasOne("API.Data.Models.County", "County")
                         .WithMany()
                         .HasForeignKey("CountyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Models.Realtor", null)
+                    b.HasOne("API.Data.Models.Realtor", null)
                         .WithMany("Houses")
                         .HasForeignKey("RealtorId");
 
@@ -223,30 +223,28 @@ namespace API.Migrations
                     b.Navigation("County");
                 });
 
-            modelBuilder.Entity("API.Models.Image", b =>
+            modelBuilder.Entity("API.Data.Models.Image", b =>
                 {
-                    b.HasOne("API.Models.House", null)
+                    b.HasOne("API.Data.Models.House", null)
                         .WithMany("Gallery")
                         .HasForeignKey("HouseId");
                 });
 
-            modelBuilder.Entity("API.Models.Realtor", b =>
+            modelBuilder.Entity("API.Data.Models.Realtor", b =>
                 {
-                    b.HasOne("API.Models.Agency", "Agency")
+                    b.HasOne("API.Data.Models.Agency", "Agency")
                         .WithMany()
-                        .HasForeignKey("AgencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AgencyId");
 
                     b.Navigation("Agency");
                 });
 
-            modelBuilder.Entity("API.Models.House", b =>
+            modelBuilder.Entity("API.Data.Models.House", b =>
                 {
                     b.Navigation("Gallery");
                 });
 
-            modelBuilder.Entity("API.Models.Realtor", b =>
+            modelBuilder.Entity("API.Data.Models.Realtor", b =>
                 {
                     b.Navigation("Houses");
                 });

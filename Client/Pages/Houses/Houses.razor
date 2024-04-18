@@ -1,4 +1,4 @@
-﻿@page "/houses"
+@page "/houses"
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
@@ -7,6 +7,7 @@
 
 @if (ListOfHouses == null)
 {
+
     <p>Ta det lugnt</p>
 }
 else
@@ -33,11 +34,10 @@ else
     }
 </table>
 }
+
 @code {
 
     private List<House> ListOfHouses { get; set; }
-
-
 
     protected override async Task OnInitializedAsync()
     {
