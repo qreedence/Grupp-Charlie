@@ -56,6 +56,9 @@ namespace API.Data.Repositories
 
         public async Task UpdateAsync(House house)
         {
+            house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
+            //house.County = await countyRepository.GetByIdAsync(house.County.CountyId);
+            house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.RealtorId);
             applicationDbContext.Houses.Update(house);
             await applicationDbContext.SaveChangesAsync();
         }

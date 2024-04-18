@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace API.Data.Repositories
 {   
     public class AgencyRepository : IAgency
-    {   //Author; Susanna
+    {   //Author: Susanna Renström
         private ApplicationDbContext applicationDbContext;
 
         public AgencyRepository(ApplicationDbContext ApplicationDbContext)
