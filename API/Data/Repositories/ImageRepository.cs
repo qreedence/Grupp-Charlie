@@ -7,6 +7,7 @@ namespace API.Data.Repositories
 {
     public class ImageRepository : IImage
     {
+        // Author: Mikaela Älgekrans
         private readonly ApplicationDbContext applicationDbContext;
         public ImageRepository(ApplicationDbContext ApplicationDbContext)
         {

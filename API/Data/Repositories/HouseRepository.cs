@@ -6,14 +6,26 @@ namespace API.Data.Repositories
 {
     public class HouseRepository : IHouse
     {
+        // Author: Mikaela Älgekrans
+
         private readonly ApplicationDbContext applicationDbContext;
-        public HouseRepository(ApplicationDbContext ApplicationDbContext) 
+        private readonly ICategory categoryRepository;
+        private readonly ICounty countyRepository;
+        private readonly IRealtor realtorRepository;
+
+        public HouseRepository(ApplicationDbContext ApplicationDbContext, ICategory CategoryRepository, ICounty CountyRepository, IRealtor RealtorRepository) 
         {
             applicationDbContext = ApplicationDbContext;
+            categoryRepository = CategoryRepository;
+            countyRepository = CountyRepository;
+            realtorRepository = RealtorRepository;
         }
 
         public async Task AddAsync(House house)
         {
+            house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
+            house.County = await countyRepository.GetByIdAsync(house.County.CountyId);
+            house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.RealtorId);
             await applicationDbContext.Houses.AddAsync(house);
             await applicationDbContext.SaveChangesAsync();
         }

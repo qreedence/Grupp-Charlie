@@ -57,7 +57,7 @@ namespace API.Migrations
                 {
                     RealtorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AgencyId = table.Column<int>(type: "int", nullable: false),
+                    AgencyId = table.Column<int>(type: "int", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -71,8 +71,7 @@ namespace API.Migrations
                         name: "FK_Realtors_Agencies_AgencyId",
                         column: x => x.AgencyId,
                         principalTable: "Agencies",
-                        principalColumn: "AgencyId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AgencyId");
                 });
 
             migrationBuilder.CreateTable(

@@ -2,6 +2,7 @@
 
 namespace API.Data.Interfaces
 {
+    // Author: Mikaela Älgekrans
     public interface ICounty
     {
         public Task<County> AddAsync(County county);
