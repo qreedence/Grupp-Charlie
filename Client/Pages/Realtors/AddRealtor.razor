@@ -2,6 +2,8 @@
 @using Models;
 @inject HttpClient Http
 
+@*Author: Eden Yusof-Ioannidis*@
+
 <EditForm Model="Realtor" OnSubmit="Submit" FormName="CreateRealtor">
     <div>
         <label>First Name</label>
@@ -27,14 +29,13 @@
         <label>Agency</label>
         @if (Agencies != null)
         {
-            <select>
+            <select @bind="AgencyId">
                 @foreach (var agency in Agencies)
                 {
-                    <option>@agency.NameOfAgency</option>
+                    <option value="@agency.AgencyId">@agency.NameOfAgency</option>
                 }
             </select>
         }
-        
     </div>
     
     <button type="submit">Create Realtor</button>
@@ -42,8 +43,8 @@
 
 @code {
     public Realtor Realtor { get; set; } = new Realtor();
-
     public List<Agency> Agencies { get; set; } = new List<Agency>();
+    public int AgencyId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,6 +53,7 @@
 
     public async Task Submit()
     {
+        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
         await Http.PostAsJsonAsync<Realtor>("api/realtor", Realtor);
     }
 }

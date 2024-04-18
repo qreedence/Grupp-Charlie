@@ -1,0 +1,97 @@
+﻿@page "/browse"
+@inject HttpClient Http
+@using Models;
+@using System.Net.Http.Json
+
+@*Author: Eden Yusof-Ioannidis*@
+
+<h3>Houses</h3>
+<div>
+    <label>Ange kommun att söka bostad i:</label>
+    <InputText @bind-Value="County"></InputText>
+</div>
+<div>
+    <label>Välj bostadstyp:</label>
+    @if (Categories != null)
+    {
+        <select @bind="CategoryId">
+            @foreach (var category in Categories)
+            {
+                <option value="@category.CategoryId">@category.CategoryName</option>
+            }
+        </select>
+    }
+</div>
+<div>
+    <button type="button" @onclick="Search">Sök</button>
+    <button type="button" @onclick="NoFilter">Rensa filter</button>
+</div>
+
+@if (FilteredList == null)
+{
+    <p>Loading...</p>
+}
+else if (FilteredList.Count == 0)
+{
+    <p>No houses found.</p>
+}
+else
+{
+    @foreach (var house in FilteredList)
+    {
+        <div>
+            <h3>@house.Adress</h3>
+            <p>Kommun: @house.County.CountyName</p>
+            <p>Price: @house.Price</p>
+            <p>Bostadstyp: @house.Category.CategoryName</p>
+            <a href="/browse/@house.HouseId">View Details</a>
+        </div>
+    }
+}
+
+@code {
+
+    private List<House> ListOfHouses { get; set; }
+
+    private List<House> FilteredList { get; set; }
+
+    private List<Category> Categories { get; set; }
+
+    private int CategoryId { get; set; }
+
+    private string County { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
+        FilteredList = ListOfHouses.ToList();
+        Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
+    }
+
+    public async Task Search()
+    {
+        if (ListOfHouses != null && !string.IsNullOrEmpty(County) && CategoryId != 0)
+        {
+            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County && h.Category.CategoryId == CategoryId).ToList();
+            StateHasChanged();
+        }
+
+        if (ListOfHouses != null && string.IsNullOrEmpty(County) && CategoryId != 0)
+        {
+            FilteredList = ListOfHouses.Where(h => h.Category.CategoryId == CategoryId).ToList();
+            StateHasChanged();
+        }
+
+        if (ListOfHouses != null && !string.IsNullOrEmpty(County) && CategoryId == 0)
+        {
+            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County).ToList();
+            StateHasChanged();
+        }
+    }
+
+    public async Task NoFilter()
+    {
+        FilteredList = await Http.GetFromJsonAsync<List<House>>("api/house");
+        StateHasChanged();
+    }
+}
