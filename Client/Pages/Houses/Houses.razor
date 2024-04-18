@@ -1,4 +1,4 @@
-﻿@page "/houses"
+@page "/houses"
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
@@ -7,32 +7,34 @@
 
 @if (ListOfHouses == null)
 {
+
     <p>Ta det lugnt</p>
 }
 else
 {
 
-    <table>
+<table>
+    <tr>
+        <th>
+            House Id:
+        </th>     
+    </tr>
+    @foreach (var house in ListOfHouses)
+    {
         <tr>
-            <th>
-                House Id:
-            </th>
-        </tr>
-        @foreach (var house in ListOfHouses)
-        {
-            <tr>
-                <td>
-                    @house.HouseId
+            <td>
+                @house.HouseId
                 </td>
-            </tr>
-            <tr>
-                <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
-                <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
-
-            </tr>
-        }
-    </table>
+        </tr>
+        <tr>
+                    <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
+                    <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
+            
+        </tr>
+    }
+</table>
 }
+
 @code {
 
     private List<House> ListOfHouses { get; set; }
@@ -43,8 +45,8 @@ else
     {
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
         // Console.WriteLine("entered OnInitializedAsync method");
-
-    }
+      
+}
 
     void UpdateHouse(int id)
     {
