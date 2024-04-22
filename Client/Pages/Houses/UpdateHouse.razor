@@ -1,7 +1,6 @@
 ﻿@page "/houses/update/{id:int}"
 @page "/houses/update"
 @inject HttpClient Http
-@using Models;
 @using System.Net.Http.Json
 @inject NavigationManager NavigationManager
 
@@ -17,7 +16,7 @@
     else
     {
      
-    <EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit">
+    <EditForm Model="House" OnSubmit="Submit" FormName="edit">
        
         <div>
             <label>Mäklare</label>
@@ -44,9 +43,19 @@
             }
         </div>
         <div>
-            <label>Bilder</label>
-        @if (Images != null && Images.Count > 0)
-        {
+            <label>Kommun</label>
+            @if (Counties != null)
+            {
+                <select @bind="CountyId">
+                    @foreach (var county in Counties)
+                    {
+                        <option value="@county.CountyId">@county.CountyName</option>
+                    }
+                </select>
+            }
+        </div>
+        <div>
+
             <label>Bildgalleri</label>
             @foreach (var image in Images)
             {
@@ -55,7 +64,7 @@
                     <InputText @bind-Value="image.ImageURL"></InputText>
                 </div>
             }
-        }
+        
         </div>
         <div>
             <label>Adress</label>
@@ -106,46 +115,39 @@
 
     [Parameter]
     public int Id { get; set; }
-
     House House { get; set; } = new House();
+
+    private int CountyId { get; set; }
+    public List<County> Counties { get; set; } = new List<County>();
+
     public List<Image> Images { get; set; } = new List<Image>();
 
-    // private int ImageId { get; set; }
-
+    private int RealtorId { get; set; }
     private List<Realtor> Realtors { get; set; } = new List<Realtor>();
 
-    private int RealtorId { get; set; }
-
-    private List<Category> Categories { get; set; } = new List<Category>();
-
     private int CategoryId { get; set; }
+    private List<Category> Categories { get; set; } = new List<Category>();
 
     protected override async Task OnInitializedAsync()
     {   
-        // Images = await Http.GetFromJsonAsync<List<Image>>("api/images");
+        Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        Images = await Http.GetFromJsonAsync<List<Image>>("api/image");
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
         Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+        
         var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
         if (result != null)
-            House = result;
+        { House = result; }
     }
-
-    public async Task HandleSubmit()
+        
+       public async Task Submit()
     {
-        // if (Id != null)
-        // {
+        House.County = await Http.GetFromJsonAsync<County>($"api/category/{CountyId}");
         House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
         House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
         await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
         NavigationManager.NavigateTo($"/houses");
-        // if (result.IsSuccessStatusCode)
-            // {
-                // House = await result.Content.ReadFromJsonAsync<House>();
-            // }
-            // else
-            // {
-            //     Console.WriteLine($"{result.StatusCode}");
-            // }
+      
     }
 
 
