@@ -1,5 +1,6 @@
 ﻿@page "/browse"
 @inject HttpClient Http
+@inject IJSRuntime JSRuntime
 @using Models;
 @using System.Net.Http.Json
 
@@ -26,6 +27,38 @@
     <button type="button" @onclick="Search">Sök</button>
     <button type="button" @onclick="NoFilter">Rensa filter</button>
 </div>
+@* 
+<div id="map" style="height: 400px;"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k&callback=initMap" async defer></script>
+<script>
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 62, lng: 15 }, // Center on Sweden
+            zoom: 5
+        });
+    }
+
+    function addMarkers(adresses) {
+        var geocoder = new google.maps.Geocoder();
+
+        // Geocode each address and add a marker on the map
+        addresses.forEach(function (address) {
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    console.error('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        });
+    }
+</script> *@
 
 @if (FilteredList == null)
 {
@@ -53,6 +86,8 @@ else
 
     private List<House> ListOfHouses { get; set; }
 
+    // private List<string> AdressList { get; set; } = new List<string>();
+
     private List<House> FilteredList { get; set; }
 
     private List<Category> Categories { get; set; }
@@ -61,11 +96,20 @@ else
 
     private string County { get; set; } = "";
 
+    public string srcUrl { get; set; }
+
+    public string APIKey { get; set; }
+
+
     protected override async Task OnInitializedAsync()
     {
+        APIKey = "AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k";
+        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key=AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k&q=test");
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
         FilteredList = ListOfHouses.ToList();
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
+        // await ListAdresses();
+        // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
     }
 
     public async Task Search()
@@ -73,18 +117,24 @@ else
         if (ListOfHouses != null && !string.IsNullOrEmpty(County) && CategoryId != 0)
         {
             FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County && h.Category.CategoryId == CategoryId).ToList();
+            // await ListAdresses();
+            // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
             StateHasChanged();
         }
 
         if (ListOfHouses != null && string.IsNullOrEmpty(County) && CategoryId != 0)
         {
             FilteredList = ListOfHouses.Where(h => h.Category.CategoryId == CategoryId).ToList();
+            // await ListAdresses();
+            // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
             StateHasChanged();
         }
 
         if (ListOfHouses != null && !string.IsNullOrEmpty(County) && CategoryId == 0)
         {
             FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County).ToList();
+            // await ListAdresses();
+            // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
             StateHasChanged();
         }
     }
@@ -94,4 +144,13 @@ else
         FilteredList = await Http.GetFromJsonAsync<List<House>>("api/house");
         StateHasChanged();
     }
+
+    // public async Task ListAdresses()
+    // {
+    //     AdressList.Clear();
+    //     foreach (var house in FilteredList)
+    //     {
+    //         AdressList.Add(house.Adress);
+    //     }
+    // }
 }
