@@ -1,23 +1,40 @@
-﻿@page "/houses"
+@page "/houses"
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
-@inject NavigationManager NavigationManager
+
 <h3>Houses</h3>
 
 @if (ListOfHouses == null)
 {
-    <p>Tänk igen idiot</p>
+
+    <p>Ta det lugnt</p>
 }
 else
 {
+
+<table>
+    <tr>
+        <th>
+            House Id:
+        </th>     
+    </tr>
     @foreach (var house in ListOfHouses)
     {
-        <p>House Id: @house.HouseId</p>
-        <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
-        <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
+        <tr>
+            <td>
+                @house.HouseId
+                </td>
+        </tr>
+        <tr>
+                    <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
+                    <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
+            
+        </tr>
     }
+</table>
 }
+
 @code {
 
     private List<House> ListOfHouses { get; set; }

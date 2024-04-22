@@ -3,15 +3,14 @@
 @using Models;
 @inject NavigationManager NavigationManager
 @using System.Net.Http.Json
+
+@*Autohor: Susanna Renström*@
 <h3>DeleteHouse</h3>
 
 <EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit">
     <div>
         
         <InputNumber id="houseid" @bind-Value="House.HouseId" />
-
-
-
     </div>
     <button type="submit">Save</button>
 </EditForm> 
@@ -19,11 +18,8 @@
 @code {
     [Parameter]
     public int Id { get; set; }
-
     House House { get; set; } = new House();
-
-
-  
+      
     protected override async Task OnParametersSetAsync()
     {
         var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
@@ -34,9 +30,7 @@
     public async Task HandleSubmit()
     {
         await Http.DeleteAsync($"api/house/{Id}");
-
-        // House = await result.Content.ReadFromJsonAsync<House>()
-        //;
+        NavigationManager.NavigateTo($"/houses");
     }
 
 }

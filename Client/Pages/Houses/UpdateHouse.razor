@@ -5,6 +5,8 @@
 @using System.Net.Http.Json
 @inject NavigationManager NavigationManager
 
+@*Autohor: Susanna Renström*@
+
 <h3>UpdateHouse</h3>
 <div>
     <label>Houses</label>
@@ -53,6 +55,7 @@
         // {
        
         await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
+        NavigationManager.NavigateTo($"/houses");
         // if (result.IsSuccessStatusCode)
             // {
                 // House = await result.Content.ReadFromJsonAsync<House>();
@@ -66,4 +69,4 @@
 
 }
 
-   }
+   

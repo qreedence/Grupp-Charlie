@@ -2,6 +2,7 @@
 
 namespace API.Data.Interfaces
 {
+    // Author: Mikaela Älgekrans
     public interface IImage
     {        
         public Task<Image> AddAsync(Image image);
