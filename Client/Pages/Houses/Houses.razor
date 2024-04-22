@@ -42,7 +42,7 @@ else
 
 
     protected override async Task OnInitializedAsync()
-    {
+    { 
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
         // Console.WriteLine("entered OnInitializedAsync method");
       
