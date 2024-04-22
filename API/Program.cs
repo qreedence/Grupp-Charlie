@@ -28,6 +28,7 @@ namespace API
             builder.Services.AddTransient<IHouse, HouseRepository>();
             builder.Services.AddTransient<IImage, ImageRepository>();
             builder.Services.AddTransient<IRealtor, RealtorRepository>();
+            builder.Services.AddTransient<IAPIKey, APIKeyRepository>();
 
             var app = builder.Build();
             //La till denna för att lösa "loading" problemet
