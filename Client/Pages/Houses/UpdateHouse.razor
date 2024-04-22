@@ -5,45 +5,126 @@
 @using System.Net.Http.Json
 @inject NavigationManager NavigationManager
 
-@*Autohor: Susanna Renström*@
+@*Author: Susanna Renström*@
 
-<h3>UpdateHouse</h3>
-<div>
-    <label>Houses</label>
+<h3>Uppdatera hus</h3>
+
+    <label>Aktuellt hus</label>
     @if (House == null)
     {
-        <p>Loading...</p>
+        <p>Ett ögonblick...</p>
     }
     else
     {
-        <p>House Id: @House.HouseId</p>
-        <p>Price: @House.Price</p>
-        <p>Adress: @House.Adress</p>
-        
-    }
-
+     
     <EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit">
+       
         <div>
-            <label for="adress">Adress</label>
-            <InputText id="adress" @bind-Value="House.Adress" />
-            <label for="price">Price</label>
-            <InputNumber id="price" @bind-Value="House.Price" />
-
-
+            <label>Mäklare</label>
+            @if (Realtors != null)
+            {
+                <select @bind="RealtorId">
+                    @foreach (var realtor in Realtors)
+                    {
+                       <option value="@realtor.RealtorId">@realtor.FirstName</option>
+                    }
+                </select>
+            }
         </div>
-        <button type="submit">Save</button>
-    </EditForm>
+        <div>
+            <label>Kategori</label>
+            @if (Categories != null)
+            {
+                <select @bind="CategoryId">
+                    @foreach (var category in Categories)
+                    {
+                        <option value="@category.CategoryId">@category.CategoryName</option>
+                    }
+                </select>
+            }
+        </div>
+        <div>
+            <label>Bilder</label>
+        @if (Images != null && Images.Count > 0)
+        {
+            <label>Bildgalleri</label>
+            @foreach (var image in Images)
+            {
+                <div>
+                    <label>Bild URL</label>
+                    <InputText @bind-Value="image.ImageURL"></InputText>
+                </div>
+            }
+        }
+        </div>
+        <div>
+            <label>Adress</label>
+            <InputText id="adress" @bind-Value="House.Adress" />
+        </div>
+        <div>
+            <label>Pris</label>
+            <InputNumber id="price" @bind-Value="House.Price" />
+        </div>
+        <div>
+            <label>Boarea</label>
+            <InputNumber @bind-Value="House.LivingArea" />
+        </div>
+        <div>
+            <label>Biarea</label>
+            <InputNumber @bind-Value="House.AuxiliaryArea" />
+        </div>
+        <div>
+            <label>Tomtarea</label>
+            <InputNumber @bind-Value="House.PlotArea" />
+        </div>
+        <div>
+            <label>Beskrivning</label>
+            <InputTextArea @bind-Value="House.Description" />
+        </div>
+        <div>
+            <label>Antal rum</label>
+            <InputNumber @bind-Value="House.NumberOfRooms" />
+        </div>
+        <div>
+            <label>Månadsavgift</label>
+            <InputNumber @bind-Value="House.MonthlyFee" />
+        </div>
+        <div>
+            <label>Årlig driftkostnad</label>
+            <InputNumber @bind-Value="House.OperatingCostPerYear" />
+        </div>
+        <div>
+            <label>Byggår</label>
+            <InputNumber @bind-Value="House.YearOfConstruction" />
+        </div>
 
-</div>
+        
+        <button type="submit">Spara</button>
+    </EditForm>
+}
 @code {
 
-        [Parameter]
-        public int Id { get; set; }
- 
-        House House { get; set; } = new House();
+    [Parameter]
+    public int Id { get; set; }
+
+    House House { get; set; } = new House();
+    public List<Image> Images { get; set; } = new List<Image>();
+
+    // private int ImageId { get; set; }
+
+    private List<Realtor> Realtors { get; set; } = new List<Realtor>();
+
+    private int RealtorId { get; set; }
+
+    private List<Category> Categories { get; set; } = new List<Category>();
+
+    private int CategoryId { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {
+    {   
+        // Images = await Http.GetFromJsonAsync<List<Image>>("api/images");
+        Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
+        Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
         var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
         if (result != null)
             House = result;
@@ -53,7 +134,8 @@
     {
         // if (Id != null)
         // {
-       
+        House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
+        House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
         await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
         NavigationManager.NavigateTo($"/houses");
         // if (result.IsSuccessStatusCode)

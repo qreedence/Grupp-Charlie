@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Data.Repositories
 {   
     public class CategoryRepository : ICategory
-    {   //Author; Susanna
+    {   //Author: Susanna Renström
         private readonly ApplicationDbContext applicationDbContext;
 
         public CategoryRepository(ApplicationDbContext applicationDbContext)
