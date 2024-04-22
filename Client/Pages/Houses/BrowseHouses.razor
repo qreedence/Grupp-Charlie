@@ -30,7 +30,7 @@
 @* 
 <div id="map" style="height: 400px;"></div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap" async defer></script>
 <script>
     var map;
 
@@ -103,8 +103,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        APIKey = "AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k";
-        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key=AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k&q=test");
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
         FilteredList = ListOfHouses.ToList();
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +24,21 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Agencies", x => x.AgencyId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApiKeys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Key = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Domain = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiKeys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,7 +108,7 @@ namespace API.Migrations
                     MonthlyFee = table.Column<int>(type: "int", nullable: false),
                     OperatingCostPerYear = table.Column<int>(type: "int", nullable: false),
                     YearOfConstruction = table.Column<int>(type: "int", nullable: false),
-                    RealtorId = table.Column<int>(type: "int", nullable: true)
+                    RealtorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,7 +129,8 @@ namespace API.Migrations
                         name: "FK_Houses_Realtors_RealtorId",
                         column: x => x.RealtorId,
                         principalTable: "Realtors",
-                        principalColumn: "RealtorId");
+                        principalColumn: "RealtorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,6 +181,9 @@ namespace API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApiKeys");
+
             migrationBuilder.DropTable(
                 name: "Images");
 
