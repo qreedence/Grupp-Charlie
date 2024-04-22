@@ -34,18 +34,29 @@ else
     <p>Tomtarea: @House.PlotArea &#13217</p>
     <p>Pris: @House.Price.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr</p>
 
+    <iframe width="450"
+            height="250"
+            frameborder="0" style="border:0"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="@srcUrl"
+            allowfullscreen>
+    </iframe>
 
 }
 
 @code {
     [Parameter]
     public int Id { get; set; }
+    public string srcUrl { get; set; }
+    public string APIKey { get; set; }
 
     private House House { get; set; } = new House();
 
     protected override async Task OnInitializedAsync()
     {
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
+        APIKey = "AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k";
+        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key=AIzaSyC3fVV0d29woOeup6draiHd9H46ClJ3y7k&q={House.Adress}");
         StateHasChanged();
     }
 }
