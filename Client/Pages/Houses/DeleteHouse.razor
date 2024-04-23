@@ -4,12 +4,13 @@
 @inject NavigationManager NavigationManager
 @using System.Net.Http.Json
 
-@*Autohor: Susanna Renström*@
-<h3>DeleteHouse</h3>
+@*Author: Susanna Renström*@
+<h3>Radera hus</h3>
 
 <EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit">
     <div>
-        
+       @*  <InputNumber id="houseid" @bind-Value="House.County.CountyName" />
+        <InputNumber id="houseid" @bind-Value="House.Adress" /> *@
         <InputNumber id="houseid" @bind-Value="House.HouseId" />
     </div>
     <button type="submit">Save</button>

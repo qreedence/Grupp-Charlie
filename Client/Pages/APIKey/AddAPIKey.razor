@@ -1,0 +1,31 @@
+﻿@page "/apikey/register"
+@using Models;
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+@*Author: Eden Yusof-Ioannidis*@
+
+<EditForm Model="APIKey" OnSubmit="Submit" FormName="RegisterAPIKey">
+    <div>
+        <label>API-Key:</label>
+        <InputText @bind-Value="APIKey.Key"></InputText>
+    </div>
+
+    <button type="submit">Registrera API-key</button>
+</EditForm>
+
+@code {
+    public APIKey APIKey { get; set; } = new APIKey();
+
+    protected override async Task OnInitializedAsync()
+    {
+        APIKey.DateRegistered = DateTime.Now;
+        APIKey.Domain = "GoogleMaps";
+    }
+
+    public async Task Submit()
+    {
+        await Http.PostAsJsonAsync<APIKey>("api/APIKey", APIKey);
+        NavigationManager.NavigateTo("/");
+    }
+}

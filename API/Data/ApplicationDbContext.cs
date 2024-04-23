@@ -16,7 +16,6 @@ namespace API.Data
         public DbSet<Realtor> Realtors { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Image> Images { get; set; }
-
-
+        public DbSet<APIKey> ApiKeys { get; set; }
     }
 }
