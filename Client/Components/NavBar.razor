@@ -5,6 +5,7 @@
 @inject IJSRuntime JSRuntime
 @using System.Net.Http.Headers
 
+@*Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis*@
 
 <div>
     <ul>
@@ -26,11 +27,6 @@
 @code {
 
     private bool UserAuthenticated { get; set; }
-    public class AuthenticationStatusResponse
-    {
-        public string Status { get; set; }
-        public string Message { get; set; }
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,14 +36,9 @@
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
         var response = await Http.GetAsync("api/authenticate/status");
-        if(response.IsSuccessStatusCode)
+        if (response.IsSuccessStatusCode)
         {
-            var responseContent = await response.Content.ReadAsStringAsync();
 
-            // Deserialize the JSON response to an object
-            var responseData = JsonSerializer.Deserialize<AuthenticationStatusResponse>(responseContent);
-
-            // Set UserAuthenticated based on the authentication status in the response
             UserAuthenticated = true;
 
         }
