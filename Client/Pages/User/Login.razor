@@ -1,0 +1,36 @@
+﻿@page "/login"
+@inject HttpClient Http
+@using System.Net.Http.Json
+@inject IJSRuntime JSRuntime
+<h3>Login</h3>
+
+<EditForm Model="LoginModel" OnSubmit="Submit">
+    <label>Användarnamn:</label>
+    <InputText @bind-Value="LoginModel.Username"></InputText>
+    <label>Lösenord:</label>
+    <InputText @bind-Value="LoginModel.Password"></InputText>
+    <button type="submit">Logga in</button>
+
+</EditForm>
+
+
+@code {
+    public LoginModel LoginModel {get; set; } = new LoginModel();
+
+    public async Task Submit()
+    {
+        var responseMessage = await Http.PostAsJsonAsync<LoginModel>("api/authenticate/login", LoginModel);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var responseContent = await responseMessage.Content.ReadFromJsonAsync<Response>();
+            // Assuming LoginResponse is a class containing the token property
+            var token = responseContent.Token;
+
+            // Store the token securely in localStorage or sessionStorage
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", token);
+
+            NavigationManager.NavigateTo($"/houses");
+        }
+    }
+
+}

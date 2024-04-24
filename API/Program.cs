@@ -4,6 +4,10 @@ using API.Data.Repositories;
 using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace API
 {
@@ -12,7 +16,7 @@ namespace API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            ConfigurationManager configuration = builder.Configuration;
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -22,6 +26,32 @@ namespace API
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
+            // For Identity
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            // Adding Authentication
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+            // Adding Jwt Bearer
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = configuration["JWT:ValidAudience"],
+                    ValidIssuer = configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
+                };
+            });
             builder.Services.AddTransient<IAgency, AgencyRepository>();
             builder.Services.AddTransient<ICategory, CategoryRepository>();
             builder.Services.AddTransient<ICounty, CountyRepository>();
@@ -29,6 +59,8 @@ namespace API
             builder.Services.AddTransient<IImage, ImageRepository>();
             builder.Services.AddTransient<IRealtor, RealtorRepository>();
             builder.Services.AddTransient<IAPIKey, APIKeyRepository>();
+
+
 
             var app = builder.Build();
             //La till denna för att lösa "loading" problemet
@@ -46,7 +78,8 @@ namespace API
             }
 
             app.UseHttpsRedirection();
-
+            // Authentication & Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
