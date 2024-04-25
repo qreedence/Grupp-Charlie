@@ -2,6 +2,7 @@
 @page "/houses/update"
 @inject HttpClient Http
 @using System.Net.Http.Json
+@using Client.Models
 @inject NavigationManager NavigationManager
 
 @*Author: Susanna Renström*@
@@ -131,7 +132,7 @@
     protected override async Task OnInitializedAsync()
     {   
         Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
-        Images = await Http.GetFromJsonAsync<List<Image>>("api/image");
+        Images? = await Http.GetFromJsonAsync<List<Image>>("api/image");
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
         Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
         
