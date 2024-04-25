@@ -1,13 +1,51 @@
-﻿<div>
-    <ul>
-        <li><NavLink href="/apikey/register" Match="NavLinkMatch.All">Registrera ny API-key</NavLink></li>
-        <li><NavLink href="/browse" Match="NavLinkMatch.All">Sök bostäder</NavLink></li>
-        <li><NavLink href="/realtors" Match="NavLinkMatch.All">Se mäklare</NavLink></li>
-        <li><NavLink href="/realtors/create" Match="NavLinkMatch.All">Skapa ny mäklare</NavLink></li>
-        <li><NavLink href="/houses" Match="NavLinkMatch.All">Se alla hus</NavLink></li>
-    </ul>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject HttpClient Http
+@using System.Net.Http.Json
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+@using System.Net.Http.Headers
+
+@*Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis*@
+
+<div class="nav-bar">
+    <div class="nav-left">
+        <NavLink href="/" Match="NavLinkMatch.All">
+            <button id ="logo-btn">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            </button>
+        </NavLink>
+        <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
+        <NavLink href="/userpages" Match="NavLinkMatch.All">Kund-sidor</NavLink>
+    </div>
+    <div class="nav-right">
+        @if (UserAuthenticated == false)
+        {
+            <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
+        }
+    </div>
 </div>
 
 @code {
+
+    private bool UserAuthenticated { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+        if (!string.IsNullOrEmpty(token))
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+        var response = await Http.GetAsync("api/authenticate/status");
+        if (response.IsSuccessStatusCode)
+        {
+
+            UserAuthenticated = true;
+
+        }
+
+    }
 
 }
