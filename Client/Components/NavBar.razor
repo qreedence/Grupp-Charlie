@@ -7,21 +7,24 @@
 
 @*Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis*@
 
-<div>
-    <ul>
-        <li><NavLink href="/apikey/register" Match="NavLinkMatch.All">Registrera ny API-key</NavLink></li>
-        <li><NavLink href="/browse" Match="NavLinkMatch.All">Sök bostäder</NavLink></li>
-        @if (UserAuthenticated)
-        {
-            <li><NavLink href="/realtors" Match="NavLinkMatch.All">Se mäklare</NavLink></li>
-        }
-        <li><NavLink href="/realtors/create" Match="NavLinkMatch.All">Skapa ny mäklare</NavLink></li>
-        <li><NavLink href="/houses" Match="NavLinkMatch.All">Se alla hus</NavLink></li>
+<div class="nav-bar">
+    <div class="nav-left">
+        <NavLink href="/" Match="NavLinkMatch.All">
+            <button id ="logo-btn">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            </button>
+        </NavLink>
+        <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
+        <NavLink href="/userpages" Match="NavLinkMatch.All">Kund-sidor</NavLink>
+    </div>
+    <div class="nav-right">
         @if (UserAuthenticated == false)
         {
-            <li><NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink></li>
+            <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
         }
-    </ul>
+    </div>
 </div>
 
 @code {

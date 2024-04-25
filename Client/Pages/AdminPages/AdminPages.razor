@@ -1,0 +1,28 @@
+﻿@page "/adminpages"
+
+@*Author: Eden-Yusof-Ioannidis*@
+
+<div class="grid-container">
+    <div class="card float-up">
+        <span class="material-symbols-outlined svg">
+            key
+        </span>
+        <NavLink href="/apikey/register" Match="NavLinkMatch.All"><button>Registrera ny API-nyckel</button></NavLink><br />
+    </div>
+    <div class="card float-up">
+        <span class="material-symbols-outlined svg">
+            groups
+        </span>
+        <NavLink href="/realtors" Match="NavLinkMatch.All"><button>Hantera mäklare</button></NavLink><br />
+    </div>
+    <div class="card float-up">
+        <span class="material-symbols-outlined svg">
+            apartment   
+        </span>
+        <NavLink href="/houses" Match="NavLinkMatch.All"><button>Hantera bostäder</button></NavLink><br />
+    </div>
+</div>
+
+@code {
+
+}
