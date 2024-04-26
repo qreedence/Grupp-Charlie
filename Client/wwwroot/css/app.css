@@ -197,3 +197,11 @@ button:hover{
     font-weight: 500;
     margin-block: 1rem;
 }
+
+.county > ul {
+    margin-block: 1rem;
+}
+
+.county > ul > li {
+    list-style: none;
+}
