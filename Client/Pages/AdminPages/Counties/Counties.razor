@@ -1,0 +1,47 @@
+﻿@page "/counties"
+@inject HttpClient Http
+
+<section>
+    <h2>Län och kommuner</h2>
+    @if (ListOfCounties == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @foreach (var county in ListOfCounties)
+        {
+            <div class="county">
+                <h3>@county.CountyName</h3>
+                <ul>
+                    @foreach (var municipality in county.Municipalities)
+                    {
+                        <li>@municipality.MunicipalityName</li>
+                    }
+                </ul>
+            </div>
+            
+        }
+    }
+</section>
+
+<NavLink href="/counties" Match="NavLinkMatch.All"><button>Importera län och kommuner till databasen</button></NavLink>
+
+@code {
+    private List<County> ListOfCounties { get; set; } = new List<County>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfCounties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        foreach (var county in ListOfCounties)
+        {
+            if (county.Municipalities == null)
+            {
+                county.Municipalities = new List<Municipality>();
+            }
+        }
+    }
+
+
+
+}
