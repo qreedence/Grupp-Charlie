@@ -191,3 +191,9 @@ button:hover{
     padding-inline: 1rem;
     border: 1px solid black;
 }
+
+.error-message {
+    color: red;
+    font-weight: 500;
+    margin-block: 1rem;
+}

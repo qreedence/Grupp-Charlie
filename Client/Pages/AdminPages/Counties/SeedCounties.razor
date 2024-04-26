@@ -15,6 +15,7 @@
         }
 
         <button @onclick="SeedDatabase">Lägg till dessa län till databasen</button>
+        <p class="error-message">@ErrorMessage</p>
 
         <h3>Raw JSON:</h3>
         <button @onclick="ToggleVisibility">Click to show/hide</button>
@@ -30,6 +31,7 @@
     private List<County> Counties { get; set; } = new List<County>();
     private List<string> CountiesString { get; set; } = new List<string>();
     private string Test { get; set; }
+    private string ErrorMessage { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -62,9 +64,18 @@
 
     private async Task SeedDatabase()
     {
-        foreach (var county in Counties)
+        List<County> existingCounties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        if (existingCounties.Count == 0)
         {
-            await Http.PostAsJsonAsync<County>("api/county", county);
+            foreach (var county in Counties)
+            {
+                await Http.PostAsJsonAsync<County>("api/county", county);
+            }
         }
+        else
+        {
+            ErrorMessage = "Det ser ut som att databasen redan innehåller län. Testa ta bort alla län från databasen och försök igen.";
+        }
+
     }
 }
