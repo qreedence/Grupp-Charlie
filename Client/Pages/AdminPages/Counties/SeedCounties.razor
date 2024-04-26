@@ -1,0 +1,81 @@
+﻿@page "/counties/seed"
+@inject HttpClient Http
+
+<section>
+    @if (Counties == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <h3>Län</h3>
+        @foreach (var county in Counties)
+        {
+            <p>@county.CountyName</p>
+        }
+
+        <button @onclick="SeedDatabase">Lägg till dessa län till databasen</button>
+        <p class="error-message">@ErrorMessage</p>
+
+        <h3>Raw JSON:</h3>
+        <button @onclick="ToggleVisibility">Click to show/hide</button>
+        <div class="json">
+            <p>@Test</p>
+        </div>
+    }
+</section>
+
+
+@code {
+    private List<JsonCounty> JsonCounties { get; set; } = new List<JsonCounty>();
+    private List<County> Counties { get; set; } = new List<County>();
+    private List<string> CountiesString { get; set; } = new List<string>();
+    private string Test { get; set; }
+    private string ErrorMessage { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        JsonCounties = await Http.GetFromJsonAsync<List<JsonCounty>>("api/json");
+        Test = await Http.GetStringAsync("api/json");
+        foreach (var county in JsonCounties)
+        {
+            string temp = county.lan_name.FirstOrDefault();
+            CountiesString.Add(temp);
+        }
+        foreach (var county in CountiesString)
+        {
+            County newCounty = new County();
+            newCounty.CountyName = county;
+            Counties.Add(newCounty);
+        }
+    }
+
+    private async Task ToggleVisibility()
+    {
+        if (Test == "[...]")
+        {
+            Test = await Http.GetStringAsync("api/json");
+        }
+        else
+        {
+            Test = "[...]";
+        }
+    }
+
+    private async Task SeedDatabase()
+    {
+        List<County> existingCounties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        if (existingCounties.Count == 0)
+        {
+            foreach (var county in Counties)
+            {
+                await Http.PostAsJsonAsync<County>("api/county", county);
+            }
+        }
+        else
+        {
+            ErrorMessage = "Det ser ut som att databasen redan innehåller län. Testa ta bort alla län från databasen och försök igen.";
+        }
+
+    }
+}

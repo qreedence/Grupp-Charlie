@@ -1,4 +1,6 @@
-﻿namespace Client.Models
+﻿using Newtonsoft.Json;
+
+namespace Client.Models
 {
     public class County
     {

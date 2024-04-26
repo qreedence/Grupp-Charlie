@@ -73,7 +73,7 @@ button {
     padding-inline: 1rem;
     padding-block: 0.4rem;
     background-color: white;
-    border: none;
+    border: 1px solid var(--primary-clr-600);
     border-radius: 8px;
     font-family: Montserrat;
     font-weight: 600;
@@ -81,7 +81,9 @@ button {
 
 button:hover{
     cursor: pointer;
-    border: 1px solid var(--primary-clr-600);
+    color: white;
+    background-color: var(--primary-clr-600);
+    border: 1px solid var(--primary-clr-200);
 }
 
 .nav-bar {
@@ -101,6 +103,7 @@ button:hover{
     color: white;
     font-weight: 600;
     transition: 0.2s;
+    border: none;
 }
 
 #logo-btn:hover {
@@ -178,4 +181,19 @@ button:hover{
     background-size: cover;
     background-position:bottom;
     color: white;
+}
+
+.json {
+    width: 60%;
+    margin-top: 1rem;
+    background-color: lightgoldenrodyellow;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    border: 1px solid black;
+}
+
+.error-message {
+    color: red;
+    font-weight: 500;
+    margin-block: 1rem;
 }
