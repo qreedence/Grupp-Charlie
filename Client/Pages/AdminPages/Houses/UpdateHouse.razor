@@ -134,20 +134,27 @@
         Images = await Http.GetFromJsonAsync<List<Image>>("api/image");
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
         Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
-        
+
         var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
         if (result != null)
         { House = result; }
     }
-        
-       public async Task Submit()
+
+    public async Task Submit()
     {
-        House.County = await Http.GetFromJsonAsync<County>($"api/category/{CountyId}");
-        House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
-        House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
-        await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
+        House.County = Counties.FirstOrDefault(c => c.CountyId == CountyId);
+        House.Category = Categories.FirstOrDefault(c => c.CategoryId == CategoryId);
+        House.Realtor = Realtors.FirstOrDefault(c => c.RealtorId == RealtorId);
+        // House.County = await Http.GetFromJsonAsync<County>($"api/category/{CountyId}");
+        // House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
+        // House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
+       
+            var result = await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
+        
+        if (result.IsSuccessStatusCode)
+        {
         NavigationManager.NavigateTo($"/houses");
-      
+        }
     }
 
 
