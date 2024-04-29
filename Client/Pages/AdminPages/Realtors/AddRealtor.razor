@@ -54,7 +54,6 @@
     public async Task Submit()
     {
         Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
-        Realtor.Houses = new List<House>();
         await Http.PostAsJsonAsync<Realtor>("api/realtor", Realtor);
     }
 }

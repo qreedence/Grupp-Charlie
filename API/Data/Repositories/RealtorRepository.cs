@@ -42,7 +42,9 @@ namespace API.Data.Repositories
 
         public async Task<List<Realtor>> GetAllAsync()
         {
-            return await applicationDbContext.Realtors.ToListAsync();
+            return await applicationDbContext.Realtors
+                .Include(r => r.Agency)
+                .ToListAsync();
         }
 
         public async Task<Realtor> GetByIdAsync(int id)
