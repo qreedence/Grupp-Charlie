@@ -132,7 +132,6 @@
             House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
             House.County = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
             House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
-            House.Realtor.Houses = new List<House>();
             House.Gallery = Images;     
             
             await Http.PostAsJsonAsync<House>("api/House", House);

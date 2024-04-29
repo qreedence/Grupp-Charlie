@@ -9,7 +9,5 @@
         public string Email { get; set; }
         public int Phonenumber { get; set; }
         public string Avatar { get; set; }
-        public List<House>? Houses { get; set; }
-
     }
 }
