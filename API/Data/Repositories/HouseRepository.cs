@@ -12,16 +12,19 @@ namespace API.Data.Repositories
         private readonly ICategory categoryRepository;
         private readonly ICounty countyRepository;
         private readonly IRealtor realtorRepository;
+        private readonly IMunicipality municipalityRepository;
 
-        public HouseRepository(ApplicationDbContext ApplicationDbContext, ICategory CategoryRepository, ICounty CountyRepository, IRealtor RealtorRepository) 
+        public HouseRepository(ApplicationDbContext ApplicationDbContext, ICategory CategoryRepository, ICounty CountyRepository, IRealtor RealtorRepository, IMunicipality MunicipalityRepository) 
         {
             applicationDbContext = ApplicationDbContext;
             categoryRepository = CategoryRepository;
             countyRepository = CountyRepository;
             realtorRepository = RealtorRepository;
+            municipalityRepository = MunicipalityRepository;
         }
         public async Task AddAsync(House house)
         {
+            house.Municipality = await municipalityRepository.GetByIdAsync(house.Municipality.MunicipalityId);
             house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
             house.County = await countyRepository.GetByIdAsync(house.County.CountyId);
             house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.RealtorId);
@@ -56,6 +59,7 @@ namespace API.Data.Repositories
 
         public async Task UpdateAsync(House house)
         {
+            house.Municipality = await municipalityRepository.GetByIdAsync(house.Municipality.MunicipalityId);
             house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
             house.County = await countyRepository.GetByIdAsync(house.County.CountyId);
             house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.RealtorId);

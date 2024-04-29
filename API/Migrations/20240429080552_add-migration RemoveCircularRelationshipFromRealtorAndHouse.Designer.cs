@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240429080552_add-migration RemoveCircularRelationshipFromRealtorAndHouse")]
+    partial class addmigrationRemoveCircularRelationshipFromRealtorAndHouse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,9 +139,6 @@ namespace API.Migrations
                     b.Property<int>("MonthlyFee")
                         .HasColumnType("int");
 
-                    b.Property<int>("MunicipalityId")
-                        .HasColumnType("int");
-
                     b.Property<int>("NumberOfRooms")
                         .HasColumnType("int");
 
@@ -162,8 +162,6 @@ namespace API.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CountyId");
-
-                    b.HasIndex("MunicipalityId");
 
                     b.HasIndex("RealtorId");
 
@@ -467,12 +465,6 @@ namespace API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API.Data.Models.Municipality", "Municipality")
-                        .WithMany()
-                        .HasForeignKey("MunicipalityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("API.Data.Models.Realtor", "Realtor")
                         .WithMany()
                         .HasForeignKey("RealtorId")
@@ -482,8 +474,6 @@ namespace API.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("County");
-
-                    b.Navigation("Municipality");
 
                     b.Navigation("Realtor");
                 });
