@@ -1,0 +1,148 @@
+﻿@page "/counties/seed"
+@inject HttpClient Http
+
+<section>
+    @if (Counties == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <h3>Län</h3>
+        if (ExistingCounties.Count == 0)
+        {
+            <button @onclick="SeedDatabaseCounties">Lägg till dessa län till databasen</button>
+            <p class="error-message">@ErrorMessage</p>
+            @foreach (var county in Counties)
+            {
+                <p>@county.CountyName</p>
+            }
+            <h3>Raw JSON:</h3>
+            <button @onclick="ToggleVisibility">Click to show/hide</button>
+            <div class="json">
+                <p>@Test</p>
+            </div>
+        }
+        else
+        {
+            <p>Databasen verkar redan innehålla län.</p><br/>
+        }
+
+    }
+    @if (Municipalities == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <h3>Kommuner</h3>
+        @if (ExistingMunicipalities.Count == 0)
+        {
+            <button @onclick="SeedDatabaseMunicipalities">Lägg till dessa kommuner till databasen</button>
+            <p class="error-message">@ErrorMessage</p>
+            <table>
+                <tr>
+                    <th>Kommun</th>
+                    <th>Län</th>
+                </tr>
+                @foreach (var municipality in Municipalities)
+                {
+                    <tr>
+                        <td>@municipality.MunicipalityName</td>
+                        <td>@municipality.CountyName</td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            <p>Databasen verkar redan innehålla kommuner.</p><br />
+        }
+    }
+</section>
+
+
+@code {
+    private List<County> ExistingCounties { get; set; } = new List<County>();
+    private List<Municipality> ExistingMunicipalities { get; set; } = new List<Municipality>();
+    private List<JsonCounty> JsonCounties { get; set; } = new List<JsonCounty>();
+    private List<County> Counties { get; set; } = new List<County>();
+    private List<string> CountiesString { get; set; } = new List<string>();
+    private string Test { get; set; }
+    private string ErrorMessage { get; set; } = "";
+
+    private List<JsonMunicipality> JsonMunicipalities { get; set; } = new List<JsonMunicipality>();
+    private List<Municipality> Municipalities { get; set; } = new List<Municipality>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ExistingCounties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        ExistingMunicipalities = await Http.GetFromJsonAsync<List<Municipality>>("api/municipality");
+        JsonCounties = await Http.GetFromJsonAsync<List<JsonCounty>>("api/json/counties");
+        JsonMunicipalities = await Http.GetFromJsonAsync<List<JsonMunicipality>>("api/json/municipalities");
+        Test = "[...]";
+        foreach (var county in JsonCounties)
+        {
+            string temp = county.lan_name.FirstOrDefault();
+            CountiesString.Add(temp);
+        }
+        foreach (var county in CountiesString)
+        {
+            County newCounty = new County();
+            newCounty.CountyName = county;
+            Counties.Add(newCounty);
+        }
+        foreach (var municipality in JsonMunicipalities)
+        {
+            string municipalityName = municipality.kom_name.FirstOrDefault();
+            string municipalityCounty = municipality.lan_name.FirstOrDefault();
+            Municipality newMunicipality = new Municipality();
+            newMunicipality.MunicipalityName = municipalityName;
+            newMunicipality.CountyName = municipalityCounty;
+            Municipalities.Add(newMunicipality);
+        }
+    }
+
+    private async Task ToggleVisibility()
+    {
+        if (Test == "[...]")
+        {
+            Test = await Http.GetStringAsync("api/json/counties");
+        }
+        else
+        {
+            Test = "[...]";
+        }
+    }
+
+    private async Task SeedDatabaseCounties()
+    {
+        if (ExistingCounties.Count == 0)
+        {
+            foreach (var county in Counties)
+            {
+                await Http.PostAsJsonAsync<County>("api/county", county);
+            }
+        }
+        else
+        {
+            ErrorMessage = "Det ser ut som att databasen redan innehåller län. Testa ta bort alla län från databasen och försök igen.";
+        }
+    }
+
+    private async Task SeedDatabaseMunicipalities()
+    {
+        if (ExistingMunicipalities.Count == 0)
+        {
+            foreach (var municipality in Municipalities)
+            {
+                await Http.PostAsJsonAsync<Municipality>("api/municipality", municipality);
+            }
+        }
+        else
+        {
+            ErrorMessage = "Det ser ut som att databasen redan innehåller kommuner. Testa ta bort alla kommuner från databasen och försök igen.";
+        }
+    }
+}

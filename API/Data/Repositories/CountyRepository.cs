@@ -49,12 +49,17 @@ namespace API.Data.Repositories
 
         public async Task<List<County>> GetAllAsync()
         {
-            return await applicationDbContext.Counties.ToListAsync();
+            return await applicationDbContext.Counties.Include(c => c.Municipalities).ToListAsync();
         }
 
         public async Task<County> GetByIdAsync(int id)
         {
             return await applicationDbContext.Counties.FindAsync(id);
+        }
+
+        public async Task<County> GetByNameAsync(string name)
+        {
+            return await applicationDbContext.Counties.Where(c => c.CountyName == name).FirstOrDefaultAsync();
         }
     }
 }

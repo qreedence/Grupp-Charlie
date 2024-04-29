@@ -15,6 +15,7 @@ namespace API.Data
         public DbSet<House> Houses { get; set; }
         public DbSet<Agency> Agencies { get; set; }
         public DbSet<County> Counties { get; set; }
+        public DbSet<Municipality> Municipalities { get; set; }
         public DbSet<Realtor> Realtors { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Image> Images { get; set; }

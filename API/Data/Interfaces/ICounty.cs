@@ -10,5 +10,6 @@ namespace API.Data.Interfaces
         public Task DeleteAsync(int id);
         public Task<List<County>> GetAllAsync();
         public Task<County> GetByIdAsync(int id);
+        public Task<County> GetByNameAsync(string name);
     }
 }

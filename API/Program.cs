@@ -55,6 +55,7 @@ namespace API
             builder.Services.AddTransient<IAgency, AgencyRepository>();
             builder.Services.AddTransient<ICategory, CategoryRepository>();
             builder.Services.AddTransient<ICounty, CountyRepository>();
+            builder.Services.AddTransient<IMunicipality, MunicipalityRepository>();
             builder.Services.AddTransient<IHouse, HouseRepository>();
             builder.Services.AddTransient<IImage, ImageRepository>();
             builder.Services.AddTransient<IRealtor, RealtorRepository>();
