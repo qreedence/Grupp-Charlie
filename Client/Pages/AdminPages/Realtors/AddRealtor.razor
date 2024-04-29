@@ -30,11 +30,13 @@
         @if (Agencies != null)
         {
             <select @bind="AgencyId">
+                <option value="">Välj mäklarfirma</option>
                 @foreach (var agency in Agencies)
                 {
                     <option value="@agency.AgencyId">@agency.NameOfAgency</option>
                 }
             </select>
+            <p>@ErrorMessage</p>
         }
     </div>
     
@@ -44,16 +46,28 @@
 @code {
     public Realtor Realtor { get; set; } = new Realtor();
     public List<Agency> Agencies { get; set; } = new List<Agency>();
-    public int AgencyId { get; set; }
+    public int AgencyId { get; set; } 
+    public string ErrorMessage { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
         Agencies = await Http.GetFromJsonAsync<List<Agency>>("api/agency");
+
+
     }
 
     public async Task Submit()
     {
-        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
-        await Http.PostAsJsonAsync<Realtor>("api/realtor", Realtor);
+        if (AgencyId != 0)
+        {
+            Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
+            await Http.PostAsJsonAsync<Realtor>("api/realtor", Realtor);
+            ErrorMessage = "";
+        }
+        else
+        {
+            ErrorMessage = "Välj en mäklarfirma.";
+        }
+
     }
 }

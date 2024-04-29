@@ -35,6 +35,7 @@
             @if (Categories != null)
             {
                 <select @bind="CategoryId">
+                    <option value="" selected>Välj kategori</option>
                     @foreach (var category in Categories)
                     {
                         <option value="@category.CategoryId">@category.CategoryName</option>
@@ -43,7 +44,19 @@
             }
         </div>
         <div>
-            <label>Kommun</label>
+            <label>Municipality</label>
+            @if (Municipalities != null)
+            {
+                <select @bind="MunicipalityId">
+                    @foreach (var municipality in Municipalities)
+                    {
+                        <option value="@municipality.MunicipalityId">@municipality.MunicipalityName</option>
+                    }
+                </select>
+            }
+        </div>
+        <div>
+            <label>Län</label>
             @if (Counties != null)
             {
                 <select @bind="CountyId">
@@ -107,6 +120,7 @@
             <InputNumber @bind-Value="House.YearOfConstruction" />
         </div>
 
+
         
         <button type="submit">Spara</button>
     </EditForm>
@@ -120,6 +134,9 @@
     private int CountyId { get; set; }
     public List<County> Counties { get; set; } = new List<County>();
 
+    private int MunicipalityId { get; set; }
+    private List<Municipality> Municipalities { get; set; } = new List<Municipality>();
+
     public List<Image> Images { get; set; } = new List<Image>();
 
     private int RealtorId { get; set; }
@@ -127,10 +144,14 @@
 
     private int CategoryId { get; set; }
     private List<Category> Categories { get; set; } = new List<Category>();
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {   
         Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        Municipalities = await Http.GetFromJsonAsync<List<Municipality>>("api/municipality");
         Images = await Http.GetFromJsonAsync<List<Image>>("api/image");
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
         Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
@@ -142,12 +163,10 @@
 
     public async Task Submit()
     {
-        House.County = Counties.FirstOrDefault(c => c.CountyId == CountyId);
-        House.Category = Categories.FirstOrDefault(c => c.CategoryId == CategoryId);
-        House.Realtor = Realtors.FirstOrDefault(c => c.RealtorId == RealtorId);
-        // House.County = await Http.GetFromJsonAsync<County>($"api/category/{CountyId}");
-        // House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
-        // House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
+        House.County = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
+        House.Municipality = await Http.GetFromJsonAsync<Municipality>($"api/municipality/{MunicipalityId}");
+        House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
+        House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
        
             var result = await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
         
