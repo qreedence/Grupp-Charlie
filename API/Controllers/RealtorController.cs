@@ -24,7 +24,7 @@ namespace API.Controllers
 
         // GET api/<RealtorController>/5
         [HttpGet("{id}")]
-        public async Task<Realtor> GetByIdAsync(int id)
+        public async Task<Realtor> GetByIdAsync(string id)
         {
             return await realtorRepository.GetByIdAsync(id);
         }

@@ -6,22 +6,27 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using API.Auth;
+using API.Data.Models;
+using API.Data.Interfaces;
 
 namespace API.Controllers
 {
+    //Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IAgency agencyRepository;
+        private readonly UserManager<Realtor> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public AuthenticateController(
-            UserManager<IdentityUser> userManager,
+        public AuthenticateController(IAgency agencyRepository,
+            UserManager<Realtor> userManager,
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration)
         {
+            this.agencyRepository = agencyRepository;
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
@@ -62,17 +67,30 @@ namespace API.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var userExists = await _userManager.FindByNameAsync(model.Username);
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-
-            IdentityUser user = new()
+            var hasher = new PasswordHasher<Realtor>();
+            Realtor user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Avatar = model.Avatar,
+                PasswordHash = hasher.HashPassword(null, model.Password),
+                Agency = await agencyRepository.GetByIdAsync(model.Agency.AgencyId),
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                TwoFactorEnabled = true,
+                LockoutEnabled = false,
+                AccessFailedCount = 0,
+                UserName = model.Email,
+                NormalizedUserName = model.Email.ToUpper()
+                
+
             };
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
@@ -99,15 +117,18 @@ namespace API.Controllers
         [Route("register-admin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
         {
-            var userExists = await _userManager.FindByNameAsync(model.Username);
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-
-            IdentityUser user = new()
+            var hasher = new PasswordHasher<Realtor>();
+            Realtor user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Avatar = model.Avatar,
+                PasswordHash = hasher.HashPassword(null, model.Password),
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)

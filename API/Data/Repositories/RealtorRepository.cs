@@ -17,16 +17,16 @@ namespace API.Data.Repositories
         public async Task AddAsync(Realtor realtor)
         {
             realtor.Agency = await agencyRepository.GetByIdAsync(realtor.Agency.AgencyId);
-            await applicationDbContext.Realtors.AddAsync(realtor);
+            await applicationDbContext.Users.AddAsync(realtor);
             await applicationDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
         {
-            Realtor realtor = await applicationDbContext.Realtors.FindAsync(id);
+            Realtor realtor = await applicationDbContext.Users.FindAsync(id);
             if (realtor != null)
             {
-                applicationDbContext.Realtors.Remove(realtor);
+                applicationDbContext.Users.Remove(realtor);
                 await applicationDbContext.SaveChangesAsync();
             }
         }
@@ -35,21 +35,21 @@ namespace API.Data.Repositories
         {
             if (realtor != null)
             {
-                applicationDbContext.Realtors.Update(realtor);
+                applicationDbContext.Users.Update(realtor);
                 await applicationDbContext.SaveChangesAsync();
             }
         }
 
         public async Task<List<Realtor>> GetAllAsync()
         {
-            return await applicationDbContext.Realtors
+            return await applicationDbContext.Users
                 .Include(r => r.Agency)
                 .ToListAsync();
         }
 
-        public async Task<Realtor> GetByIdAsync(int id)
+        public async Task<Realtor> GetByIdAsync(string id)
         {
-            return await applicationDbContext.Realtors.Include(a => a.Agency).FirstOrDefaultAsync(r => r.RealtorId == id);
+            return await applicationDbContext.Users.Include(a => a.Agency).FirstOrDefaultAsync(r => r.Id == id);
         }
 
     }
