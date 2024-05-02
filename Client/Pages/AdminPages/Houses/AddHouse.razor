@@ -11,7 +11,8 @@
         <label>Realtor</label>
         @if (Realtors != null)
         {
-            <select @bind="RealtorId">
+            <select @bind="RealtorId" >
+                <option value="">Välj mäklare</option>
                 @foreach (var realtor in Realtors)
                 {
                     <option value="@realtor.RealtorId">@realtor.FirstName</option>
@@ -40,7 +41,8 @@
         <label>County</label>
         @if (Counties != null)
         {
-            <select @bind="CountyId">
+               <select @bind-value="CountyId" @onchange="FilterMunicipalities" @bind-value:event="oninput">
+                <option value="">Välj län</option>
                 @foreach (var county in Counties)
                 {
                     <option value="@county.CountyId">@county.CountyName</option>
@@ -53,7 +55,8 @@
         @if (Municipalities != null)
         {
             <select @bind="MunicipalityId">
-                @foreach (var municipality in Municipalities)
+                <option value="" selected>Välj kommun</option>
+                @foreach (var municipality in FilteredMunicipalities)
                 {
                     <option value="@municipality.MunicipalityId">@municipality.MunicipalityName</option>
                 }
@@ -121,6 +124,7 @@
     private List<County> Counties { get; set; } = new List<County>();
     private List<Realtor> Realtors { get; set; } = new List<Realtor>();
     private List<Municipality> Municipalities { get; set; } = new List<Municipality>();
+    private List<Municipality> FilteredMunicipalities { get; set; } = new List<Municipality>();
     private int CategoryId { get; set; }
     private int CountyId { get; set; }
     private int RealtorId { get; set; }
@@ -150,13 +154,20 @@
             House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
             House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
             House.Gallery = Images;     
-            
+
             await Http.PostAsJsonAsync<House>("api/House", House);
         }
         catch (Exception ex)
         {
             Console.WriteLine($"There was an error: {ex}");
         }
+    }
+
+    public async Task FilterMunicipalities()
+    {
+        House.County = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
+        FilteredMunicipalities = Municipalities.Where(m => m.CountyName == House.County.CountyName).ToList();
+        StateHasChanged();
     }
 }
 
