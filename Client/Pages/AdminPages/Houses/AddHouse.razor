@@ -11,7 +11,8 @@
         <label>Realtor</label>
         @if (Realtors != null)
         {
-            <select @bind="RealtorId">
+            <select @bind="RealtorId" >
+                <option value="">Välj mäklare</option>
                 @foreach (var realtor in Realtors)
                 {
                     <option value="@realtor.RealtorId">@realtor.FirstName</option>
@@ -40,8 +41,8 @@
         <label>County</label>
         @if (Counties != null)
         {
-@*             <select @bind="CountyId"> *@
                <select @bind-value="CountyId" @onchange="FilterMunicipalities" @bind-value:event="oninput">
+                <option value="">Välj län</option>
                 @foreach (var county in Counties)
                 {
                     <option value="@county.CountyId">@county.CountyName</option>
@@ -54,6 +55,7 @@
         @if (Municipalities != null)
         {
             <select @bind="MunicipalityId">
+                <option value="" selected>Välj kommun</option>
                 @foreach (var municipality in FilteredMunicipalities)
                 {
                     <option value="@municipality.MunicipalityId">@municipality.MunicipalityName</option>
