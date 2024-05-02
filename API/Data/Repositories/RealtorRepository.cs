@@ -47,9 +47,9 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Realtor> GetByIdAsync(int id)
+        public async Task<Realtor> GetByIdAsync(string id)
         {
-            return await applicationDbContext.Realtors.Include(a => a.Agency).FirstOrDefaultAsync(r => r.RealtorId == id);
+            return await applicationDbContext.Realtors.Include(a => a.Agency).FirstOrDefaultAsync(r => r.Id == id);
         }
 
     }

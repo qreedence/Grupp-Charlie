@@ -1,6 +1,6 @@
 ﻿namespace Client.Models
 {
-    public class Realtor
+    public class Realtor 
     {
         public int RealtorId { get; set; }
         public Agency? Agency { get; set; }

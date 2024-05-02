@@ -27,7 +27,7 @@ namespace API.Data.Repositories
             house.Municipality = await municipalityRepository.GetByIdAsync(house.Municipality.MunicipalityId);
             house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
             house.County = await countyRepository.GetByIdAsync(house.County.CountyId);
-            house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.RealtorId);
+            house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.Id);
             await applicationDbContext.Houses.AddAsync(house);
             await applicationDbContext.SaveChangesAsync();
         }
@@ -62,7 +62,7 @@ namespace API.Data.Repositories
             house.Municipality = await municipalityRepository.GetByIdAsync(house.Municipality.MunicipalityId);
             house.Category = await categoryRepository.GetByIdAsync(house.Category.CategoryId);
             house.County = await countyRepository.GetByIdAsync(house.County.CountyId);
-            house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.RealtorId);
+            house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.Id);
             applicationDbContext.Houses.Update(house);
             await applicationDbContext.SaveChangesAsync();
         }
