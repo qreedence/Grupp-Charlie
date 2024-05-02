@@ -54,7 +54,7 @@ namespace API.Data.Repositories
 
         public async Task<House> GetByIdAsync(int id)
         {
-            return await applicationDbContext.Houses.Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).FirstOrDefaultAsync(x => x.HouseId == id);
+            return await applicationDbContext.Houses.Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).Include(x => x.Municipality).FirstOrDefaultAsync(x => x.HouseId == id);
         }
 
         public async Task UpdateAsync(House house)

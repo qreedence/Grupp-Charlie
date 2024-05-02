@@ -15,7 +15,7 @@
                 <option value="">Välj mäklare</option>
                 @foreach (var realtor in Realtors)
                 {
-                    <option value="@realtor.RealtorId">@realtor.FirstName</option>
+                    <option value="@realtor.Id">@realtor.FirstName</option>
                 }
             </select>
         }
@@ -127,7 +127,7 @@
     private List<Municipality> FilteredMunicipalities { get; set; } = new List<Municipality>();
     private int CategoryId { get; set; }
     private int CountyId { get; set; }
-    private int RealtorId { get; set; }
+    private string RealtorId { get; set; }
     private int MunicipalityId { get; set; }
 
     public List<Image> Images { get; set; } = new List<Image>();
@@ -155,7 +155,11 @@
             House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
             House.Gallery = Images;     
 
-            await Http.PostAsJsonAsync<House>("api/House", House);
+            var result = await Http.PostAsJsonAsync<House>("api/House", House);
+            if (result.IsSuccessStatusCode)
+            {
+                NavigationManager.NavigateTo($"/houses");
+            }
         }
         catch (Exception ex)
         {
