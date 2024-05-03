@@ -71,8 +71,15 @@ namespace API
                 .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
                 .AllowCredentials());
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+			using (var scope = app.Services.CreateScope())
+			{
+				var services = scope.ServiceProvider;
+
+				SeedData.Initialize(services);
+			}
+
+			// Configure the HTTP request pipeline.
+			if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
