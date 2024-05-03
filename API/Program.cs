@@ -73,7 +73,7 @@ namespace API
                 .WithHeaders(HeaderNames.ContentType, HeaderNames.Authorization, "x-custom-header")
                 .AllowCredentials());
 
-			// Add objects to the database through Models.SeedData
+			// Adds objects to the database through Models.SeedData
             // Author: Mikaela Älgekrans
 			using (var scope = app.Services.CreateScope())
 			{
