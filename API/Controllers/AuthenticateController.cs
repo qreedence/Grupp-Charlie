@@ -70,7 +70,7 @@ namespace API.Controllers
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Epostadressen finns redan registrerad!" });
             var hasher = new PasswordHasher<Realtor>();
             string firstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.FirstName.ToLower());
             string lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.LastName.ToLower());
@@ -96,9 +96,9 @@ namespace API.Controllers
             };
             var result = await _userManager.CreateAsync(user);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Att skapa en användare misslyckades! Kontrollera användaruppgifterna och försök igen" });
 
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "Användaren har skapats!" });
         }
         [HttpGet]
         [Route("status")]
@@ -108,12 +108,12 @@ namespace API.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 // User is authenticated, return 200 OK with a success message
-                return Ok(new { Status = "Authenticated", Message = "User is logged in" });
+                return Ok(new { Status = "Authenticated", Message = "Användaren är inloggad" });
             }
             else
             {
                 // User is not authenticated, return 401 Unauthorized with an error message
-                return Unauthorized(new { Status = "NotAuthenticated", Message = "User is not logged in" });
+                return Unauthorized(new { Status = "NotAuthenticated", Message = "Användaren är inte inloggad" });
             }
         }
 
@@ -123,7 +123,7 @@ namespace API.Controllers
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Epostadressen finns redan registrerad!" });
             var hasher = new PasswordHasher<Realtor>();
             Realtor user = new()
             {
@@ -136,7 +136,7 @@ namespace API.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Att skapa en användare misslyckades! Kontrollera användaruppgifterna och försök igen" });
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -151,7 +151,7 @@ namespace API.Controllers
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "Användaren har skapats!" });
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
