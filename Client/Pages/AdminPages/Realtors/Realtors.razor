@@ -5,11 +5,11 @@
 
 @*Author: Eden Yusof-Ioannidis*@
 
-<h3>Realtors</h3>
+<h3>Mäklare</h3>
 
 @if (ListOfRealtors == null)
 {
-    <p>Loading...</p>
+    <p>Ett ögonblick..</p>
 }
 else if (ListOfRealtors.Count == 0)
 {
@@ -22,10 +22,10 @@ else
         <table>
             <tr>
                 <th>
-                    First Name
+                    Förnamn
                 </th>
                 <th>
-                    Last Name
+                    Efternamn
                 </th>
             </tr>
             @foreach (var realtor in ListOfRealtors)
