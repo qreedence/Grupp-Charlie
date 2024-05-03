@@ -305,7 +305,7 @@ namespace API.Migrations
                             Id = "e2680c44-32bb-432e-9cae-53b8ce24a0dd",
                             AccessFailedCount = 0,
                             Avatar = "sgsgs",
-                            ConcurrencyStamp = "62f168da-93d2-43e1-9728-684f27391354",
+                            ConcurrencyStamp = "af2e7e49-2fb0-42e6-87fa-b1bcccaaeff4",
                             Email = "marcus.friberg@xlent.se",
                             EmailConfirmed = true,
                             FirstName = "Marcus",
@@ -313,9 +313,9 @@ namespace API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MARCUS.FRIBERG@XLENT.SE",
                             NormalizedUserName = "MARCUS.FRIBERG@XLENT.SE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGd4gI52qsCnhxUE6L3JRrY6WV6ByiEfIY3f1pReZ8XINJxNa2hU/SB3fiDj9tTSsg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAKKen/o7mOCBYaywIvW77bFkzEnJjLKeKY8Q/RIpvvMebieUwgPA/B9/xLeZGiv8w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5f8b91dc-7cf7-421f-b4e5-97605524193b",
+                            SecurityStamp = "df8a4cc6-2843-411d-9aa1-9996b4b65730",
                             TwoFactorEnabled = false,
                             UserName = "marcus.friberg@xlent.se"
                         });
