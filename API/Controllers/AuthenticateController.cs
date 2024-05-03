@@ -8,6 +8,7 @@ using System.Text;
 using API.Auth;
 using API.Data.Models;
 using API.Data.Interfaces;
+using System.Globalization;
 
 namespace API.Controllers
 {
@@ -71,12 +72,15 @@ namespace API.Controllers
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
             var hasher = new PasswordHasher<Realtor>();
+            string firstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.FirstName.ToLower());
+            string lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.LastName.ToLower());
             Realtor user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                FirstName = firstName,
+                LastName = lastName,
+                PhoneNumber = model.PhoneNumber,
                 Avatar = model.Avatar,
                 PasswordHash = hasher.HashPassword(null, model.Password),
                 Agency = await agencyRepository.GetByIdAsync(model.Agency.AgencyId),
