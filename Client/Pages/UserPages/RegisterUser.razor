@@ -6,7 +6,7 @@
 
 @*Author: Susanna Renström*@
 
-<h3>RegisterUser</h3>
+<h3>Skapa ny användare</h3>
 @if (Response == null)
 {
     <EditForm Model="RegisterModel" OnSubmit="Submit">
@@ -31,7 +31,7 @@
             <InputText @bind-Value="RegisterModel.PhoneNumber"></InputText>
         </div>
         <div>
-            <label>URL för Avatar</label>
+            <label>Avatar URL</label>
             <InputText @bind-Value="RegisterModel.Avatar"></InputText>
         </div>
         <div>
@@ -44,7 +44,7 @@
                 }
             </select>
         </div>
-        <button type="submit">Spara</button>
+        <button type="submit">Skapa användare</button>
     </EditForm>
 }
 <br />

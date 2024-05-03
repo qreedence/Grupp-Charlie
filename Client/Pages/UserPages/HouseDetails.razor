@@ -7,7 +7,7 @@
 
 @if (House == null)
 {
-    <p>Loading...</p>
+    <p>Ett ögonblick...</p>
 }
 else
 {
@@ -18,7 +18,7 @@ else
     }
     @if (House.Category != null)
     {
-        <p>Bostadstyp: @House.Category.CategoryName</p>
+        <p>Kategori: @House.Category.CategoryName</p>
     }
     <p>@House.Description</p>
     @if(House.Gallery != null && House.Gallery.Count > 0)
