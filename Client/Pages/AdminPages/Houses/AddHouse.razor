@@ -4,11 +4,11 @@
 @using System.Net.Http.Json
 
 @*Author: Mikaela Älgekrans*@
-
+<h3>Lägg till ett nytt hus</h3>
 <EditForm Model="House" OnSubmit="Submit" FormName="CreateHouse">
 
     <div>
-        <label>Realtor</label>
+        <label>Mäklare</label>
         @if (Realtors != null)
         {
             <select @bind="RealtorId" >
@@ -21,7 +21,7 @@
         }
     </div>
     <div>
-        <label>Category</label>
+        <label>Kategori</label>
         @if (Categories != null)
         {
             <select @bind="CategoryId">
@@ -38,7 +38,7 @@
         <InputText @bind-Value="House.Adress"></InputText>
     </div>
     <div>
-        <label>County</label>
+        <label>Län</label>
         @if (Counties != null)
         {
                <select @bind-value="CountyId" @onchange="FilterMunicipalities" @bind-value:event="oninput">
@@ -51,7 +51,7 @@
         }
     </div>
     <div>
-        <label>Municipality</label>
+        <label>Kommun</label>
         @if (Municipalities != null)
         {
             <select @bind="MunicipalityId">
@@ -64,43 +64,43 @@
         }
     </div>
     <div>
-        <label>Price</label>
+        <label>Pris</label>
         <InputNumber @bind-Value="House.Price"></InputNumber>
     </div>
     <div>
-        <label>Living Area</label>
+        <label>Boarea</label>
         <InputNumber @bind-Value="House.LivingArea"></InputNumber>
     </div>
     <div>
-        <label>Auxiliary Area</label>
+        <label>Biarea</label>
         <InputNumber @bind-Value="House.AuxiliaryArea"></InputNumber>
     </div>
     <div>
-        <label>Plot Area</label>
+        <label>Tomtarea</label>
         <InputNumber @bind-Value="House.PlotArea"></InputNumber>
     </div>
     <div>
-        <label>Description</label>
+        <label>Beskrivning</label>
         <InputTextArea @bind-Value="House.Description"></InputTextArea>
     </div>
     <div>
-        <label>Number of Rooms</label>
+        <label>Antal rum</label>
         <InputNumber @bind-Value="House.NumberOfRooms"></InputNumber>
     </div>
     <div>
-        <label>Monthly Fee</label>
+        <label>Månadsavgift</label>
         <InputNumber @bind-Value="House.MonthlyFee"></InputNumber>
     </div>
     <div>
-        <label>Operating Cost Per Year</label>
+        <label>Årlig driftkostnad</label>
         <InputNumber @bind-Value="House.OperatingCostPerYear"></InputNumber>
     </div>
     <div>
-        <label>Year of Construction</label>
+        <label>Byggår</label>
         <InputNumber @bind-Value="House.YearOfConstruction"></InputNumber>
     </div>
     <div>
-        <label>Gallery</label>
+        <label>Bildgalleri</label>
         @if (Images != null && Images.Count > 0)
         {
             @foreach (var image in Images)
@@ -111,10 +111,10 @@
                 </div>
             }
         }
-        <button type="button" @onclick="AddImageField">Add Image</button>
+        <button type="button" @onclick="AddImageField">Lägg till bild</button>
     </div>
 
-    <button type="submit">Add House</button>
+    <button type="submit">Lägg till hus</button>
 </EditForm>
 
 @code {
@@ -163,7 +163,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"There was an error: {ex}");
+            Console.WriteLine($"Det uppstod ett fel: {ex}");
         }
     }
 

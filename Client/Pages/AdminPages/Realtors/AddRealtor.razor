@@ -3,18 +3,18 @@
 @inject HttpClient Http
 
 @*Author: Eden Yusof-Ioannidis*@
-
+<h3>Skapa ny mäklare</h3>
 <EditForm Model="Realtor" OnSubmit="Submit" FormName="CreateRealtor">
     <div>
-        <label>First Name</label>
+        <label>Förnamn</label>
         <InputText @bind-Value="Realtor.FirstName"></InputText>
     </div>
     <div>
-        <label>Last Name</label>
+        <label>Efternamn</label>
         <InputText @bind-Value="Realtor.LastName"></InputText>
     </div>
     <div>
-        <label>Email</label>
+        <label>Epostadress</label>
         <InputText @bind-Value="Realtor.Email"></InputText>
     </div>
    
@@ -23,7 +23,7 @@
         <InputText @bind-Value="Realtor.Avatar"></InputText>
     </div>
     <div>
-        <label>Agency</label>
+        <label>Mäklarfirma</label>
         @if (Agencies != null)
         {
             <select @bind="AgencyId">
@@ -37,7 +37,7 @@
         }
     </div>
     
-    <button type="submit">Create Realtor</button>
+    <button type="submit">Skapa mäklare</button>
 </EditForm>
 
 @code {
