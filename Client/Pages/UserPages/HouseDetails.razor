@@ -14,7 +14,7 @@ else
     <h3>@House.Adress</h3>
     @if(House.County != null)
     {
-        <h4>@House.County.CountyName</h4>
+        <h4>@House.Municipality.MunicipalityName, @House.County.CountyName</h4>
     }
     @if (House.Category != null)
     {
