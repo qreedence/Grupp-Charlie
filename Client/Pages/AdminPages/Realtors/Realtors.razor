@@ -47,11 +47,8 @@ else
 
     private List<Realtor> ListOfRealtors { get; set; }
 
-    private Realtor TestRealtor { get; set; } = new Realtor();
-
     protected override async Task OnInitializedAsync()
     {
         ListOfRealtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
-        TestRealtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/1");
     }
 }

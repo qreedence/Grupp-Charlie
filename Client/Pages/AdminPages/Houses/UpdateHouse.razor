@@ -17,7 +17,7 @@
     else
     {
      
-    <EditForm Model="House" OnSubmit="Submit" FormName="edit">
+    <EditForm Model="House" OnSubmit="Submit" FormName="edit" class="card form">
        
         <div>
             <label>Mäklare</label>
@@ -89,8 +89,8 @@
             }
         </div>
         <div>
-
             <label>Bildgalleri</label>
+            <div class="flex-column form">
             @foreach (var image in Images)
             {
                 <div>
@@ -98,7 +98,7 @@
                     <InputText @bind-Value="image.ImageURL"></InputText>
                 </div>
             }
-        
+            </div>
         </div>
         <div>
             <label>Adress</label>
