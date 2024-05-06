@@ -1,13 +1,14 @@
-﻿using API.Data.Models;
+﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace API.Auth
+namespace Client.Models
 {
     public class RegisterModel
     {
-        //Comment
         //[Required(ErrorMessage = "User Name is required")]
         //public string? Username { get; set; }
+
+        //Comment
 
         [EmailAddress]
         [Required(ErrorMessage = "Email is required")]
@@ -23,5 +24,6 @@ namespace API.Auth
         public string? Avatar {  get; set; }
         [Required(ErrorMessage = "Agency is required")]
         public Agency? Agency { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }
