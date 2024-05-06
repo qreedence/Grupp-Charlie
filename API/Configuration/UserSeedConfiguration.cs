@@ -6,7 +6,7 @@ using API.Data.Models;
 namespace API.Configuration
 {
     internal class UserSeedConfiguration : IEntityTypeConfiguration<Realtor>
-    {
+    {   //Comment
         public void Configure(EntityTypeBuilder<Realtor> builder)
         {
             var hasher = new PasswordHasher<Realtor>();

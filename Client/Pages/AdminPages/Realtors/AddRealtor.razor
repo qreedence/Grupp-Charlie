@@ -4,7 +4,7 @@
 
 @*Author: Eden Yusof-Ioannidis*@
 
-<EditForm Model="Realtor" OnSubmit="Submit" FormName="CreateRealtor">
+<EditForm Model="Realtor" OnSubmit="Submit" FormName="CreateRealtor" class="card form">
     <div>
         <label>First Name</label>
         <InputText @bind-Value="Realtor.FirstName"></InputText>
@@ -17,7 +17,7 @@
         <label>Email</label>
         <InputText @bind-Value="Realtor.Email"></InputText>
     </div>
-   
+
     <div>
         <label>Avatar URL</label>
         <InputText @bind-Value="Realtor.Avatar"></InputText>
@@ -36,9 +36,10 @@
             <p>@ErrorMessage</p>
         }
     </div>
-    
+
     <button type="submit">Create Realtor</button>
 </EditForm>
+
 
 @code {
     public Realtor Realtor { get; set; } = new Realtor();
