@@ -28,12 +28,12 @@
         if (responseMessage.IsSuccessStatusCode)
         {
             var responseContent = await responseMessage.Content.ReadFromJsonAsync<Response>();
-            
+
             var token = responseContent.Token;
 
             await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", token);
 
-            NavigationManager.NavigateTo($"/houses");
+            NavigationManager.NavigateTo($"/");
         }
     }
 

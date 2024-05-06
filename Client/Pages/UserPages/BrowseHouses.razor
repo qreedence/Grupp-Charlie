@@ -119,7 +119,7 @@ else
                             @house.Category.CategoryName
                         </p>
                         <p>@(house.Price.ToString("N0") + " kr")</p>
-                        <p>@house.Description</p>
+                        <p id="card-description">@(house.Description?.Split('.')[0])</p>
                     </div>
                     <div>
                         <a href="/browse/@house.HouseId"><button>Se detaljer</button></a>

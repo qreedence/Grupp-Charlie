@@ -143,7 +143,7 @@
     {
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
         APIKey = await Http.GetFromJsonAsync<APIKey>("api/APIKey");
-        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality},{House.County}");
+        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality}");
         StateHasChanged();
     }
 }
