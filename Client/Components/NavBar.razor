@@ -25,6 +25,10 @@
             <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
             <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
         }
+        @if (UserAuthenticated == true)
+        {
+            <button @onclick="Logout" id="logout-btn">Logga ut</button>
+        }
     </div>
 </div>
 
@@ -34,6 +38,11 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await UpdateAuthenticationStatusAsync();
+    }
+
+    private async Task UpdateAuthenticationStatusAsync()
+    {
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
         if (!string.IsNullOrEmpty(token))
         {
@@ -42,11 +51,24 @@
         var response = await Http.GetAsync("api/authenticate/status");
         if (response.IsSuccessStatusCode)
         {
-
             UserAuthenticated = true;
-
         }
+    }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        await UpdateAuthenticationStatusAsync();
+        {
+            StateHasChanged();
+        }
+    }
+
+    public async Task Logout()
+    {
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "authToken");
+        UserAuthenticated = false;
+        StateHasChanged();
+        NavigationManager.NavigateTo("/");
     }
 
 }

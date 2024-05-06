@@ -36,7 +36,7 @@
 
             await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", token);
 
-            NavigationManager.NavigateTo($"/houses");
+            NavigationManager.NavigateTo($"/");
         }
         else
         { ErrorMessage = "Något gick fel. Kontrollera dina inloggningsuppgifter samt att ditt konto har blivit godkänt."; }

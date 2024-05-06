@@ -332,7 +332,7 @@ select::backdrop {
     margin-inline: auto;
     margin-block: 2rem;
     background-color: white;
-    width: 70%;
+    width: 60%;
     display: grid;
     grid-template-columns: 950px 200px;
 }
@@ -351,6 +351,10 @@ select::backdrop {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.details-left{
+    max-width: 70%;
 }
 
 .details > div > h1,h2{
@@ -397,4 +401,24 @@ select::backdrop {
     width: 80%;
     margin-inline: auto;
     gap: 0.5rem;
+}
+
+#card-description{
+    margin-top: 1rem;
+}
+
+#logout-btn {
+    color: white;
+    background-color: var(--primary-clr-400);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+    border: none;
+}
+
+#logout-btn:hover {
+    font-weight: 800;
+    color: var(--primary-clr-800);
 }
