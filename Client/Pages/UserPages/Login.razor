@@ -18,9 +18,12 @@
     <button type="submit">Logga in</button>
 </EditForm>
 
+<p>@ErrorMessage</p>
+
 
 @code {
     public LoginModel LoginModel {get; set; } = new LoginModel();
+    public string ErrorMessage { get; set; } = "";
 
     public async Task Submit()
     {
@@ -28,13 +31,15 @@
         if (responseMessage.IsSuccessStatusCode)
         {
             var responseContent = await responseMessage.Content.ReadFromJsonAsync<Response>();
-            
+
             var token = responseContent.Token;
 
             await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", token);
 
             NavigationManager.NavigateTo($"/houses");
         }
+        else
+        { ErrorMessage = "Något gick fel. Kontrollera dina inloggningsuppgifter samt att ditt konto har blivit godkänt."; }
     }
 
 }
