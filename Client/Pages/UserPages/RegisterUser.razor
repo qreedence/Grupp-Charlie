@@ -8,10 +8,11 @@
 
 @*RegisterUser*@
 
-<h3>Skapa ny användare</h3>
+
 @if (Response == null)
 {
-    <EditForm Model="RegisterModel" OnSubmit="Submit">
+    <EditForm Model="RegisterModel" OnSubmit="Submit" class="card form">
+        <h3>Skapa ny användare</h3>
         <div>
             <label>Förnamn</label>
             <InputText @bind-Value="RegisterModel.FirstName"></InputText>

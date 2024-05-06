@@ -1,0 +1,24 @@
+﻿@page "/images/{id:int}"
+@inject HttpClient Http
+
+<div class="gallery">
+    @if (House.Gallery != null && House.Gallery.Count > 0)
+    {
+        @foreach(var image in House.Gallery)
+        {
+            <img src="@image.ImageURL" />
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private House House { get; set; } = new House();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
+    }
+}

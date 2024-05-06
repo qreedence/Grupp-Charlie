@@ -17,12 +17,13 @@
             </button>
         </NavLink>
         <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
-        <NavLink href="/userpages" Match="NavLinkMatch.All">Kund-sidor</NavLink>
+        <NavLink href="/browse" Match="NavLinkMatch.All">Sök bostad</NavLink>
     </div>
     <div class="nav-right">
         @if (UserAuthenticated == false)
         {
             <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
+            <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
         }
     </div>
 </div>
