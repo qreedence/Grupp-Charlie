@@ -8,6 +8,7 @@ using System.Text;
 using API.Auth;
 using API.Data.Models;
 using API.Data.Interfaces;
+using System.Globalization;
 
 namespace API.Controllers
 {
@@ -36,7 +37,17 @@ namespace API.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
+            //var user = await _userManager.FindByNameAsync(model.Username);
+            //if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            //{
+
             var user = await _userManager.FindByNameAsync(model.Username);
+            // if user email is not yet confirmed, deny access
+            if (!await _userManager.IsEmailConfirmedAsync(user))
+            {
+                
+                return Unauthorized();
+            }
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
@@ -46,6 +57,7 @@ namespace API.Controllers
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
+               
 
                 foreach (var userRole in userRoles)
                 {
@@ -69,18 +81,21 @@ namespace API.Controllers
         {   //Comment
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Epostadressen finns redan registrerad!" });
             var hasher = new PasswordHasher<Realtor>();
+            string firstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.FirstName.ToLower());
+            string lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.LastName.ToLower());
             Realtor user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                FirstName = firstName,
+                LastName = lastName,
                 Avatar = model.Avatar,
                 PasswordHash = hasher.HashPassword(null, model.Password),
                 Agency = await agencyRepository.GetByIdAsync(model.Agency.AgencyId),
                 EmailConfirmed = false,
+                PhoneNumber = model.PhoneNumber,
                 PhoneNumberConfirmed = true,
                 TwoFactorEnabled = true,
                 LockoutEnabled = false,
@@ -92,9 +107,9 @@ namespace API.Controllers
             };
             var result = await _userManager.CreateAsync(user);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Något gick fel! Kontrollera dina användaruppgifter och försök igen." });
 
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "Användaren har skapats!" });
         }
         [HttpGet]
         [Route("status")]
@@ -119,7 +134,7 @@ namespace API.Controllers
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Epostadressen finns redan registrerad!" });
             var hasher = new PasswordHasher<Realtor>();
             Realtor user = new()
             {
@@ -132,7 +147,7 @@ namespace API.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Något gick fel! Kontrollera dina användaruppgifter och försök igen." });
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -147,7 +162,7 @@ namespace API.Controllers
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "Användaren har skapats!" });
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

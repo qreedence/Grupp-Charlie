@@ -56,7 +56,8 @@
 
 @if (@Response?.Status == "Success")
 {
-    <p>Nu kan du logga in</p>
+    <p>När ditt konto har blivit godkänt kan du logga in</p>
+    <br />
     <button @onclick="@(() => NavigateToLogin())">Logga in</button>
 }
 </div>

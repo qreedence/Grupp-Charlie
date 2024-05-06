@@ -19,7 +19,7 @@ namespace API.Auth
         public string? FirstName { get; set; }
         [Required(ErrorMessage = "Lastname is required")]
         public string? LastName { get; set; }
-
+        public string? PhoneNumber { get; set; }
         public string? Avatar {  get; set; }
         [Required(ErrorMessage = "Agency is required")]
         public Agency? Agency { get; set; }
