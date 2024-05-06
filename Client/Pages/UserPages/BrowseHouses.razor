@@ -6,99 +6,156 @@
 
 @*Author: Eden Yusof-Ioannidis*@
 
-<h3>Houses</h3>
-<div>
-    <label>Ange kommun att söka bostad i:</label>
-    <InputText @bind-Value="County"></InputText>
-</div>
-<div>
-    <label>Välj bostadstyp:</label>
-    @if (Categories != null)
-    {
-        <select @bind="CategoryId">
-            @foreach (var category in Categories)
-            {
-                <option value="@category.CategoryId">@category.CategoryName</option>
-            }
-        </select>
-    }
-</div>
-<div>
-    <button type="button" @onclick="Search">Sök</button>
-    <button type="button" @onclick="NoFilter">Rensa filter</button>
-</div>
-@* 
-<div id="map" style="height: 400px;"></div>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap" async defer></script>
-<script>
-    var map;
-
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 62, lng: 15 }, // Center on Sweden
-            zoom: 5
-        });
-    }
-
-    function addMarkers(adresses) {
-        var geocoder = new google.maps.Geocoder();
-
-        // Geocode each address and add a marker on the map
-        addresses.forEach(function (address) {
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status === 'OK') {
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    console.error('Geocode was not successful for the following reason: ' + status);
+<div class="card form">
+    <div>
+        <label>Välj län</label>
+        @if (Counties != null)
+        {
+            <select @bind-value="CountyId" @onchange="FilterMunicipalities" @bind-value:event="oninput">
+                <option value="" selected>Välj län</option>
+                @foreach (var county in Counties)
+                {
+                    <option value="@county.CountyId">@county.CountyName</option>
                 }
-            });
-        });
-    }
-</script> *@
+            </select>
+        }
+    </div>
+    <div>
+        <label>Välj kommun</label>
+        @if (Municipalities != null)
+        {
+            <select @bind="MunicipalityId">
+                <option value="" selected>Välj kommun</option>
+                @foreach (var municipality in FilteredMunicipalities)
+                {
+                    <option value="@municipality.MunicipalityId">@municipality.MunicipalityName</option>
+                }
+            </select>
+        }
+    </div>
+    <div>
+        <label>Välj bostadstyp:</label>
+        @if (Categories != null)
+        {
+            <select @bind="CategoryId">
+                @foreach (var category in Categories)
+                {
+                    <option value="@category.CategoryId">@category.CategoryName</option>
+                }
+            </select>
+        }
+    </div>
+    <div class="button-row">
+        <button type="button" @onclick="Search">Sök</button>
+        <button type="button" @onclick="NoFilter">Rensa filter</button>
+    </div>
+</div>
+
+
+
 
 @if (FilteredList == null)
 {
-    <p>Ett ögonblick...</p>
+    <p>Loading...</p>
 }
 else if (FilteredList.Count == 0)
 {
-    <p>Inga hus hittades</p>
+    <div class="houses-list">
+        <p>Inga resultat matchade din sökning.</p>
+    </div>
+
 }
 else
 {
-    @foreach (var house in FilteredList)
-    {
-        <div>
-            <h3>@house.Adress</h3>
-            <p>Kommun: @house.County.CountyName</p>
-            <p>Pris: @house.Price</p>
-            <p>Kategori: @house.Category.CategoryName</p>
-            <a href="/browse/@house.HouseId">View Details</a>
-        </div>
-    }
+    <div class="houses-list">
+        @foreach (var house in FilteredList)
+        {
+            <div class="house-card">
+                <div class="card-left">
+                    @if (house.Gallery != null && house.Gallery.Count > 0)
+                    {
+                        @foreach (var image in house.Gallery)
+                        {
+                            <img src="@image.ImageURL" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg" />
+                    }
+                </div>
+                <div class="card-right">
+                    <div class="house-info">
+                        <h3>@house.Adress</h3>
+                        <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
+                        <p class="category-line">
+                            @if (house.Category.CategoryName == "Villa")
+                            {
+                                <span class="material-symbols-outlined">
+                                    home
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Par/Kedje/Radhus")
+                            {
+                                <span class="material-symbols-outlined">
+                                    other_houses
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Lägenhet")
+                            {
+                                <span class="material-symbols-outlined">
+                                    location_city
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Fritidsboende")
+                            {
+                                <span class="material-symbols-outlined">
+                                    cottage
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Gård")
+                            {
+                                <span class="material-symbols-outlined">
+                                    fence
+                                </span>
+                            }
+                            @house.Category.CategoryName
+                        </p>
+                        <p>@(house.Price.ToString("N0") + " kr")</p>
+                        <p>@house.Description</p>
+                    </div>
+                    <div>
+                        <a href="/browse/@house.HouseId"><button>Se detaljer</button></a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
 }
 
 @code {
 
     private List<House> ListOfHouses { get; set; }
 
-    // private List<string> AdressList { get; set; } = new List<string>();
-
     private List<House> FilteredList { get; set; }
 
     private List<Category> Categories { get; set; }
 
+    private List<County> Counties { get; set; } = new List<County>();
+    private List<Municipality> Municipalities { get; set; } = new List<Municipality>();
+    private List<Municipality> FilteredMunicipalities { get; set; } = new List<Municipality>();
+
     private int CategoryId { get; set; }
 
-    private string County { get; set; } = "";
+    private string SelectedCounty { get; set; } = "";
 
     public string srcUrl { get; set; }
 
     public string APIKey { get; set; }
+
+    public int CountyId { get; set; }
+    public int MunicipalityId { get; set; }
 
 
     protected override async Task OnInitializedAsync()
@@ -106,33 +163,29 @@ else
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
         FilteredList = ListOfHouses.ToList();
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
-        // await ListAdresses();
-        // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
+        Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
+        Counties.Sort((c1, c2) => c1.CountyName.CompareTo(c2.CountyName));
+        Municipalities = await Http.GetFromJsonAsync<List<Municipality>>("/api/municipality");
+        Municipalities.Sort((m1, m2) => m1.MunicipalityName.CompareTo(m2.MunicipalityName));
     }
 
     public async Task Search()
     {
-        if (ListOfHouses != null && !string.IsNullOrEmpty(County) && CategoryId != 0)
+        if (ListOfHouses != null && !string.IsNullOrEmpty(SelectedCounty) && CategoryId != 0)
         {
-            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County && h.Category.CategoryId == CategoryId).ToList();
-            // await ListAdresses();
-            // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
+            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == SelectedCounty && h.Category.CategoryId == CategoryId).ToList();
             StateHasChanged();
         }
 
-        if (ListOfHouses != null && string.IsNullOrEmpty(County) && CategoryId != 0)
+        if (ListOfHouses != null && string.IsNullOrEmpty(SelectedCounty) && CategoryId != 0)
         {
             FilteredList = ListOfHouses.Where(h => h.Category.CategoryId == CategoryId).ToList();
-            // await ListAdresses();
-            // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
             StateHasChanged();
         }
 
-        if (ListOfHouses != null && !string.IsNullOrEmpty(County) && CategoryId == 0)
+        if (ListOfHouses != null && !string.IsNullOrEmpty(SelectedCounty) && CategoryId == 0)
         {
-            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == County).ToList();
-            // await ListAdresses();
-            // await JSRuntime.InvokeVoidAsync("addMarkers", AdressList);
+            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == SelectedCounty).ToList();
             StateHasChanged();
         }
     }
@@ -143,12 +196,11 @@ else
         StateHasChanged();
     }
 
-    // public async Task ListAdresses()
-    // {
-    //     AdressList.Clear();
-    //     foreach (var house in FilteredList)
-    //     {
-    //         AdressList.Add(house.Adress);
-    //     }
-    // }
+    public async Task FilterMunicipalities()
+    {
+        var result = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
+        SelectedCounty = result.CountyName;
+        FilteredMunicipalities = Municipalities.Where(m => m.CountyName == SelectedCounty).ToList();
+        StateHasChanged();
+    }
 }

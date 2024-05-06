@@ -7,18 +7,18 @@
 
 @if (House == null)
 {
-    <p>Ett ögonblick...</p>
+    <p>Loading...</p>
 }
 else
 {
     <h3>@House.Adress</h3>
     @if(House.County != null)
     {
-        <h4>@House.County.CountyName</h4>
+        <h4>@House.Municipality.MunicipalityName, @House.County.CountyName</h4>
     }
     @if (House.Category != null)
     {
-        <p>Kategori: @House.Category.CategoryName</p>
+        <p>Bostadstyp: @House.Category.CategoryName</p>
     }
     <p>@House.Description</p>
     @if(House.Gallery != null && House.Gallery.Count > 0)

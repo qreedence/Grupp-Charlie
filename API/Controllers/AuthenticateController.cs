@@ -8,7 +8,6 @@ using System.Text;
 using API.Auth;
 using API.Data.Models;
 using API.Data.Interfaces;
-using System.Globalization;
 
 namespace API.Controllers
 {
@@ -70,17 +69,14 @@ namespace API.Controllers
         {   //Comment
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Epostadressen finns redan registrerad!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
             var hasher = new PasswordHasher<Realtor>();
-            string firstName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.FirstName.ToLower());
-            string lastName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(model.LastName.ToLower());
             Realtor user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
-                FirstName = firstName,
-                LastName = lastName,
-                PhoneNumber = model.PhoneNumber,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
                 Avatar = model.Avatar,
                 PasswordHash = hasher.HashPassword(null, model.Password),
                 Agency = await agencyRepository.GetByIdAsync(model.Agency.AgencyId),
@@ -96,9 +92,9 @@ namespace API.Controllers
             };
             var result = await _userManager.CreateAsync(user);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Att skapa en användare misslyckades! Kontrollera användaruppgifterna och försök igen" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
-            return Ok(new Response { Status = "Success", Message = "Användaren har skapats!" });
+            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
         [HttpGet]
         [Route("status")]
@@ -108,12 +104,12 @@ namespace API.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 // User is authenticated, return 200 OK with a success message
-                return Ok(new { Status = "Authenticated", Message = "Användaren är inloggad" });
+                return Ok(new { Status = "Authenticated", Message = "User is logged in" });
             }
             else
             {
                 // User is not authenticated, return 401 Unauthorized with an error message
-                return Unauthorized(new { Status = "NotAuthenticated", Message = "Användaren är inte inloggad" });
+                return Unauthorized(new { Status = "NotAuthenticated", Message = "User is not logged in" });
             }
         }
 
@@ -123,7 +119,7 @@ namespace API.Controllers
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Epostadressen finns redan registrerad!" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
             var hasher = new PasswordHasher<Realtor>();
             Realtor user = new()
             {
@@ -136,7 +132,7 @@ namespace API.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Att skapa en användare misslyckades! Kontrollera användaruppgifterna och försök igen" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -151,7 +147,7 @@ namespace API.Controllers
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
-            return Ok(new Response { Status = "Success", Message = "Användaren har skapats!" });
+            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

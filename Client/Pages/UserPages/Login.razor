@@ -6,13 +6,16 @@
 
 @*Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis*@
 
-<EditForm Model="LoginModel" OnSubmit="Submit">
-    <label>Användarnamn:</label>
-    <InputText @bind-Value="LoginModel.Username"></InputText>
-    <label>Lösenord:</label>
-    <InputText @bind-Value="LoginModel.Password"></InputText>
+<EditForm Model="LoginModel" OnSubmit="Submit" class="card form">
+    <div>
+        <label>Användarnamn:</label>
+        <InputText @bind-Value="LoginModel.Username"></InputText>
+    </div>
+    <div>
+        <label>Lösenord:</label>
+        <InputText type="password" @bind-Value="LoginModel.Password"></InputText>
+    </div>
     <button type="submit">Logga in</button>
-
 </EditForm>
 
 

@@ -1,5 +1,6 @@
 @page "/houses"
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 @using Models;
 @using System.Net.Http.Json
 
@@ -39,6 +40,8 @@ else
 @code {
 
     private List<House> ListOfHouses { get; set; }
+
+
 
     protected override async Task OnInitializedAsync()
     { 

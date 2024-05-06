@@ -23,7 +23,5 @@ namespace API.Auth
         public string? Avatar {  get; set; }
         [Required(ErrorMessage = "Agency is required")]
         public Agency? Agency { get; set; }
-
-        public string? PhoneNumber { get; set; }
     }
 }

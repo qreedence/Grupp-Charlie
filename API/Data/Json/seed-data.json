@@ -1,0 +1,69 @@
+{
+  "Categories": [
+    {
+      "CategoryName": "Villa"
+    },
+    {
+      "CategoryName": "Par/Kedje/Radhus"
+    },
+    {
+      "CategoryName": "Lägenhet"
+    },
+    {
+      "CategoryName": "Fritidsboende"
+    },
+    {
+      "CategoryName": "Gård"
+    }
+  ],
+  "Agencies": [
+    {
+      "NameOfAgency": "Svenska Mäklarhuset",
+      "Description": "Svenska Mäklarhuset – SMH har funnits på den svenska bostadsmarknaden sedan 1990.  Idag är vi en av de ledande fastighetsmäklarkedjorna med över 30 kontor. En av våra styrkor är kombinationen av att vara en stor kedja med stark utveckling och innovation och det lokala kontoret med mäklare som kan allt om det område där du bor. Idag finns vi representerade över hela Storstockholm, Uppsala, Västerås, Göteborg, Skåne, Halland, Spanien, Portugal, Cypern, Turkiet, Grekland, Kroatien och Thailand. I koncernen ingår även Svensk Nyproduktion, som hjälper Sveriges ledande byggföretag att förmedla bostäder för dem som vill bo i ett nybyggt hem. Vårt mål är att du ska vara så pass nöjd med oss och din bostadsaffär så du vill rekommendera oss vidare. Oavsett om det handlar om att sälja eller köpa bostadsrätter, villor eller fritidshus.",
+      "Logo": "https://svenskamaklarhuset.se/wp-content/themes/smh/images/newhome_logo.svg"
+    },
+    {
+      "NameOfAgency": "Fastighetsbyrån",
+      "Description": "Vi har samma mål idag som när dåvarande Sparbanken startade Fastighetsbyrån 1966: att vara bäst i landet på att förmedla villor, bostadsrätter och fritidshus på ett affärsmässigt och professionellt sätt till både köpare och säljare. För 50 år sedan handlade det om att bringa ordning på en oreglerad marknad; idag handlar det om att erbjuda bästa möjliga affär utifrån våra kunders ökande krav och behov. En idé som många har uppskattat genom åren.",
+      "Logo": "https://www.fastighetsbyran.com/static/media/fastighetsbyran_logo.dae08a5a.svg"
+    },
+    {
+      "NameOfAgency": "Mäklarhuset",
+      "Description": "Mäklarhuset är ett av Sveriges största, icke franchisedrivna, privata mäklarföretag med cirka 110 lokala fristående kontor runt om i hela Sverige och delar av Spanien. Vi äger oss själva vilket stärker det lokala entreprenörskapet, lokalt engagemang och möjligheten att anpassa verksamheten utifrån varje marknad.",
+      "Logo": "https://cdn.maklarhuset.se/web/bilder/logotyp/mh_undantagslogotyp_svart.svg"
+    },
+    {
+      "NameOfAgency": "HusmanHagberg",
+      "Description": "Två stjärnmäklare möts. Den ene med kontor i Stockholms södra förorter, den andre i de norra. Den ene gick i sin fars fotspår och började tidigt cykla runt för att visa hus och hem. Den andre var idrottslärare innan han köpte sitt livs första slips och började som mäklarassistent. Yttre skillnader men inre likheter. Gemensamt för båda är det varma hjärtat, ärligheten och nytänkandet. Och den där glimten i ögat.",
+      "Logo": "https://www.kirunabostader.se/images/18.61e8f2191863bf527f3f5a7/1677244989849/Hemsida%20-%20HusmanHagberg.png"
+    }
+  ],
+  "Realtors": [
+    {
+      "Agency": {
+        "AgencyId": 1,
+        "NameOfAgency": "Svenska Mäklarhuset",
+        "Description": "Svenska Mäklarhuset – SMH har funnits på den svenska bostadsmarknaden sedan 1990.  Idag är vi en av de ledande fastighetsmäklarkedjorna med över 30 kontor. En av våra styrkor är kombinationen av att vara en stor kedja med stark utveckling och innovation och det lokala kontoret med mäklare som kan allt om det område där du bor. Idag finns vi representerade över hela Storstockholm, Uppsala, Västerås, Göteborg, Skåne, Halland, Spanien, Portugal, Cypern, Turkiet, Grekland, Kroatien och Thailand. I koncernen ingår även Svensk Nyproduktion, som hjälper Sveriges ledande byggföretag att förmedla bostäder för dem som vill bo i ett nybyggt hem. Vårt mål är att du ska vara så pass nöjd med oss och din bostadsaffär så du vill rekommendera oss vidare. Oavsett om det handlar om att sälja eller köpa bostadsrätter, villor eller fritidshus.",
+        "Logo": "https://svenskamaklarhuset.se/wp-content/themes/smh/images/newhome_logo.svg"
+      },
+      "FirstName": "John",
+      "LastName": "Doe",
+      "Email": "john.doe@example.com",
+      "Phonenumber": 1234567890,
+      "Avatar": "https://example.com/avatar.jpg"
+    },
+    {
+      "Agency": {
+        "AgencyId": 1,
+        "NameOfAgency": "Svenska Mäklarhuset",
+        "Description": "Svenska Mäklarhuset – SMH har funnits på den svenska bostadsmarknaden sedan 1990.  Idag är vi en av de ledande fastighetsmäklarkedjorna med över 30 kontor. En av våra styrkor är kombinationen av att vara en stor kedja med stark utveckling och innovation och det lokala kontoret med mäklare som kan allt om det område där du bor. Idag finns vi representerade över hela Storstockholm, Uppsala, Västerås, Göteborg, Skåne, Halland, Spanien, Portugal, Cypern, Turkiet, Grekland, Kroatien och Thailand. I koncernen ingår även Svensk Nyproduktion, som hjälper Sveriges ledande byggföretag att förmedla bostäder för dem som vill bo i ett nybyggt hem. Vårt mål är att du ska vara så pass nöjd med oss och din bostadsaffär så du vill rekommendera oss vidare. Oavsett om det handlar om att sälja eller köpa bostadsrätter, villor eller fritidshus.",
+        "Logo": "https://svenskamaklarhuset.se/wp-content/themes/smh/images/newhome_logo.svg"
+      },
+      "FirstName": "Debra",
+      "LastName": "Doe",
+      "Email": "debra.doe@example.com",
+      "Phonenumber": 1234567891,
+      "Avatar": "https://example.com/avatar.jpg"
+    }
+  ]
+}
