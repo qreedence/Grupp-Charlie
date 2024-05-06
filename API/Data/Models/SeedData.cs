@@ -32,7 +32,7 @@ namespace API.Data.Models
                     {
                         foreach (var category in root.Categories)
                         {
-                            if (!context.Categories.Any(c => c.CategoryId == category.CategoryId))
+                            if (!context.Categories.Any(c => c.CategoryName == category.CategoryName))
                             {
                                 context.Categories.Add(category);
                             }
