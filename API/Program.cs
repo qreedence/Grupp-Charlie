@@ -29,7 +29,7 @@ namespace API
             //   .AddRoles<IdentityRole>()
             //   .AddEntityFrameworkStores<ApplicationDbContext>();
             // For Identity
-            builder.Services.AddIdentity<Realtor, IdentityRole>()
+            builder.Services.AddIdentity<Realtor, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             // Adding Authentication
