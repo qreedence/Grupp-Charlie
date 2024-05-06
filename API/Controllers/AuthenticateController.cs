@@ -80,7 +80,7 @@ namespace API.Controllers
                 Avatar = model.Avatar,
                 PasswordHash = hasher.HashPassword(null, model.Password),
                 Agency = await agencyRepository.GetByIdAsync(model.Agency.AgencyId),
-                EmailConfirmed = true,
+                EmailConfirmed = false,
                 PhoneNumberConfirmed = true,
                 TwoFactorEnabled = true,
                 LockoutEnabled = false,
