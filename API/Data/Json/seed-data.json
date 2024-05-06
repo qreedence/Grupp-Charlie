@@ -41,29 +41,67 @@
   "Realtors": [
     {
       "Agency": {
-        "AgencyId": 1,
-        "NameOfAgency": "Svenska Mäklarhuset",
-        "Description": "Svenska Mäklarhuset – SMH har funnits på den svenska bostadsmarknaden sedan 1990.  Idag är vi en av de ledande fastighetsmäklarkedjorna med över 30 kontor. En av våra styrkor är kombinationen av att vara en stor kedja med stark utveckling och innovation och det lokala kontoret med mäklare som kan allt om det område där du bor. Idag finns vi representerade över hela Storstockholm, Uppsala, Västerås, Göteborg, Skåne, Halland, Spanien, Portugal, Cypern, Turkiet, Grekland, Kroatien och Thailand. I koncernen ingår även Svensk Nyproduktion, som hjälper Sveriges ledande byggföretag att förmedla bostäder för dem som vill bo i ett nybyggt hem. Vårt mål är att du ska vara så pass nöjd med oss och din bostadsaffär så du vill rekommendera oss vidare. Oavsett om det handlar om att sälja eller köpa bostadsrätter, villor eller fritidshus.",
-        "Logo": "https://svenskamaklarhuset.se/wp-content/themes/smh/images/newhome_logo.svg"
+        "AgencyId": 1
       },
+      "Avatar": "https://example.com/avatar.jpg",
+      "Email": "john.doe@example.com",
+      "EmailConfirmed": true,
       "FirstName": "John",
       "LastName": "Doe",
-      "Email": "john.doe@example.com",
+      "NormalizedEmail": "JOHN.DOE@EXAMPLE.COM",
+      "NormalizedUserName": "JOHN.DOE@EXAMPLE.COM",
+      "PasswordHash": "Test1234!",
       "Phonenumber": 1234567890,
-      "Avatar": "https://example.com/avatar.jpg"
+      "UserName": "john.doe@example.com"
     },
     {
       "Agency": {
-        "AgencyId": 1,
-        "NameOfAgency": "Svenska Mäklarhuset",
-        "Description": "Svenska Mäklarhuset – SMH har funnits på den svenska bostadsmarknaden sedan 1990.  Idag är vi en av de ledande fastighetsmäklarkedjorna med över 30 kontor. En av våra styrkor är kombinationen av att vara en stor kedja med stark utveckling och innovation och det lokala kontoret med mäklare som kan allt om det område där du bor. Idag finns vi representerade över hela Storstockholm, Uppsala, Västerås, Göteborg, Skåne, Halland, Spanien, Portugal, Cypern, Turkiet, Grekland, Kroatien och Thailand. I koncernen ingår även Svensk Nyproduktion, som hjälper Sveriges ledande byggföretag att förmedla bostäder för dem som vill bo i ett nybyggt hem. Vårt mål är att du ska vara så pass nöjd med oss och din bostadsaffär så du vill rekommendera oss vidare. Oavsett om det handlar om att sälja eller köpa bostadsrätter, villor eller fritidshus.",
-        "Logo": "https://svenskamaklarhuset.se/wp-content/themes/smh/images/newhome_logo.svg"
+        "AgencyId": 1
       },
+      "Avatar": "https://example.com/avatar.jpg",
+      "Email": "debra.doe@example.com",
+      "EmailConfirmed": true,
       "FirstName": "Debra",
       "LastName": "Doe",
-      "Email": "debra.doe@example.com",
+      "NormalizedEmail": "DEBRA.DOE@EXAMPLE.COM",
+      "NormalizedUserName": "DEBRA.DOE@EXAMPLE.COM",
+      "PasswordHash": "Test1234!",
       "Phonenumber": 1234567891,
-      "Avatar": "https://example.com/avatar.jpg"
+      "UserName": "debra.doe@example.com"
+    }
+  ],
+  "Houses": [
+    {
+      "Category": {
+        "CategoryId": 1
+      },
+      "Adress": "Vilhelmsrogatan 6",
+      "County": {
+        "CountyName": "Jönköpings län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Nässjö"
+      },
+      "Price": 1450000,
+      "LivingArea": 80,
+      "AuxiliaryArea": 97,
+      "PlotArea": 907,
+      "Description": "Välbyggd tegelvilla med tilltalande planlösning. En villa med möjligheter som innehåller bra förutsättningar att uppdatera till ett mycket trivsamt boende med 3 st sovrum.\nRymligt vardagsrum och bra ljusinsläpp. Praktisk källarvåning med både hobbyutrymmen och gillestuga.\nVidbyggt garage och fjärrvärme. Nytt tak 2022.\nVälkommen på visning.",
+      "NumberOfRooms": 4,
+      "MonthlyFee": 7230,
+      "OperatingCostPerYear": 36050,
+      "YearOfConstruction": 1960,
+      "Gallery": [
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTVZJTExBNURKQU5DNDZWTktDUURCQS9jYmlsZDVlY3JnaHJvcDhwY3BucDIuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=ea5f95dbf2a93ac1ac87c7780bceed7253cd46a2b98e8d550bc44dbe32fba8c0"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTVZJTExBNURKQU5DNDZWTktDUURCQS9jYmlsZDVlY3JnaTBtajhwY3BvZmouanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=9b30385e9dc313f60bcc1aa5bc0a07fc3ea78aa96cfbd20c66d46a153e7b9c1e"
+        }
+      ],
+      "Realtor": {
+        "Email": "john.doe@example.com"
+      }
     }
   ]
 }
