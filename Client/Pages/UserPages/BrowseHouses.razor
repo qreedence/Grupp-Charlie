@@ -74,10 +74,7 @@ else
                 <div class="card-left">
                     @if (house.Gallery != null && house.Gallery.Count > 0)
                     {
-                        @foreach (var image in house.Gallery)
-                        {
-                            <img src="@image.ImageURL" />
-                        }
+                            <img src="@house.Gallery.FirstOrDefault().ImageURL" />
                     }
                     else
                     {

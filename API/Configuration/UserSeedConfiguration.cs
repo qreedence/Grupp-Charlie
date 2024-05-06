@@ -22,7 +22,7 @@ namespace API.Configuration
                     LastName = "Friberg",
                     PasswordHash = hasher.HashPassword(null, "Test1234!"),
                     EmailConfirmed= true,
-                    Avatar = "sgsgs"
+                    Avatar = "https://example.com/avatar.jpg"
                 }
             );
         }

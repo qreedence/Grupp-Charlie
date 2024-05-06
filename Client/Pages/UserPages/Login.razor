@@ -2,11 +2,11 @@
 @inject HttpClient Http
 @using System.Net.Http.Json
 @inject IJSRuntime JSRuntime
-<h3>Login</h3>
 
 @*Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis*@
 
 <EditForm Model="LoginModel" OnSubmit="Submit" class="card form">
+    <h3>Logga in    </h3>
     <div>
         <label>Användarnamn:</label>
         <InputText @bind-Value="LoginModel.Username"></InputText>

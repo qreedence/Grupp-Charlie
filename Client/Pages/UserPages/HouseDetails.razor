@@ -5,44 +5,131 @@
 
 @*Author: Eden Yusof-Ioannidis*@
 
-@if (House == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <h3>@House.Adress</h3>
-    @if(House.County != null)
+<div class="house-details card">
+    @if (House == null)
     {
-        <h4>@House.Municipality.MunicipalityName, @House.County.CountyName</h4>
+        <p>Loading...</p>
     }
-    @if (House.Category != null)
+    else
     {
-        <p>Bostadstyp: @House.Category.CategoryName</p>
-    }
-    <p>@House.Description</p>
-    @if(House.Gallery != null && House.Gallery.Count > 0)
-    {
-        @foreach (var image in House.Gallery)
+        <div class="main-left">
+        @if (House.Gallery != null && House.Gallery.Count > 0)
         {
-            <img src="@image.ImageURL" />
+            @if (House.Gallery != null && House.Gallery.Count > 0)
+            {
+                    <img src="@House.Gallery.FirstOrDefault().ImageURL" />
+            }
+            @if (House.Gallery != null && House.Gallery.Count > 1)
+            {
+                    <a href="/images/@House.HouseId"><button>@House.Gallery.Count bilder</button></a>
+            }
         }
+        <div class="details">
+            <div class="details-left">
+                <h1>@House.Adress</h1>
+                @if (House.County != null)
+                {
+                    <h2>@House.Municipality.MunicipalityName, @House.County.CountyName</h2>
+                }
+                @if (House.Category != null)
+                {
+                    <p class="category-line">
+                        @if (House.Category.CategoryName == "Villa")
+                        {
+                            <span class="material-symbols-outlined">
+                                home
+                            </span>
+                        }
+                        else if (House.Category.CategoryName == "Par/Kedje/Radhus")
+                        {
+                            <span class="material-symbols-outlined">
+                                other_houses
+                            </span>
+                        }
+                        else if (House.Category.CategoryName == "Lägenhet")
+                        {
+                            <span class="material-symbols-outlined">
+                                location_city
+                            </span>
+                        }
+                        else if (House.Category.CategoryName == "Fritidsboende")
+                        {
+                            <span class="material-symbols-outlined">
+                                cottage
+                            </span>
+                        }
+                        else if (House.Category.CategoryName == "Gård")
+                        {
+                            <span class="material-symbols-outlined">
+                                fence
+                            </span>
+                        }
+                        @House.Category.CategoryName
+                    </p>
+                }
+                <div class="description">
+                    <p>@House.Description</p>
+                </div>
+            </div>
+            <div class="details-right">
+                <p class="price">@House.Price.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr</p>
+                @if (House.NumberOfRooms > 0)
+                {
+                    <p>Antal rum: @House.NumberOfRooms</p>
+                }
+                @if (House.LivingArea > 0)
+                {
+                    <p>Boarea: @House.LivingArea &#13217</p>
+                }
+                @if (House.AuxiliaryArea > 0)
+                {
+                    <p>Biarea: @House.AuxiliaryArea &#13217</p>
+                }
+                @if (House.PlotArea > 0)
+                {
+                    <p>Tomtarea: @House.PlotArea &#13217</p>
+                }
+                @if (House.YearOfConstruction > 0)
+                {
+                    <p>Byggår: @House.YearOfConstruction</p>
+                }
+                @if (House.OperatingCostPerYear > 0)
+                {
+                    <p>Driftkostnad: @House.OperatingCostPerYear.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr/år </p>
+                }
+            </div>
+        </div>
+        
+
+        <iframe width="900"
+                height="400"
+                frameborder="0" style="border:0"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="@srcUrl"
+                allowfullscreen>
+        </iframe>
+        </div>
+        <div class="main-right">
+            @if(House.Realtor != null)
+            {
+            <p>Ansvarig mäklare</p>
+            <h2>@House.Realtor.FirstName @House.Realtor.LastName</h2>
+            <p>@House.Realtor.Email</p>
+            <div class="realtor-circle">
+                    @if (House.Realtor.Avatar == "https://example.com/avatar.jpg")
+                    {
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg" />
+                    }
+                    else
+                    {
+                        <img src="@House.Realtor.Avatar" />
+                    }
+                    
+            </div>
+            }
+        </div>
     }
-    <p>Antal rum: @House.NumberOfRooms</p>
-    <p>Boarea: @House.LivingArea &#13217</p>
-    <p>Biarea: @House.AuxiliaryArea &#13217</p>
-    <p>Tomtarea: @House.PlotArea &#13217</p>
-    <p>Pris: @House.Price.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr</p>
-
-    <iframe width="450"
-            height="250"
-            frameborder="0" style="border:0"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="@srcUrl"
-            allowfullscreen>
-    </iframe>
-
-}
+</div>
 
 @code {
     [Parameter]
@@ -56,7 +143,7 @@ else
     {
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
         APIKey = await Http.GetFromJsonAsync<APIKey>("api/APIKey");
-        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress}");
+        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality},{House.County}");
         StateHasChanged();
     }
 }
