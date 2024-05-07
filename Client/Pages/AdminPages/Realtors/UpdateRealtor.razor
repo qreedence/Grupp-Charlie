@@ -23,12 +23,12 @@ else
             <label>Mäklarbyrå</label>
             @if (Agencies != null)
             {
-                <select @bind="Realtor.Agency">
+                <select @bind="AgencyId">
                    
                     
                     @foreach (var agency in Agencies)
                     {
-                        if (agency.AgencyId == Realtor.Agency.AgencyId)
+                        if (agency.AgencyId == AgencyId)
                         {
                             <option value="@agency.AgencyId" selected>@agency.NameOfAgency</option>
                         }
