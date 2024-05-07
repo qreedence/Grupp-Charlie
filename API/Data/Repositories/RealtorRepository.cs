@@ -21,7 +21,7 @@ namespace API.Data.Repositories
             await applicationDbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
         {
             Realtor realtor = await applicationDbContext.Users.FindAsync(id);
             if (realtor != null)
@@ -35,6 +35,7 @@ namespace API.Data.Repositories
         {
             if (realtor != null)
             {
+                realtor.Agency = await agencyRepository.GetByIdAsync(realtor.Agency.AgencyId);
                 applicationDbContext.Users.Update(realtor);
                 await applicationDbContext.SaveChangesAsync();
             }

@@ -1,6 +1,9 @@
 ﻿using API.Data.Interfaces;
 using API.Data.Models;
+using API.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,12 +43,19 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task EditAsync(Realtor realtor)
         {
-            await realtorRepository.EditAsync(realtor);
+            try
+            {
+                await realtorRepository.EditAsync(realtor);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                Console.WriteLine("Error");
+            }
         }
 
         // DELETE api/<RealtorController>/5
         [HttpDelete("{id}")]
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
         {
             await realtorRepository.DeleteAsync(id);
         }
