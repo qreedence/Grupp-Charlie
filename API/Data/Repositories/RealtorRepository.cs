@@ -1,5 +1,6 @@
 ﻿using API.Data.Interfaces;
 using API.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories
@@ -8,11 +9,13 @@ namespace API.Data.Repositories
     {
         private readonly ApplicationDbContext applicationDbContext;
         private readonly IAgency agencyRepository;
+        private readonly UserManager<Realtor> userManager;
 
-        public RealtorRepository(ApplicationDbContext ApplicationDbContext, IAgency AgencyRepository)
+        public RealtorRepository(ApplicationDbContext ApplicationDbContext, IAgency AgencyRepository, UserManager<Realtor> userManager)
         {
             applicationDbContext = ApplicationDbContext;
             agencyRepository = AgencyRepository;
+            this.userManager = userManager;
         }
         public async Task AddAsync(Realtor realtor)
         {
@@ -33,10 +36,21 @@ namespace API.Data.Repositories
 
         public async Task EditAsync(Realtor realtor)
         {
-            if (realtor != null)
+            var user = await userManager.FindByIdAsync(realtor.Id);
+            //var hasher = new PasswordHasher<Realtor>();
+            if (user != null)
             {
-                realtor.Agency = await agencyRepository.GetByIdAsync(realtor.Agency.AgencyId);
-                applicationDbContext.Users.Update(realtor);
+                user.Agency = await agencyRepository.GetByIdAsync(realtor.Agency.AgencyId);
+                user.NormalizedEmail = realtor.Email.ToUpper();
+                user.NormalizedUserName = realtor.Email.ToUpper();
+                user.UserName = realtor.Email;
+                user.FirstName = realtor.FirstName;
+                user.Avatar = realtor.Avatar;
+                user.LastName = realtor.LastName;
+                user.Email = realtor.Email;
+                user.PhoneNumber = realtor.PhoneNumber;
+
+                await userManager.UpdateAsync(user);
                 await applicationDbContext.SaveChangesAsync();
             }
         }

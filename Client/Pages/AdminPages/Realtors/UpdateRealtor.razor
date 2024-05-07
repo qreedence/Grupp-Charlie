@@ -23,7 +23,9 @@ else
             <label>Mäklarbyrå</label>
             @if (Agencies != null)
             {
-                <select @bind="AgencyId">
+                <select @bind="Realtor.Agency">
+                   
+                    
                     @foreach (var agency in Agencies)
                     {
                         if (agency.AgencyId == Realtor.Agency.AgencyId)
@@ -49,7 +51,15 @@ else
         <div>
             <label>Email</label>
             <InputText id="email" @bind-Value="Realtor.Email" />
+        </div>
+        <div>
+            <label>Telefonnummer</label>
+            <InputText id="phonenumber" @bind-Value="Realtor.PhoneNumber" />
         </div> 
+     @*    <div>
+            <label>Lösenord</label>
+            <InputText id="passwordhash" @bind-Value="Realtor.PasswordHash" />
+        </div> *@
 
         <button type="submit">Spara</button>
     </EditForm>
@@ -75,9 +85,11 @@ else
 
     public async Task Submit()
     {
-        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
+        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");
+        
 
-        var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{Id}", Realtor);
+
+        var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
 
         if (result.IsSuccessStatusCode)
         {

@@ -14,9 +14,12 @@ namespace API.Controllers
     public class RealtorController : ControllerBase
     {
         private readonly IRealtor realtorRepository;
-        public RealtorController(IRealtor RealtorRepository)
+        private readonly UserManager<Realtor> userManager;
+
+        public RealtorController(IRealtor RealtorRepository, UserManager<Realtor> userManager)
         {
             realtorRepository = RealtorRepository;
+            this.userManager = userManager;
         }
         // GET: api/<RealtorController>
         [HttpGet]
@@ -43,14 +46,9 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task EditAsync(Realtor realtor)
         {
-            try
-            {
+                
                 await realtorRepository.EditAsync(realtor);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                Console.WriteLine("Error");
-            }
+          
         }
 
         // DELETE api/<RealtorController>/5
