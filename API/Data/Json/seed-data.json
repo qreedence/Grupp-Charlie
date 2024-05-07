@@ -36,6 +36,11 @@
       "NameOfAgency": "HusmanHagberg",
       "Description": "Två stjärnmäklare möts. Den ene med kontor i Stockholms södra förorter, den andre i de norra. Den ene gick i sin fars fotspår och började tidigt cykla runt för att visa hus och hem. Den andre var idrottslärare innan han köpte sitt livs första slips och började som mäklarassistent. Yttre skillnader men inre likheter. Gemensamt för båda är det varma hjärtat, ärligheten och nytänkandet. Och den där glimten i ögat.",
       "Logo": "https://www.kirunabostader.se/images/18.61e8f2191863bf527f3f5a7/1677244989849/Hemsida%20-%20HusmanHagberg.png"
+    },
+    {
+      "NameOfAgency": "Länsförsäkringar Fastighetsförmedling",
+      "Description": "Länsförsäkringar Fastighetsförmedlings vision är ”Trygga bostadsaffärer genom livet”. Vi vill bidra till en rättvis och hållbar bostadsmarknad där fler kan byta bostad efter behov. De senaste tio åren har vi växt snabbast av alla landets fastighetsmäklare och är nu näst störst i branschen. Med 200 bobutiker och 950 hängivna medarbetare runt om i Sverige finns vi alltid nära våra kunder. Under 2023 förmedlade våra fastighetsmäklare cirka 22 700 objekt till ett försäljningsvärde av 58,6 miljarder kronor. Vi tycker att den lokala närvaron är viktig och tror att det är en av anledningarna till att kunderna gav oss högsta betyg sju år i rad mellan 2016-2022, enligt Svenskt Kvalitetsindex.",
+      "Logo": "https://images.eniro.com/yapp/f9c97ccade696b9445f141890ce33251199e247b?name=default"
     }
   ],
   "Realtors": [
@@ -68,6 +73,36 @@
       "PasswordHash": "Test1234!",
       "Phonenumber": 1234567891,
       "UserName": "debra.doe@example.com"
+    },
+    {
+      "Agency": {
+        "AgencyId": 5
+      },
+      "Avatar": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvYnJva2VyaW1hZ2VzL1MxMjAyNS9jYW52YW5kYXJlM2UwaWNscms4dTRzZjgxcS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0Ijoib3V0c2lkZSIsImhlaWdodCI6MjAwLCJ3aWR0aCI6MTUwfX19?signature=4aff9e5b84e576906f2421f55789cf0e8acf5e76864fbb95d035ffffd08d656d",
+      "Email": "krister.hempel@lansfast.se",
+      "EmailConfirmed": true,
+      "FirstName": "Krister",
+      "LastName": "Hempel",
+      "NormalizedEmail": "KRISTER.HEMPEL@LANSFAST.SE",
+      "NormalizedUserName": "KRISTER.HEMPEL@LANSFAST.SE",
+      "PasswordHash": "Test1234!",
+      "Phonenumber": 0761121700,
+      "UserName": "krister.hempel@lansfast.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 5
+      },
+      "Avatar": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvYnJva2VyaW1hZ2VzL1MxMjc4NS9jYmlsZDUyM2NyOXRubzl1YnBvdGcuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjUyMCwid2lkdGgiOjQzMH19fQ==?signature=81001dadcc58e3564459a3cf262dc697d179c73b2420c4fe7a13ee87eba88e7a",
+      "Email": "linda.floric@lansfast.se",
+      "EmailConfirmed": true,
+      "FirstName": "Linda",
+      "LastName": "Floric",
+      "NormalizedEmail": "LINDA.FLORIC@LANSFAST.SE",
+      "NormalizedUserName": "LINDA.FLORIC@LANSFAST.SE",
+      "PasswordHash": "Test1234!",
+      "Phonenumber": "0762126755",
+      "UserName": "linda.floric@lansfast.se"
     }
   ],
   "Houses": [
@@ -97,10 +132,63 @@
         },
         {
           "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTVZJTExBNURKQU5DNDZWTktDUURCQS9jYmlsZDVlY3JnaTBtajhwY3BvZmouanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=9b30385e9dc313f60bcc1aa5bc0a07fc3ea78aa96cfbd20c66d46a153e7b9c1e"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTVZJTExBNURKQU5DNDZWTktDUURCQS9jYmlsZDVlY3JnamEyMzhwY3FnajUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=09b96718a273ae5972fe536469cdb1ee4aa2b076781dc71754c47d802ab83f04"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTVZJTExBNURKQU5DNDZWTktDUURCQS9jYmlsZDVlY3JnamlqbDhwY3FsNzUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=b97af652b2dfe38371ad140adf80c563b5cddf423c319ff04e1fa09a8bf16044"
         }
       ],
       "Realtor": {
-        "Email": "john.doe@example.com"
+        "Email": "krister.hempel@lansfast.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 2
+      },
+      "Adress": "Ebbalundsvägen 5",
+      "County": {
+        "CountyName": "Stockholms län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Gustavsberg"
+      },
+      "Price": 5600000,
+      "LivingArea": 102,
+      "AuxiliaryArea": "",
+      "PlotArea": 30,
+      "Description": "Radhus om 102 kvm bestående av tre sovrum, kök och vardagsrum i öppen planlösning samt två badrum. Till radhuset hör även en egen trivsam atriumgård, en uteplats, takterrass och en större balkong. Radhusen är byggda 2009 och präglas av modern och spännande arkitektur. Husen ligger naturligt inbäddad i både grönska och med skiftande, äldre bebyggelse. Den stenlagda atriumgården omges av tre väggliv vilket skapar en trivsam och insynsskyddad plats. En segelduk spänner över delar av atriumgården vilket skyddar mot både sol och regn. Uteplatsen på baksidan erbjuder eftermiddags -och kvällssol. Här finns också plats för både utemöbler och grill.\nInteriörmässigt präglas huset av stilrena ytor och materialval. I vardagsrummet finns stora fönsterpartier från golv till tak på båda sidorna av rummet vilket skapar generöst ljusinsläpp och verkligen en känsla av rymd. Med det praktiska glasade skjutdörrarna når du smidigt ut till båda atriumgården och även uteplatsen. En trivsam och effektiv braskamin står strategiskt placerad i vardagsrummet. Köket och vardagsrummet har en öppen planlösning och tack vare kökets bardisk skapas en naturlig avgränsning mellan kök och vardagsrum. I köket finns för övrigt spishäll, varmluftugn, mikrovågsugn, diskmaskin samt kyl och frys i full höjd. I badrummet på entréplanet finns WC, tvättställ, badkar, handduktork samt tvättmaskin och torktumlare. Väggar av kakel och golv av klinker med golvvärme.  Intill trappan finns en separat klädkammare och ett sovrum som vetter mot Ebbalundsvägen. I sovrummet finns också ett flertal garderober längsmed ena väggen.\nVäl uppe på övre planet finns en praktisk arbetsyta intill det stora fönstret som vetter mot atriumgården. Två sovrum varav ett är större och lämpar sig som ett föräldrarsovrum. Från det större sovrummet tar du dig smidigt ut till den stora takterrassen. På takterrassen ligger solen på större delen av dagen till sen kväll och här är en större loungegrupp given. Intill det mindre sovrummet med sovalkov finns också en större balkong men här får du nog nöja sig med en mindre möbelgrupp. Badrummet på övre planet består av WC, tvättställ, dusch och handduktork. Väggar av kakel och golv av klinker med golvvärme. Båda våningsplanen har vattenburen golvvärme, vitmålade väggar och ekparkett.\nSom boende på Ebbalundsvägen har du en egen parkeringsplats med laddbox för elbild men även ett externt förråd om ca 9 kvm. Både parkeringsplats och förrådet ingår i månadsavgiften. Inom räckhåll finns Östra Ekedal förskola, Blomkulans förskola samt Ekedals skola. Inom räckhåll finns även upplysta motionsspår och inte långt från Gustavsberg hittar du även Nacka Golfklubb. En trevlig strandpromenad längs Farstaviken tar dig smidigt till Gustavsbergs hamn med butiker och restauranger. Det här är ett optimalt boende för dig som söker något utöver det vanliga. För dig som uppskattar modern arkitektur med gott om ljusinsläpp och känsla av rymd. Och inte minst för dig som som vill ha närhet till bra kommunikationer, förskolor, skolor, havet mm.\nDetta är också en kommande försäljning. Visning planeras i början av januari 2024. Intresserad? Klicka på "Anmäl intresse" (ej mejl) och fyll i uppgifterna så får du löpande information och när det närma sig visning. Värd att vänta på!",
+      "NumberOfRooms": 4,
+      "MonthlyFee": 7812,
+      "OperatingCostPerYear": 33744,
+      "YearOfConstruction": 2009,
+      "Gallery": [
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkaGdsZG9vZWFraGguanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=0156216b2fd470c9b115dd2b179501d5f2f1b60389ff7a067877563888c4a6b3"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWIxMGc3Zm9vbjlmb2IuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=2bf305c3d98656e9956c56bdc38d5f800ad73b0344d89484261ae38d1a8779a5"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWIxMXBzN29vbjl0MnMuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=7736174547eecfb3f64b29d7d23d2f5fa46bee6150f93aeaf6d0fc267b1ca05c"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkaHN1NW9vZWFxZ2UuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=abe1ebe055363e12fa3f1d5a3d291849aa01a6972e23a8bc0431e72d5c77af15"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkaTJhbG9vZWFzZWsuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=a33428df939d65c1208127d1d58e04bb198dcfeec351944107ad7c3ec0ccfc0f"
+        },
+        {
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkaTU0MW9vZWF0ZWUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=38b78510edde5ff6d81a54a3ca5e7e60fdebbe0d80e5e2622f1284ff54fda13a"
+        },
+        {
+          "ImageRL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkZ2tiam9vZWE0NTcuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=b5d500446921d391e16396877f3ac7dba552439075c832a87eebfee25863608d"
+        }
+      ],
+      "Realtor": {
+        "Email": "linda.floric@lansfast.se"
       }
     }
   ]

@@ -1,0 +1,99 @@
+﻿@page "/realtor/update/{id}"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@using System.Net.Http.Json
+@using Client.Models
+
+@*Author: Mikaela Älgekrans*@
+
+<h3>Uppdatera din profil</h3>
+
+@if (Realtor == null)
+{
+    <p>Ett ögonblick...</p>
+}
+else
+{
+    <EditForm Model="Realtor" OnSubmit="Submit" FormName="edit" class="card form">
+        <div>
+            <label>Profilbild</label>
+            <InputText @bind-Value="Realtor.Avatar"></InputText>
+        </div>
+        <div>
+            <label>Mäklarbyrå</label>
+            @if (Agencies != null)
+            {
+                <select @bind="AgencyId">
+                   
+                    
+                    @foreach (var agency in Agencies)
+                    {
+                        if (agency.AgencyId == AgencyId)
+                        {
+                            <option value="@agency.AgencyId" selected>@agency.NameOfAgency</option>
+                        }
+                        else
+                        {
+                            <option value="@agency.AgencyId">@agency.NameOfAgency</option>
+                        }
+                    }
+                </select>
+            }
+        </div>
+        <div>
+            <label>Förnamn</label>
+            <InputText id="firstName" @bind-Value="Realtor.FirstName" />
+        </div>
+        <div>
+            <label>Efternamn</label>
+            <InputText id="lastName" @bind-Value="Realtor.LastName" />
+        </div>
+        <div>
+            <label>Email</label>
+            <InputText id="email" @bind-Value="Realtor.Email" />
+        </div>
+        <div>
+            <label>Telefonnummer</label>
+            <InputText id="phonenumber" @bind-Value="Realtor.PhoneNumber" />
+        </div> 
+     @*    <div>
+            <label>Lösenord</label>
+            <InputText id="passwordhash" @bind-Value="Realtor.PasswordHash" />
+        </div> *@
+
+        <button type="submit">Spara</button>
+    </EditForm>
+}
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Realtor Realtor { get; set; } = new Realtor();
+    
+    public int AgencyId { get; set; }
+    private List<Agency> Agencies { get; set; } = new List<Agency>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Agencies = await Http.GetFromJsonAsync<List<Agency>>($"api/agency");
+
+        var result = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{(string)Id}");
+        if (result != null)
+        {
+            Realtor = result;
+        }
+    }
+
+    public async Task Submit()
+    {
+        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");
+        
+
+
+        var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
+
+        if (result.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo($"/realtor");
+        }
+    }
+}

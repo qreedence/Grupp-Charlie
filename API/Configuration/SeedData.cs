@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using API.Data;
+using API.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data.Models
+namespace API.Configuration
 {
     // Author: Mikaela Älgekrans
     public static class SeedData
@@ -19,7 +21,7 @@ namespace API.Data.Models
                 var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
                 var path = Path.Combine(env.ContentRootPath, "Data", "Json", "seed-data.json");
                 // Reads the json content and then deserialize it to objects
-                var jsonString = System.IO.File.ReadAllText(path);
+                var jsonString = File.ReadAllText(path);
                 if (jsonString != null)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-valluable type

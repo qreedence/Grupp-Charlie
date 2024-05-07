@@ -1,6 +1,9 @@
 ﻿using API.Data.Interfaces;
 using API.Data.Models;
+using API.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,9 +14,12 @@ namespace API.Controllers
     public class RealtorController : ControllerBase
     {
         private readonly IRealtor realtorRepository;
-        public RealtorController(IRealtor RealtorRepository)
+        private readonly UserManager<Realtor> userManager;
+
+        public RealtorController(IRealtor RealtorRepository, UserManager<Realtor> userManager)
         {
             realtorRepository = RealtorRepository;
+            this.userManager = userManager;
         }
         // GET: api/<RealtorController>
         [HttpGet]
@@ -40,12 +46,14 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task EditAsync(Realtor realtor)
         {
-            await realtorRepository.EditAsync(realtor);
+                
+                await realtorRepository.EditAsync(realtor);
+          
         }
 
         // DELETE api/<RealtorController>/5
         [HttpDelete("{id}")]
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(string id)
         {
             await realtorRepository.DeleteAsync(id);
         }
