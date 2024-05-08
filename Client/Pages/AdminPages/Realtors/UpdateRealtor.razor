@@ -6,71 +6,108 @@
 
 @*Author: Mikaela Älgekrans*@
 
-<h3>Uppdatera din profil</h3>
+<style>
+    .image {
+        margin: 0 auto;
+        width: 260px;
+        height: 360px;
+        border-radius: 2%;
+        object-fit: cover; /* Klipper bilden för att passa in i behållaren */
+        object-position: center; /* Centrerar bilden i behållaren */
+    }
 
-@if (Realtor == null)
-{
-    <p>Ett ögonblick...</p>
-}
-else
-{
-    <EditForm Model="Realtor" OnSubmit="Submit" FormName="edit" class="card form">
-        <div>
-            <label>Profilbild</label>
-            <InputText @bind-Value="Realtor.Avatar"></InputText>
-        </div>
-        <div>
-            <label>Mäklarbyrå</label>
-            @if (Agencies != null)
-            {
-                <select @bind="AgencyId">
-                   
-                    
-                    @foreach (var agency in Agencies)
-                    {
-                        if (agency.AgencyId == AgencyId)
+    .center {
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1500px;
+        margin: 0 auto; /* Detta centrera blocket horisontellt */
+    }
+</style>
+
+<div class="center">
+    <h3>Uppdatera din profil</h3>
+
+    @if (Realtor == null)
+    {
+        <p>Ett ögonblick...</p>
+    }
+    else
+    {
+        <EditForm Model="Realtor" OnSubmit="Submit" FormName="edit" class="card form">
+            <div>
+                <img src="@Realtor.Avatar" class="image" />
+            </div>
+            <div>
+                <label>Profilbild</label>
+                <InputText @bind-Value="Realtor.Avatar" @oninput="UpdateImage"></InputText>
+            </div>
+            <div>
+                <label>Mäklarbyrå</label>
+                @if (Agencies != null && Realtor.Agency != null)
+                {
+                    <select @bind="Realtor.Agency.AgencyId">
+                        @foreach (var agency in Agencies)
                         {
-                            <option value="@agency.AgencyId" selected>@agency.NameOfAgency</option>
+                            if (AgencyId == Realtor.Agency.AgencyId)
+                            {
+                                <option value="@agency.AgencyId" selected>@agency.NameOfAgency</option>
+                            }
+                            else
+                            {
+                                <option value="@agency.AgencyId">@agency.NameOfAgency</option>
+                            }
                         }
-                        else
-                        {
-                            <option value="@agency.AgencyId">@agency.NameOfAgency</option>
-                        }
-                    }
-                </select>
-            }
-        </div>
-        <div>
-            <label>Förnamn</label>
-            <InputText id="firstName" @bind-Value="Realtor.FirstName" />
-        </div>
-        <div>
-            <label>Efternamn</label>
-            <InputText id="lastName" @bind-Value="Realtor.LastName" />
-        </div>
-        <div>
-            <label>Email</label>
-            <InputText id="email" @bind-Value="Realtor.Email" />
-        </div>
-        <div>
-            <label>Telefonnummer</label>
-            <InputText id="phonenumber" @bind-Value="Realtor.PhoneNumber" />
-        </div> 
-     @*    <div>
-            <label>Lösenord</label>
-            <InputText id="passwordhash" @bind-Value="Realtor.PasswordHash" />
+                    </select>
+                }
+            </div>
+            <div>
+                <label>Förnamn</label>
+                <InputText id="firstName" @bind-Value="Realtor.FirstName" />
+            </div>
+            <div>
+                <label>Efternamn</label>
+                <InputText id="lastName" @bind-Value="Realtor.LastName" />
+            </div>
+            <div>
+                <label>Email</label>
+                <InputText id="email" @bind-Value="Realtor.Email" />
+            </div>
+            <div>
+                <label>Telefonnummer</label>
+                <InputText id="phonenumber" @bind-Value="Realtor.PhoneNumber" />
+            </div>
+            @*    <div>
+        <label>Lösenord</label>
+        <InputText id="passwordhash" @bind-Value="Realtor.PasswordHash" />
         </div> *@
 
-        <button type="submit">Spara</button>
-    </EditForm>
-}
+            <button type="submit">Spara</button>
+        </EditForm>
+    }
+</div>
+
 @code {
     [Parameter]
     public string Id { get; set; }
     Realtor Realtor { get; set; } = new Realtor();
-    
+
     public int AgencyId { get; set; }
     private List<Agency> Agencies { get; set; } = new List<Agency>();
+
+    private void UpdateImage(ChangeEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(e.Value.ToString()))
+        {
+            Realtor.Avatar = "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg";
+        }
+        else
+        {
+            Realtor.Avatar = e.Value.ToString();
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -86,14 +123,12 @@ else
     public async Task Submit()
     {
         Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");
-        
-
 
         var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
 
         if (result.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo($"/realtor");
+            NavigationManager.NavigateTo($"/realtors");
         }
     }
 }

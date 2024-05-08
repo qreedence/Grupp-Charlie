@@ -11,11 +11,11 @@ namespace API.Data.Repositories
         private readonly IAgency agencyRepository;
         private readonly UserManager<Realtor> userManager;
 
-        public RealtorRepository(ApplicationDbContext ApplicationDbContext, IAgency AgencyRepository, UserManager<Realtor> userManager)
+        public RealtorRepository(ApplicationDbContext ApplicationDbContext, IAgency AgencyRepository, UserManager<Realtor> UserManager)
         {
             applicationDbContext = ApplicationDbContext;
             agencyRepository = AgencyRepository;
-            this.userManager = userManager;
+            userManager = UserManager;
         }
         public async Task AddAsync(Realtor realtor)
         {

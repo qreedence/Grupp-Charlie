@@ -1,54 +1,114 @@
 ﻿@page "/realtors"
 @inject HttpClient Http
+@inject NavigationManager NavigationManager
 @using Models;
 @using System.Net.Http.Json
 
 @*Author: Eden Yusof-Ioannidis*@
 
-<h3>Realtors</h3>
+<style>
+    .center {
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1500px;
+        margin: 0 auto; /* Detta centrera blocket horisontellt */
+    }
 
-@if (ListOfRealtors == null)
-{
-    <p>Loading...</p>
-}
-else if (ListOfRealtors.Count == 0)
-{
-    <p>No realtors found.</p>
+    .realtor-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
 
+    .realtor-card {
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 20px;
+        width: 400px;
+        height: 180px;
+        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
+        display: flex;
+        align-items: center;
+    }
+
+        .realtor-card h2 {
+            padding-bottom: 10px;
+        }
+        
+        .realtor-card:hover {
+            box-shadow: 0 0 10px 0px #022c22;
+            cursor: pointer;
+        }
+
+    .realtor-card-content {
+        margin-left: 10px;
+    }
+
+    .realtor-cards-image {
+        width: 130px;
+        height: 180px;
+        border-radius: 2%;
+        object-fit: cover; /* Klipper bilden för att passa in i behållaren */
+        object-position: center; /* Centrerar bilden i behållaren */
+    }       
+
+</style>
+
+<div class="center">
+    <div>
+        <h1>Mäklare</h1>
+    </div>
+    <br />
     <NavLink href="/realtors/create" Match="NavLinkMatch.All"><button>Skapa ny mäklare</button></NavLink>
-}
-else
-{
-        <table>
-            <tr>
-                <th>
-                    First Name
-                </th>
-                <th>
-                    Last Name
-                </th>
-            </tr>
+
+    @if (ListOfRealtors == null)
+    {
+        <p>Laddar in mäklare...</p>
+    }
+    else if (ListOfRealtors.Count == 0)
+    {
+        <p>Inga registrerade mäklare hittades.</p>
+    }
+    else
+    {
+        @*Author: Mikaela Älgekrans
+            realtor-cards html and css
+        *@
+        <div class="realtor-cards">
             @foreach (var realtor in ListOfRealtors)
             {
-                  <tr>
-                <td>
-                    @realtor.FirstName
-                </td>
-                <td>
-                    @realtor.LastName
-                </td>
-            </tr>
+                <div class="realtor-card" @onclick="() => NavigateToRealtorProfile(realtor.Id)">                    
+                    <img src="@realtor.Avatar" class="realtor-cards-image" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg';" />
+                    <div class="realtor-card-content">
+                        <h2>@realtor.FirstName @realtor.LastName</h2>
+                        <h4>@(realtor.Agency?.NameOfAgency ?? "Ingen byrå tillgänglig")</h4><br />
+                        <p>✉️ @realtor.Email</p>
+                        @if (realtor.PhoneNumber != null)
+                        {
+                            <p>☎️ @realtor.PhoneNumber</p>
+                        }
+                        <br />                  
+                    </div>
+                </div>
             }
-    </table>
-    <NavLink href="/realtors/create" Match="NavLinkMatch.All"><button>Skapa ny mäklare</button></NavLink>
-}
+        </div>
+    }
+</div>
+
 
 @code {
-
     private List<Realtor> ListOfRealtors { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         ListOfRealtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+    }
+
+    void NavigateToRealtorProfile(string id)
+    {
+        NavigationManager.NavigateTo($"/realtor/profile/{id}");
     }
 }
