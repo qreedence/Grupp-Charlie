@@ -24,15 +24,15 @@ else
             @if (Agencies != null)
             {
                 <select @bind="Realtor.Agency.AgencyId">
-                    @foreach (var agencies in Agencies)
+                    @foreach (var agency in Agencies)
                     {
-                        if (agencies.AgencyId == Realtor.Agency.AgencyId)
+                        if (agency.AgencyId == Realtor.Agency.AgencyId)
                         {
-                            <option value="@agencies.AgencyId" selected>@agencies.NameOfAgency</option>
+                            <option value="@agency.AgencyId" selected>@agency.NameOfAgency</option>
                         }
                         else
                         {
-                            <option value="@agencies.AgencyId">@agencies.NameOfAgency</option>
+                            <option value="@agency.AgencyId">@agency.NameOfAgency</option>
                         }
                     }
                 </select>
