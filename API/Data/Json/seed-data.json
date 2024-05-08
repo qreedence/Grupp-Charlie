@@ -56,7 +56,7 @@
       "NormalizedEmail": "JOHN.DOE@EXAMPLE.COM",
       "NormalizedUserName": "JOHN.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "Phonenumber": 1234567890,
+      "Phonenumber": "1234567890",
       "UserName": "john.doe@example.com"
     },
     {
@@ -71,7 +71,7 @@
       "NormalizedEmail": "DEBRA.DOE@EXAMPLE.COM",
       "NormalizedUserName": "DEBRA.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "Phonenumber": 1234567891,
+      "Phonenumber": "1234567891",
       "UserName": "debra.doe@example.com"
     },
     {
@@ -86,7 +86,7 @@
       "NormalizedEmail": "KRISTER.HEMPEL@LANSFAST.SE",
       "NormalizedUserName": "KRISTER.HEMPEL@LANSFAST.SE",
       "PasswordHash": "Test1234!",
-      "Phonenumber": 0761121700,
+      "Phonenumber": "0761121700",
       "UserName": "krister.hempel@lansfast.se"
     },
     {
@@ -153,13 +153,13 @@
         "CountyName": "Stockholms län"
       },
       "Municipality": {
-        "MunicipalityName": "Gustavsberg"
+        "MunicipalityName": "Värmdö"
       },
       "Price": 5600000,
       "LivingArea": 102,
-      "AuxiliaryArea": "",
+      "AuxiliaryArea": 0,
       "PlotArea": 30,
-      "Description": "Radhus om 102 kvm bestående av tre sovrum, kök och vardagsrum i öppen planlösning samt två badrum. Till radhuset hör även en egen trivsam atriumgård, en uteplats, takterrass och en större balkong. Radhusen är byggda 2009 och präglas av modern och spännande arkitektur. Husen ligger naturligt inbäddad i både grönska och med skiftande, äldre bebyggelse. Den stenlagda atriumgården omges av tre väggliv vilket skapar en trivsam och insynsskyddad plats. En segelduk spänner över delar av atriumgården vilket skyddar mot både sol och regn. Uteplatsen på baksidan erbjuder eftermiddags -och kvällssol. Här finns också plats för både utemöbler och grill.\nInteriörmässigt präglas huset av stilrena ytor och materialval. I vardagsrummet finns stora fönsterpartier från golv till tak på båda sidorna av rummet vilket skapar generöst ljusinsläpp och verkligen en känsla av rymd. Med det praktiska glasade skjutdörrarna når du smidigt ut till båda atriumgården och även uteplatsen. En trivsam och effektiv braskamin står strategiskt placerad i vardagsrummet. Köket och vardagsrummet har en öppen planlösning och tack vare kökets bardisk skapas en naturlig avgränsning mellan kök och vardagsrum. I köket finns för övrigt spishäll, varmluftugn, mikrovågsugn, diskmaskin samt kyl och frys i full höjd. I badrummet på entréplanet finns WC, tvättställ, badkar, handduktork samt tvättmaskin och torktumlare. Väggar av kakel och golv av klinker med golvvärme.  Intill trappan finns en separat klädkammare och ett sovrum som vetter mot Ebbalundsvägen. I sovrummet finns också ett flertal garderober längsmed ena väggen.\nVäl uppe på övre planet finns en praktisk arbetsyta intill det stora fönstret som vetter mot atriumgården. Två sovrum varav ett är större och lämpar sig som ett föräldrarsovrum. Från det större sovrummet tar du dig smidigt ut till den stora takterrassen. På takterrassen ligger solen på större delen av dagen till sen kväll och här är en större loungegrupp given. Intill det mindre sovrummet med sovalkov finns också en större balkong men här får du nog nöja sig med en mindre möbelgrupp. Badrummet på övre planet består av WC, tvättställ, dusch och handduktork. Väggar av kakel och golv av klinker med golvvärme. Båda våningsplanen har vattenburen golvvärme, vitmålade väggar och ekparkett.\nSom boende på Ebbalundsvägen har du en egen parkeringsplats med laddbox för elbild men även ett externt förråd om ca 9 kvm. Både parkeringsplats och förrådet ingår i månadsavgiften. Inom räckhåll finns Östra Ekedal förskola, Blomkulans förskola samt Ekedals skola. Inom räckhåll finns även upplysta motionsspår och inte långt från Gustavsberg hittar du även Nacka Golfklubb. En trevlig strandpromenad längs Farstaviken tar dig smidigt till Gustavsbergs hamn med butiker och restauranger. Det här är ett optimalt boende för dig som söker något utöver det vanliga. För dig som uppskattar modern arkitektur med gott om ljusinsläpp och känsla av rymd. Och inte minst för dig som som vill ha närhet till bra kommunikationer, förskolor, skolor, havet mm.\nDetta är också en kommande försäljning. Visning planeras i början av januari 2024. Intresserad? Klicka på "Anmäl intresse" (ej mejl) och fyll i uppgifterna så får du löpande information och när det närma sig visning. Värd att vänta på!",
+      "Description": "Radhus om 102 kvm bestående av tre sovrum, kök och vardagsrum i öppen planlösning samt två badrum. Till radhuset hör även en egen trivsam atriumgård, en uteplats, takterrass och en större balkong. Radhusen är byggda 2009 och präglas av modern och spännande arkitektur. Husen ligger naturligt inbäddad i både grönska och med skiftande, äldre bebyggelse. Den stenlagda atriumgården omges av tre väggliv vilket skapar en trivsam och insynsskyddad plats. En segelduk spänner över delar av atriumgården vilket skyddar mot både sol och regn. Uteplatsen på baksidan erbjuder eftermiddags -och kvällssol. Här finns också plats för både utemöbler och grill.\nInteriörmässigt präglas huset av stilrena ytor och materialval. I vardagsrummet finns stora fönsterpartier från golv till tak på båda sidorna av rummet vilket skapar generöst ljusinsläpp och verkligen en känsla av rymd. Med det praktiska glasade skjutdörrarna når du smidigt ut till båda atriumgården och även uteplatsen. En trivsam och effektiv braskamin står strategiskt placerad i vardagsrummet. Köket och vardagsrummet har en öppen planlösning och tack vare kökets bardisk skapas en naturlig avgränsning mellan kök och vardagsrum. I köket finns för övrigt spishäll, varmluftugn, mikrovågsugn, diskmaskin samt kyl och frys i full höjd. I badrummet på entréplanet finns WC, tvättställ, badkar, handduktork samt tvättmaskin och torktumlare. Väggar av kakel och golv av klinker med golvvärme.  Intill trappan finns en separat klädkammare och ett sovrum som vetter mot Ebbalundsvägen. I sovrummet finns också ett flertal garderober längsmed ena väggen.\nVäl uppe på övre planet finns en praktisk arbetsyta intill det stora fönstret som vetter mot atriumgården. Två sovrum varav ett är större och lämpar sig som ett föräldrarsovrum. Från det större sovrummet tar du dig smidigt ut till den stora takterrassen. På takterrassen ligger solen på större delen av dagen till sen kväll och här är en större loungegrupp given. Intill det mindre sovrummet med sovalkov finns också en större balkong men här får du nog nöja sig med en mindre möbelgrupp. Badrummet på övre planet består av WC, tvättställ, dusch och handduktork. Väggar av kakel och golv av klinker med golvvärme. Båda våningsplanen har vattenburen golvvärme, vitmålade väggar och ekparkett.\nSom boende på Ebbalundsvägen har du en egen parkeringsplats med laddbox för elbild men även ett externt förråd om ca 9 kvm. Både parkeringsplats och förrådet ingår i månadsavgiften. Inom räckhåll finns Östra Ekedal förskola, Blomkulans förskola samt Ekedals skola. Inom räckhåll finns även upplysta motionsspår och inte långt från Gustavsberg hittar du även Nacka Golfklubb. En trevlig strandpromenad längs Farstaviken tar dig smidigt till Gustavsbergs hamn med butiker och restauranger. Det här är ett optimalt boende för dig som söker något utöver det vanliga. För dig som uppskattar modern arkitektur med gott om ljusinsläpp och känsla av rymd. Och inte minst för dig som som vill ha närhet till bra kommunikationer, förskolor, skolor, havet mm.\nDetta är också en kommande försäljning. Visning planeras i början av januari 2024. Intresserad? Klicka på 'Anmäl intresse' (ej mejl) och fyll i uppgifterna så får du löpande information och när det närma sig visning. Värd att vänta på!",
       "NumberOfRooms": 4,
       "MonthlyFee": 7812,
       "OperatingCostPerYear": 33744,
@@ -184,7 +184,7 @@
           "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkaTU0MW9vZWF0ZWUuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=38b78510edde5ff6d81a54a3ca5e7e60fdebbe0d80e5e2622f1284ff54fda13a"
         },
         {
-          "ImageRL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkZ2tiam9vZWE0NTcuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=b5d500446921d391e16396877f3ac7dba552439075c832a87eebfee25863608d"
+          "ImageURL": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvZm9yc2FsZWltYWdlcy9DTUJPTEdINUU0SkVNUzFURVQwVlRIUS9jYmlsZDVlOWFkZ2tiam9vZWE0NTcuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7ImZpdCI6Im91dHNpZGUiLCJoZWlnaHQiOjkwMCwid2lkdGgiOjE0NDB9fX0=?signature=b5d500446921d391e16396877f3ac7dba552439075c832a87eebfee25863608d"
         }
       ],
       "Realtor": {

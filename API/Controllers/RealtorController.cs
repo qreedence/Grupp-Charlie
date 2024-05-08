@@ -14,12 +14,10 @@ namespace API.Controllers
     public class RealtorController : ControllerBase
     {
         private readonly IRealtor realtorRepository;
-        private readonly UserManager<Realtor> userManager;
 
-        public RealtorController(IRealtor RealtorRepository, UserManager<Realtor> userManager)
+        public RealtorController(IRealtor RealtorRepository)
         {
             realtorRepository = RealtorRepository;
-            this.userManager = userManager;
         }
         // GET: api/<RealtorController>
         [HttpGet]
@@ -46,9 +44,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task EditAsync(Realtor realtor)
         {
-                
-                await realtorRepository.EditAsync(realtor);
-          
+            await realtorRepository.EditAsync(realtor);          
         }
 
         // DELETE api/<RealtorController>/5

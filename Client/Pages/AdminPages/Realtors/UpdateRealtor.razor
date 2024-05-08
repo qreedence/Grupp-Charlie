@@ -1,4 +1,4 @@
-﻿@page "/realtor/update/{id}"
+﻿@page "/realtor/update/{id:string}"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @using System.Net.Http.Json
@@ -23,18 +23,16 @@ else
             <label>Mäklarbyrå</label>
             @if (Agencies != null)
             {
-                <select @bind="AgencyId">
-                   
-                    
-                    @foreach (var agency in Agencies)
+                <select @bind="Realtor.Agency.AgencyId">
+                    @foreach (var agencies in Agencies)
                     {
-                        if (agency.AgencyId == AgencyId)
+                        if (agencies.AgencyId == Realtor.Agency.AgencyId)
                         {
-                            <option value="@agency.AgencyId" selected>@agency.NameOfAgency</option>
+                            <option value="@agencies.AgencyId" selected>@agencies.NameOfAgency</option>
                         }
                         else
                         {
-                            <option value="@agency.AgencyId">@agency.NameOfAgency</option>
+                            <option value="@agencies.AgencyId">@agencies.NameOfAgency</option>
                         }
                     }
                 </select>
@@ -85,9 +83,7 @@ else
 
     public async Task Submit()
     {
-        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");
-        
-
+        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");    
 
         var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
 

@@ -1,4 +1,5 @@
-﻿using API.Data;
+﻿
+using API.Data;
 using API.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace API.Configuration
                 var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
                 var path = Path.Combine(env.ContentRootPath, "Data", "Json", "seed-data.json");
                 // Reads the json content and then deserialize it to objects
-                var jsonString = File.ReadAllText(path);
+                var jsonString = System.IO.File.ReadAllText(path);
                 if (jsonString != null)
                 {
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-valluable type
@@ -84,7 +85,7 @@ namespace API.Configuration
 
                     // Add the House objects to the database
                     // Check if countiesInDb is not null and contains elements
-                    if (countiesInDb != null && countiesInDb.Any())
+                    if (countiesInDb != null && countiesInDb.Any() && municipalitiesInDb != null && municipalitiesInDb.Any())
                     {
                         if (root?.Houses != null)
                         {
