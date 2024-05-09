@@ -32,7 +32,32 @@ namespace API.Controllers
             _roleManager = roleManager;
             _configuration = configuration;
         }
+        //Author GetUserName: Susanna Renström
+        [HttpGet]
+        [Route("getusername")]
+        public ActionResult<string> GetUserName(string token)
+        {
+            try
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
 
+                var usernameClaim = jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+                if (usernameClaim != null)
+                {
+                    return Ok(usernameClaim.Value);
+                }
+                else
+                {
+                    return BadRequest("Inget användarnamn hittades");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ett fel uppstod: {ex.Message}");
+            }
+        }
+        
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)

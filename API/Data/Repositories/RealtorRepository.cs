@@ -36,7 +36,10 @@ namespace API.Data.Repositories
 
         public async Task EditAsync(Realtor realtor)
         {
+            
             var user = await userManager.FindByIdAsync(realtor.Id);
+            if (realtor.EmailConfirmed == true)
+            { user.EmailConfirmed = true; }
             //var hasher = new PasswordHasher<Realtor>();
             if (user != null)
             {
