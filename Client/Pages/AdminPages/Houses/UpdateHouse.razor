@@ -9,80 +9,88 @@
 
 <h3>Uppdatera hus</h3>
 
-    <label>Aktuellt hus</label>
+    
     @if (House == null)
     {
         <p>Ett ögonblick...</p>
     }
     else
     {
-     
+    @if (showForm)
+    {
     <EditForm Model="House" OnSubmit="Submit" FormName="edit" class="card form">
-       
+  
         <div>
             <label>Mäklare</label>
-            @if (Realtors != null)
-            {   
-                <select @bind="RealtorId">
-
+            @if (Realtors != null && House.Realtor != null)
+            {
+                <select @bind="House.Realtor.Id">
                     @foreach (var realtor in Realtors)
                     {
-                       <option value="@realtor.Id">@realtor.FirstName</option>
+                        if (RealtorId == House.Realtor.Id)
+                        {
+                            <option value="@realtor.Id" selected>@realtor.FirstName</option>
+                        }
+                        else
+                        {
+                            <option value="@realtor.Id">@realtor.FirstName</option>
+                        }
                     }
                 </select>
             }
         </div>
         <div>
             <label>Kategori</label>
-            @if (Categories != null)
+            @if (Categories != null && House.Category != null)
             {
-                <select @bind="CategoryId">
-                    
+                <select @bind="House.Category.CategoryId">
                     @foreach (var category in Categories)
                     {
-                        if (category.CategoryId == House.Category.CategoryId)
+                        if (CategoryId == House.Category.CategoryId)
                         {
                             <option value="@category.CategoryId" selected>@category.CategoryName</option>
                         }
                         else
                         {
-                        <option value="@category.CategoryId">@category.CategoryName</option>
-                    }}
-                </select>
-            }
-        </div>
-        <div>
-            <label>Municipality</label>
-            @if (Municipalities != null)
-            {
-                <select @bind="MunicipalityId">
-                    @foreach (var municipality in Municipalities)
-                    {       
-                        if (municipality.MunicipalityId == House.Municipality.MunicipalityId)
-                        {
-                            <option value="@municipality.MunicipalityId" selected>@municipality.MunicipalityName</option>
+                            <option value="@category.CategoryId">@category.CategoryName</option>
                         }
-                        else
-                        {
-                            <option value="@municipality.MunicipalityId">@municipality.MunicipalityName</option>
-                        }}
+                    }
                 </select>
             }
         </div>
         <div>
             <label>Län</label>
-            @if (Counties != null)
+            @if (Counties != null && House.County != null)
             {
-                <select @bind="CountyId">
-                    @foreach (var counties in Counties)
+                <select @bind="House.County.CountyId">
+                    @foreach (var county in Counties)
                     {
-                        if (counties.CountyId == House.County.CountyId)
+                        if (CountyId == House.County.CountyId)
                         {
-                            <option value="@counties.CountyId" selected>@counties.CountyName</option>
+                            <option value="@county.CountyId" selected>@county.CountyId</option>
                         }
                         else
                         {
-                            <option value="@counties.CountyId">@counties.CountyName</option>
+                            <option value="@county.CountyId">@county.CountyName</option>
+                        }
+                    }
+                </select>
+            }
+        </div>
+        <div>
+            <label>Län</label>
+            @if (Municipalities != null && House.Municipality != null)
+            {
+                <select @bind="House.Municipality.MunicipalityId">
+                    @foreach (var municipality in Municipalities)
+                    {
+                        if (MunicipalityId == House.Municipality.MunicipalityId)
+                        {
+                            <option value="@municipality.MunicipalityId" selected>@municipality.MunicipalityId</option>
+                        }
+                        else
+                        {
+                            <option value="@municipality.MunicipalityId">@municipality.MunicipalityName</option>
                         }
                     }
                 </select>
@@ -143,7 +151,14 @@
   
         <button type="submit">Spara</button>
     </EditForm>
-}
+}}
+<br />
+<br />
+<p>@Message</p>
+<br />
+<button @onclick="NavigateBackToHouses">Tillbaka till översikt</button>
+
+
 @code {
 
     [Parameter]
@@ -155,6 +170,7 @@
 
     private int MunicipalityId { get; set; }
     private List<Municipality> Municipalities { get; set; } = new List<Municipality>();
+    private List<Municipality> FilteredMunicipalities { get; set; } = new List<Municipality>();
 
     public List<Image> Images { get; set; } = new List<Image>();
 
@@ -163,10 +179,9 @@
 
     private int CategoryId { get; set; }
     private List<Category> Categories { get; set; } = new List<Category>();
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
+    private bool showForm = true;
+    private string Message { get; set; }
+
     protected override async Task OnInitializedAsync()
     {   
         Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
@@ -182,17 +197,31 @@
 
     public async Task Submit()
     {
-        House.County = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
-        House.Municipality = await Http.GetFromJsonAsync<Municipality>($"api/municipality/{MunicipalityId}");
-        House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{CategoryId}");
-        House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
-       
-            var result = await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
-        
+        House.County = await Http.GetFromJsonAsync<County>($"api/county/{House.County.CountyId}");
+        House.Municipality = await Http.GetFromJsonAsync<Municipality>($"api/municipality/{House.Municipality.MunicipalityId}");
+        House.Category = await Http.GetFromJsonAsync<Category>($"api/category/{House.Category.CategoryId}");
+        House.Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{House.Realtor.Id}");
+
+        var result = await Http.PutAsJsonAsync<House>($"api/house/{(int)Id}", House);
+
         if (result.IsSuccessStatusCode)
         {
-        NavigationManager.NavigateTo($"/houses");
+            showForm = false;
+            Message = "Aktuellt hus har uppdaterats!";
+
         }
+    }
+
+    public async Task FilterMunicipalities()
+    {
+        House.County = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
+        FilteredMunicipalities = Municipalities.Where(m => m.CountyName == House.County.CountyName).ToList();
+        StateHasChanged();
+    }
+
+    public async Task NavigateBackToHouses()
+    {
+        NavigationManager.NavigateTo($"/houses");
     }
 
 
