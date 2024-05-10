@@ -16,7 +16,10 @@
                 </span>
             </button>
         </NavLink>
-        <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
+        @if (UserAuthenticated == true)
+        {
+            <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
+        }
         <NavLink href="/browse" Match="NavLinkMatch.All">Sök bostad</NavLink>
     </div>
     <div class="nav-right">
@@ -25,10 +28,11 @@
             <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
             <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
         }
-        @if (UserAuthenticated == true)
+        @if(UserAuthenticated == true)
         {
             <button @onclick="Logout" id="logout-btn">Logga ut</button>
         }
+
     </div>
 </div>
 

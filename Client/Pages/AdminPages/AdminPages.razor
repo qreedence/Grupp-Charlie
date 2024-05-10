@@ -1,34 +1,57 @@
 ﻿@page "/adminpages"
+@inject HttpClient Http
+@using System.Net.Http.Json
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+@using System.Net.Http.Headers
 
 @*Author: Eden-Yusof-Ioannidis*@
-
-<div class="grid-container">
-    <div class="card float-up">
-        <span class="material-symbols-outlined svg">
-            key
-        </span>
-        <NavLink href="/apikey/register" Match="NavLinkMatch.All"><button>Registrera ny API-nyckel</button></NavLink><br />
+@if (UserAuthenticated == true)
+{
+    <div class="grid-container">
+        <div class="card float-up">
+            <span class="material-symbols-outlined svg">
+                key
+            </span>
+            <NavLink href="/apikey/register" Match="NavLinkMatch.All"><button>Registrera ny API-nyckel</button></NavLink><br />
+        </div>
+        <div class="card float-up">
+            <span class="material-symbols-outlined svg">
+                groups
+            </span>
+            <NavLink href="/realtors" Match="NavLinkMatch.All"><button>Hantera mäklare</button></NavLink><br />
+        </div>
+        <div class="card float-up">
+            <span class="material-symbols-outlined svg">
+                apartment   
+            </span>
+            <NavLink href="/houses" Match="NavLinkMatch.All"><button>Hantera bostäder</button></NavLink><br />
+        </div>
+        <div class="card float-up">
+            <span class="material-symbols-outlined svg">
+                map
+            </span>
+            <NavLink href="/counties" Match="NavLinkMatch.All"><button>Hantera län & kommuner</button></NavLink><br />
+        </div>
     </div>
-    <div class="card float-up">
-        <span class="material-symbols-outlined svg">
-            groups
-        </span>
-        <NavLink href="/realtors" Match="NavLinkMatch.All"><button>Hantera mäklare</button></NavLink><br />
-    </div>
-    <div class="card float-up">
-        <span class="material-symbols-outlined svg">
-            apartment   
-        </span>
-        <NavLink href="/houses" Match="NavLinkMatch.All"><button>Hantera bostäder</button></NavLink><br />
-    </div>
-    <div class="card float-up">
-        <span class="material-symbols-outlined svg">
-            map
-        </span>
-        <NavLink href="/counties" Match="NavLinkMatch.All"><button>Hantera län & kommuner</button></NavLink><br />
-    </div>
-</div>
+}
 
 @code {
+    private bool UserAuthenticated { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+       
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+        if (!string.IsNullOrEmpty(token))
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+        var response = await Http.GetAsync("api/authenticate/status");
+        if (response.IsSuccessStatusCode)
+        {
+            UserAuthenticated = true;
+        }
+    }
 
 }
