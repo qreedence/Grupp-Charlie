@@ -130,6 +130,9 @@ namespace API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("HasBeenSold")
+                        .HasColumnType("bit");
+
                     b.Property<int>("LivingArea")
                         .HasColumnType("int");
 
@@ -304,8 +307,8 @@ namespace API.Migrations
                         {
                             Id = "e2680c44-32bb-432e-9cae-53b8ce24a0dd",
                             AccessFailedCount = 0,
-                            Avatar = "sgsgs",
-                            ConcurrencyStamp = "62f168da-93d2-43e1-9728-684f27391354",
+                            Avatar = "https://example.com/avatar.jpg",
+                            ConcurrencyStamp = "532b52d9-7a91-47fb-afc5-fe7e7cb946f6",
                             Email = "marcus.friberg@xlent.se",
                             EmailConfirmed = true,
                             FirstName = "Marcus",
@@ -313,9 +316,9 @@ namespace API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MARCUS.FRIBERG@XLENT.SE",
                             NormalizedUserName = "MARCUS.FRIBERG@XLENT.SE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGd4gI52qsCnhxUE6L3JRrY6WV6ByiEfIY3f1pReZ8XINJxNa2hU/SB3fiDj9tTSsg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI2l4yYIvRQteX4DVApyYCSbR8E3Fen7jn2+LvOlp/fO2IMxTvF5qzGrP4LkeN5QJw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5f8b91dc-7cf7-421f-b4e5-97605524193b",
+                            SecurityStamp = "c976c87c-426b-4241-8f77-a40ee83dbb08",
                             TwoFactorEnabled = false,
                             UserName = "marcus.friberg@xlent.se"
                         });
