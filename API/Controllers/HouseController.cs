@@ -23,6 +23,13 @@ namespace API.Controllers
             return await houseRepository.GetAllAsync();
         }
 
+        [HttpGet]
+        [Route("/api/house/getallsold")]
+        public async Task<List<House>> GetSold()
+        {
+            return await houseRepository.GetAllSoldAsync();
+        }
+
         // GET api/<HouseController>/5
         [HttpGet("{id}")]
         public async Task<House> GetByIdAsync(int id)
@@ -51,6 +58,15 @@ namespace API.Controllers
         {
             await houseRepository.DeleteAsync(id);
             
-    }
-    } }
+        }
+
+        [HttpPut]
+        [Route("sell/{id}")]
+        public async Task Sell(int id)
+        {
+            await houseRepository.SellAsync(id);
+        }
+
+    } 
+}
 

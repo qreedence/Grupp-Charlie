@@ -18,6 +18,7 @@
         public List<Image> Gallery { get; set; }        
         public Realtor Realtor { get; set; }
         public Municipality Municipality { get; set; }
+        public bool HasBeenSold { get; set; } = false;
         //public Agency Agency { get; set; } 
 
 

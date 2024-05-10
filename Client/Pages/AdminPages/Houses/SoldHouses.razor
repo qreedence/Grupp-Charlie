@@ -1,0 +1,134 @@
+﻿@page "/soldhouses"
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@using Models;
+@using System.Net.Http.Json
+
+@*Author: Eden Yusof-Ioannidis*@
+
+<div class="card form">
+    @if (Realtors != null)
+    {
+        <div>
+        <label>Välj mäklare</label>
+        <select @bind-value="RealtorId" @onchange="FilterRealtors" @bind-value:event="oninput">
+            @foreach (var realtor in Realtors)
+            {
+                <option value="@realtor.Id">@realtor.FirstName @realtor.LastName</option>
+            }
+        </select>
+        </div>
+    }
+</div>
+
+
+@if (FilteredList == null)
+{
+    <p>Loading...</p>
+}
+else if (FilteredList.Count == 0)
+{
+    <div class="houses-list">
+        <p>Denna mäklare har inte sålt några bostäder.</p>
+    </div>
+
+}
+else
+{
+    <div class="houses-list">
+        @if (String.IsNullOrEmpty(SelectedRealtor.Id))
+        {
+            <p>Visar alla tidigare sålda bostäder.</p>
+        }
+        else
+        {
+            <p>Visar tidigare sålda bostäder för @SelectedRealtor.FirstName @SelectedRealtor.LastName</p>
+        }
+        @foreach (var house in FilteredList)
+        {
+            <div class="house-card">
+                <div class="card-left">
+                    @if (house.Gallery != null && house.Gallery.Count > 0)
+                    {
+                        <img src="@house.Gallery.FirstOrDefault().ImageURL" />
+                    }
+                    else
+                    {
+                        <img src="https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg" />
+                    }
+                </div>
+                <div class="card-right">
+                    <div class="house-info">
+                        <h3>@house.Adress</h3>
+                        <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
+                        <p class="category-line">
+                            @if (house.Category.CategoryName == "Villa")
+                            {
+                                <span class="material-symbols-outlined">
+                                    home
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Par/Kedje/Radhus")
+                            {
+                                <span class="material-symbols-outlined">
+                                    other_houses
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Lägenhet")
+                            {
+                                <span class="material-symbols-outlined">
+                                    location_city
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Fritidsboende")
+                            {
+                                <span class="material-symbols-outlined">
+                                    cottage
+                                </span>
+                            }
+                            else if (house.Category.CategoryName == "Gård")
+                            {
+                                <span class="material-symbols-outlined">
+                                    fence
+                                </span>
+                            }
+                            @house.Category.CategoryName
+                        </p>
+                        <p>@(house.Price.ToString("N0") + " kr")</p>
+                        <p id="card-description">@(house.Description?.Split('.')[0])</p>
+                    </div>
+                    <div>
+                        <a href="/browse/@house.HouseId"><button>Se detaljer</button></a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+}
+
+@code {
+    private List<House> ListOfHouses { get; set; }
+
+    private List<House> FilteredList { get; set; }
+
+    private List<Realtor> Realtors { get; set; } = new List<Realtor>();
+
+    private Realtor SelectedRealtor { get; set; } = new Realtor();
+
+    private string RealtorId { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house/getallsold");
+        FilteredList = ListOfHouses.ToList();
+        Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor/");
+    }
+
+    private async Task FilterRealtors()
+    {
+        SelectedRealtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
+        FilteredList = ListOfHouses.Where(h => h.Realtor.Id == SelectedRealtor.Id).ToList();
+        StateHasChanged();
+    }
+}

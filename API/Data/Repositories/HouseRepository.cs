@@ -49,7 +49,12 @@ namespace API.Data.Repositories
 
         public async Task<List<House>> GetAllAsync()
         {
-            return await applicationDbContext.Houses.Include(x => x.Realtor).Include(x => x.Realtor.Agency).Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).Include(x => x.Municipality).ToListAsync();
+            return await applicationDbContext.Houses.Where(x => x.HasBeenSold == false).Include(x => x.Realtor).Include(x => x.Realtor.Agency).Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).Include(x => x.Municipality).ToListAsync();
+        }
+
+        public async Task<List<House>> GetAllSoldAsync()
+        {
+            return await applicationDbContext.Houses.Where(x => x.HasBeenSold == true).Include(x => x.Realtor).Include(x => x.Realtor.Agency).Include(x => x.County).Include(x => x.Category).Include(x => x.Gallery).Include(x => x.Municipality).ToListAsync();
         }
 
         public async Task<House> GetByIdAsync(int id)
@@ -65,6 +70,14 @@ namespace API.Data.Repositories
             house.Realtor = await realtorRepository.GetByIdAsync(house.Realtor.Id);
             applicationDbContext.Houses.Update(house);
             await applicationDbContext.SaveChangesAsync();
+        }
+
+        //Author: Eden Yusof-Ioannidis
+        public async Task SellAsync(int id)
+        {
+            House house = await GetByIdAsync(id);
+            house.HasBeenSold = true;
+            await UpdateAsync(house);
         }
     }
 }
