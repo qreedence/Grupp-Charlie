@@ -2,6 +2,7 @@
 @using Models;
 @inject HttpClient Http
 @using System.Net.Http.Json
+@inject IJSRuntime JSRuntime
 
 @*Author: Eden Yusof-Ioannidis*@
 
@@ -24,6 +25,11 @@
                     <a href="/images/@House.HouseId"><button>@House.Gallery.Count bilder</button></a>
             }
         }
+        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken)
+        {
+            <button type="button" @onclick="MarkAsSold">Markera som sålt</button>
+        }
+        
         <div class="details">
             <div class="details-left">
                 <h1>@House.Adress</h1>
@@ -137,6 +143,8 @@
     public string srcUrl { get; set; }
     public APIKey APIKey { get; set; }
 
+    public string UserNameFromToken { get; set; }
+
     private House House { get; set; } = new House();
 
     protected override async Task OnInitializedAsync()
@@ -144,6 +152,14 @@
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
         APIKey = await Http.GetFromJsonAsync<APIKey>("api/APIKey");
         srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality}");
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+        var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+        UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
         StateHasChanged();
+    }
+
+    private async Task MarkAsSold()
+    {
+        await Http.PutAsJsonAsync<int>($"api/house/sell/{House.HouseId}", House.HouseId);
     }
 }
