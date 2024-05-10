@@ -35,8 +35,8 @@
             var token = responseContent.Token;
 
             await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", token);
-
-            NavigationManager.NavigateTo($"/");
+            NavigationManager.NavigateTo($"/", forceLoad: true);
+            
         }
         else
         { ErrorMessage = "Något gick fel. Kontrollera dina inloggningsuppgifter samt att ditt konto har blivit godkänt."; }
