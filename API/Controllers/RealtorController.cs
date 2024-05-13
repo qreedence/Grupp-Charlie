@@ -44,7 +44,8 @@ namespace API.Controllers
         [HttpPost]
         public async Task AddAsync(Realtor realtor)
         {
-            await realtorRepository.AddAsync(realtor);
+           await realtorRepository.AddAsync(realtor);
+           
         }
 
         // PUT api/<RealtorController>/5
