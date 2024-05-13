@@ -28,9 +28,17 @@
             <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
             <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
         }
-        @if(UserAuthenticated == true)
+        @if(UserAuthenticated == true && Realtor != null)
         {
-            <button @onclick="Logout" id="logout-btn">Logga ut</button>
+            <a href="/realtor/profile/@Realtor.Id">
+                @* <img src="@Realtor.Avatar" /> *@
+                <span class="material-symbols-outlined">
+                    account_circle
+                </span>
+                Mina sidor
+            </a>
+            
+            <button @onclick="Logout" id="navbar-btn">Logga ut</button>
         }
 
     </div>
@@ -38,6 +46,10 @@
 
 @code {
     private bool UserAuthenticated { get; set; }
+
+    public string UserNameFromToken { get; set; }
+
+    public Realtor Realtor { get; set; } = new Realtor();
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,9 +59,12 @@
     private async Task UpdateAuthenticationStatusAsync()
     {
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
-        if (!string.IsNullOrEmpty(token))
+        if (!string.IsNullOrEmpty(token))   
         {
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+            UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
+            Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/getbyname?username={UserNameFromToken}");
         }
         var response = await Http.GetAsync("api/authenticate/status");
         if (response.IsSuccessStatusCode)
@@ -66,12 +81,18 @@
         }
     }
 
+    //Author: Eden Yusof-Ioannidis
     public async Task Logout()
     {
         await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "authToken");
         UserAuthenticated = false;
         StateHasChanged();
         NavigationManager.NavigateTo("/");
+    }
+
+    public async Task GoToProfile()
+    {
+        NavigationManager.NavigateTo($"/realtor/profile/{Realtor.Id}");
     }
 
 }

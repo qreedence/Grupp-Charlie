@@ -33,6 +33,13 @@ namespace API.Controllers
             return await realtorRepository.GetByIdAsync(id);
         }
 
+        [HttpGet]
+        [Route("/api/realtor/getbyname")]
+        public async Task<Realtor> GetByNameAsync(string username)
+        {
+            return await realtorRepository.GetByNameAsync(username);
+        }
+
         // POST api/<RealtorController>
         [HttpPost]
         public async Task AddAsync(Realtor realtor)
