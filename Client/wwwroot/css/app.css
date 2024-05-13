@@ -333,7 +333,7 @@ select::backdrop {
     margin-inline: auto;
     margin-block: 2rem;
     background-color: white;
-    width: 60%;
+    width: 1200px;
     display: grid;
     grid-template-columns: 950px 200px;
 }
@@ -422,4 +422,13 @@ select::backdrop {
 #logout-btn:hover {
     font-weight: 800;
     color: var(--primary-clr-800);
+}
+
+.filled {
+    background-color: var(--primary-clr-500);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.2rem;
 }

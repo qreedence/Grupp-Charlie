@@ -25,9 +25,17 @@
                     <a href="/images/@House.HouseId"><button>@House.Gallery.Count bilder</button></a>
             }
         }
-        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken)
+        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && House.HasBeenSold == false)
         {
             <button type="button" @onclick="MarkAsSold">Markera som sålt</button>
+        }
+        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && House.HasBeenSold == true)
+        {
+                <button class="filled" type="button">
+                    <span class="material-symbols-outlined">
+                        done
+                    </span> Markerad som såld
+                </button>
         }
         
         <div class="details">
@@ -161,5 +169,6 @@
     private async Task MarkAsSold()
     {
         await Http.PutAsJsonAsync<int>($"api/house/sell/{House.HouseId}", House.HouseId);
+        StateHasChanged();
     }
 }
