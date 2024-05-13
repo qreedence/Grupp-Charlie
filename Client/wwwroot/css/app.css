@@ -133,6 +133,15 @@ button:hover{
     text-decoration: none;
     font-weight: 600;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.nav-bar > div > a > img {
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid black;
 }
 
 .nav-bar > div > a:hover {
@@ -408,7 +417,7 @@ select::backdrop {
     margin-top: 1rem;
 }
 
-#logout-btn {
+#navbar-btn {
     color: white;
     background-color: var(--primary-clr-400);
     font-size: 1rem;
@@ -417,9 +426,13 @@ select::backdrop {
     font-weight: 600;
     transition: 0.2s;
     border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-inline: 0px;
 }
 
-#logout-btn:hover {
+#navbar-btn:hover {
     font-weight: 800;
     color: var(--primary-clr-800);
 }

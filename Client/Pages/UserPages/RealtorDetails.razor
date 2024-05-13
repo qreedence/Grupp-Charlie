@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @using System.Net.Http.Json
 @using Client.Models
+@inject IJSRuntime JSRuntime
 
 @*Author: Mikaela Älgekrans*@
 
@@ -103,6 +104,11 @@ else
                 {
                     <p>☎️ @Realtor.PhoneNumber</p>
                 }
+                @if (Realtor.UserName == UserNameFromToken)
+                {
+                    <br />
+                    <a href="/realtor/update/@Realtor.Id" Match="NavLinkMatch.All"><button>Redigera info</button></a> 
+                }
             </div>
         </div>
         <h3>Nuvarande objekt:</h3>
@@ -173,6 +179,8 @@ else
     public int HouseId { get; set; }
     private List<House> Houses { get; set; } = new List<House>();
 
+    public string UserNameFromToken { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         Agencies = await Http.GetFromJsonAsync<List<Agency>>($"api/agency");
@@ -182,6 +190,12 @@ else
         if (result != null)
         {
             Realtor = result;
+        }
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+        if (!string.IsNullOrEmpty(token))   
+        {
+            var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+            UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
         }
     }
 
