@@ -5,7 +5,7 @@
 @inject NavigationManager NavigationManager
 
 @*Author: Susanna Renström*@
-
+@*Co-Author: Eden Yusof-Ioannidis - valideringar*@
 @*RegisterUser*@
 
 
@@ -15,27 +15,31 @@
         <h3>Skapa ny användare</h3>
         <div>
             <label>Förnamn</label>
-            <InputText @bind-Value="RegisterModel.FirstName"></InputText>
+            <InputText @bind-Value="RegisterModel.FirstName" required></InputText>
         </div>
         <div>
             <label>Efternamn</label>
-            <InputText @bind-Value="RegisterModel.LastName"></InputText>
+            <InputText @bind-Value="RegisterModel.LastName" required></InputText>
         </div>
         <div>
             <label>Epostadress</label>
-            <InputText @bind-Value="RegisterModel.Email"></InputText>
+            <InputText @bind-Value="RegisterModel.Email" required></InputText>
         </div>
         <div>
             <label>Lösenord</label>
-            <InputText @bind-Value="RegisterModel.Password"></InputText>
+            <InputText type="password" @bind-Value="RegisterModel.Password" required></InputText>
+        </div>
+        <div>
+            <label>Bekräfta lösenord</label>
+            <InputText type="password" @bind-Value="ConfirmPassword" required></InputText>
         </div>
         <div>
             <label>Telefonnummer</label>
-            <InputText @bind-Value="RegisterModel.PhoneNumber"></InputText>
+            <InputText @bind-Value="RegisterModel.PhoneNumber" required></InputText>
         </div>
         <div>
             <label>Avatar URL</label>
-            <InputText @bind-Value="RegisterModel.Avatar"></InputText>
+            <InputText @bind-Value="RegisterModel.Avatar" required></InputText>
         </div>
         <div>
             <label>Mäklarfirma</label>
@@ -48,26 +52,39 @@
             </select>
         </div>
         <button type="submit">Skapa användare</button>
+        @if (!String.IsNullOrEmpty(ErrorMessage))
+        {
+            <div class="error-box">
+                <p>@ErrorMessage</p>
+            </div>
+        }
+
     </EditForm>
 }
 <br />
 <br />
-<div>
-<p>@Response?.Message</p>
-
-@if (@Response?.Status == "Success")
+@if(Response != null)
 {
-    <p>När ditt konto har blivit godkänt kan du logga in</p>
-    <br />
-    <button @onclick="@(() => NavigateToLogin())">Logga in</button>
+    <div class="card form">
+        <p>@Response?.Message</p>
+
+        @if (@Response?.Status == "Success")
+        {
+            <p>När ditt konto har blivit godkänt kan du logga in</p>
+            <br />
+            <button @onclick="@(() => NavigateToLogin())">Logga in</button>
+        }
+    </div>
 }
-</div>
+
 @code {
 
     public Response Response { get; set; }
     public RegisterModel RegisterModel { get; set; } = new RegisterModel();
     public int AgencyId { get; set; }
     public List<Agency> Agencies { get; set; } = new List<Agency>();
+    public string ConfirmPassword { get; set; }
+    public string ErrorMessage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -76,13 +93,31 @@
 
     public async Task Submit()
     {
-        RegisterModel.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
-        var result = await Http.PostAsJsonAsync<RegisterModel>("api/authenticate/register", RegisterModel);
-        Response = await result.Content.ReadFromJsonAsync<Response>();
+        if (Validate() == true)
+        {
+            RegisterModel.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
+            var result = await Http.PostAsJsonAsync<RegisterModel>("api/authenticate/register", RegisterModel);
+            Response = await result.Content.ReadFromJsonAsync<Response>();
+        }
     }
     public void NavigateToLogin()
     {
         NavigationManager.NavigateTo("/login");
     }
+
+    public bool Validate()
+    {
+        if (ConfirmPassword != RegisterModel.Password)
+        {
+            ErrorMessage = "Lösenorden matchar inte.";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+
 
 }

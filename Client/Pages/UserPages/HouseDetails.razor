@@ -9,7 +9,7 @@
 <div class="house-details card">
     @if (House == null)
     {
-        <p>Loading...</p>
+        <p>Ett ögonblick...</p>
     }
     else
     {
@@ -110,7 +110,7 @@
                 }
                 @if (House.OperatingCostPerYear > 0)
                 {
-                    <p>Driftkostnad: @House.OperatingCostPerYear.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr/år </p>
+                    <p>Årlig driftkostnad: @House.OperatingCostPerYear.ToString("#,0", new System.Globalization.CultureInfo("sv-SE")) kr/år </p>
                 }
             </div>
         </div>

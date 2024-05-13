@@ -5,10 +5,10 @@
 
 @*Author: Mikaela Älgekrans*@
 
-<EditForm Model="House" OnSubmit="Submit" FormName="CreateHouse">
+<EditForm Model="House" OnSubmit="Submit" FormName="CreateHouse" class="card form">
 
     <div>
-        <label>Realtor</label>
+        <label>Mäklare</label>
         @if (Realtors != null)
         {
             <select @bind="RealtorId" >
@@ -21,7 +21,7 @@
         }
     </div>
     <div>
-        <label>Category</label>
+        <label>Bostadstyp</label>
         @if (Categories != null)
         {
             <select @bind="CategoryId">
@@ -38,7 +38,7 @@
         <InputText @bind-Value="House.Adress"></InputText>
     </div>
     <div>
-        <label>County</label>
+        <label>Län</label>
         @if (Counties != null)
         {
                <select @bind-value="CountyId" @onchange="FilterMunicipalities" @bind-value:event="oninput">
@@ -51,7 +51,7 @@
         }
     </div>
     <div>
-        <label>Municipality</label>
+        <label>Kommun</label>
         @if (Municipalities != null)
         {
             <select @bind="MunicipalityId">
@@ -64,57 +64,66 @@
         }
     </div>
     <div>
-        <label>Price</label>
+        <label>Pris</label>
         <InputNumber @bind-Value="House.Price"></InputNumber>
     </div>
     <div>
-        <label>Living Area</label>
+        <label>Boarea</label>
         <InputNumber @bind-Value="House.LivingArea"></InputNumber>
     </div>
     <div>
-        <label>Auxiliary Area</label>
+        <label>Biarea</label>
         <InputNumber @bind-Value="House.AuxiliaryArea"></InputNumber>
     </div>
     <div>
-        <label>Plot Area</label>
+        <label>Tomtarea</label>
         <InputNumber @bind-Value="House.PlotArea"></InputNumber>
     </div>
     <div>
-        <label>Description</label>
+        <label>Beskrivning</label>
         <InputTextArea @bind-Value="House.Description"></InputTextArea>
     </div>
     <div>
-        <label>Number of Rooms</label>
-        <InputNumber @bind-Value="House.NumberOfRooms"></InputNumber>
+        <label>Antal rum</label>
+        <select @bind="House.NumberOfRooms">
+            @for (int i = 1; i<=20; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
     </div>
     <div>
-        <label>Monthly Fee</label>
+        <label>Månadsavgift</label>
         <InputNumber @bind-Value="House.MonthlyFee"></InputNumber>
     </div>
     <div>
-        <label>Operating Cost Per Year</label>
+        <label>Årlig driftkostnad</label>
         <InputNumber @bind-Value="House.OperatingCostPerYear"></InputNumber>
     </div>
     <div>
-        <label>Year of Construction</label>
+        <label>Byggår</label>
         <InputNumber @bind-Value="House.YearOfConstruction"></InputNumber>
     </div>
     <div>
-        <label>Gallery</label>
+        <label>Bildgalleri</label><br />
         @if (Images != null && Images.Count > 0)
-        {
+        {<table>
             @foreach (var image in Images)
             {
                 <div>
-                    <label>Image URL</label>
-                    <InputText @bind-Value="image.ImageURL"></InputText>
+                    <label>Bild URL</label><br />
+                    
+                    <tr><td><InputText @bind-Value="image.ImageURL"></InputText></td></tr>
+                  
                 </div>
             }
+        </table>
+
         }
-        <button type="button" @onclick="AddImageField">Add Image</button>
+        <button type="button" @onclick="AddImageField">Lägg till bild</button>
     </div>
 
-    <button type="submit">Add House</button>
+    <button type="submit">Skapa annons</button>
 </EditForm>
 
 @code {
@@ -138,6 +147,8 @@
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
         Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
         Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+        Counties.Sort((c1, c2) => c1.CountyName.CompareTo(c2.CountyName));
+        Municipalities.Sort((m1, m2) => m1.MunicipalityName.CompareTo(m2.MunicipalityName));
     }
 
     void AddImageField()
@@ -163,7 +174,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"There was an error: {ex}");
+            Console.WriteLine($"Något gick fel: {ex}");
         }
     }
 
