@@ -25,11 +25,11 @@
                     <a href="/images/@House.HouseId"><button>@House.Gallery.Count bilder</button></a>
             }
         }
-        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && House.HasBeenSold == false)
+        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && HasBeenSold == false)
         {
             <button type="button" @onclick="MarkAsSold">Markera som sålt</button>
         }
-        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && House.HasBeenSold == true)
+        @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && HasBeenSold == true)
         {
                 <button class="filled" type="button">
                     <span class="material-symbols-outlined">
@@ -155,6 +155,8 @@
 
     private House House { get; set; } = new House();
 
+    public bool HasBeenSold { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
@@ -163,12 +165,14 @@
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
         var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
         UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
+        HasBeenSold = House.HasBeenSold;
         StateHasChanged();
     }
 
     private async Task MarkAsSold()
     {
         await Http.PutAsJsonAsync<int>($"api/house/sell/{House.HouseId}", House.HouseId);
+        HasBeenSold = true;
         StateHasChanged();
     }
 }
