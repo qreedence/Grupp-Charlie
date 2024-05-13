@@ -5,7 +5,10 @@
 
 @*Author: Mikaela Älgekrans*@
 
+<script src="https://kit.fontawesome.com/c3e8571618.js" crossorigin="anonymous"></script>
+
 <style>
+
 .center {
     padding-top: 30px;
     display: flex;
@@ -98,10 +101,10 @@ else
                 <h4>@Realtor.Agency.NameOfAgency</h4><br />
             }
             <h2>@Realtor.FirstName @Realtor.LastName</h2>
-                <p>✉️ @Realtor.Email</p>
+                <p><i class="fa-regular fa-envelope"></i> @Realtor.Email</p>
                 @if (!string.IsNullOrEmpty(Realtor.PhoneNumber))
                 {
-                    <p>☎️ @Realtor.PhoneNumber</p>
+                    <p><i class="fa-solid fa-phone"></i> @Realtor.PhoneNumber</p>
                 }
             </div>
         </div>

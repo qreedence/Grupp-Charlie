@@ -128,7 +128,11 @@
             {
             <p>Ansvarig mäklare</p>
             <h2>@House.Realtor.FirstName @House.Realtor.LastName</h2>
-            <p>@House.Realtor.Email</p>
+                <p><i class="fa-regular fa-envelope"></i> @House.Realtor.Email</p>
+                @if (!string.IsNullOrEmpty(House.Realtor.PhoneNumber))
+                {
+                    <p><i class="fa-solid fa-phone"></i> @House.Realtor.PhoneNumber</p>
+                }
             <div class="realtor-circle">
                     @if (House.Realtor.Avatar == "https://example.com/avatar.jpg")
                     {
