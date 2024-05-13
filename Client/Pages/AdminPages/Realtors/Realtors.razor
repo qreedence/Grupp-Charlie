@@ -61,10 +61,10 @@
     <div>
         <h1>Mäklare</h1>
     </div>
-    <br />
-    <NavLink href="/register" Match="NavLinkMatch.All"><button>Skapa ny mäklare</button></NavLink>
-    <br/>
-    <NavLink href="/inactive-accounts" Match="NavLinkMatch.All"><button>Godkänn mäklarkonto</button></NavLink>
+    <div class="button-row">
+        <NavLink href="/register" Match="NavLinkMatch.All"><button>Skapa ny mäklare</button></NavLink>
+        <NavLink href="/inactive-accounts" Match="NavLinkMatch.All"><button>Godkänn mäklarkonto</button></NavLink>
+    </div>
 
     @if (ListOfRealtors == null)
     {

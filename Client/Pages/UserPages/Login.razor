@@ -16,9 +16,16 @@
         <InputText type="password" @bind-Value="LoginModel.Password"></InputText>
     </div>
     <button type="submit">Logga in</button>
+    @if(!String.IsNullOrEmpty(ErrorMessage))
+    {
+    <div class="error-box">
+        <p>@ErrorMessage</p>
+    </div>
+    }
+
 </EditForm>
 
-<p>@ErrorMessage</p>
+
 
 
 @code {

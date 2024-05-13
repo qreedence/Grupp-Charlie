@@ -78,6 +78,7 @@ button {
     font-family: Montserrat;
     font-weight: 600;
     margin-right: 0.4rem;
+    margin-block: 0.2rem;
 }
 
 button:hover{
@@ -266,6 +267,11 @@ select::backdrop {
     background-color: white;
 }
 
+select > option {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+
 .houses-list {
     display: flex;
     flex-direction: column;
@@ -325,7 +331,7 @@ select::backdrop {
 .button-row {
     display: flex;
     gap: 0.1rem;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .agency-logo {
@@ -335,7 +341,6 @@ select::backdrop {
 .flex-column {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .house-details {
@@ -444,4 +449,19 @@ select::backdrop {
     flex-direction: row;
     align-items: center;
     gap: 0.2rem;
+}
+
+.error-box {
+    background-color: white;
+    border: 1px solid var(--primary-clr-800);
+    color: black;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.error-box > p {
+    font-weight: 400;
+    text-align: left;
 }
