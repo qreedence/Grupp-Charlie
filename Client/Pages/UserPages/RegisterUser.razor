@@ -76,9 +76,15 @@
 
     public async Task Submit()
     {
+        
+
         RegisterModel.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");
-        var result = await Http.PostAsJsonAsync<RegisterModel>("api/authenticate/register", RegisterModel);
-        Response = await result.Content.ReadFromJsonAsync<Response>();
+       
+        
+            var result = await Http.PostAsJsonAsync<RegisterModel>("api/authenticate/register", RegisterModel);
+            Response = await result.Content.ReadFromJsonAsync<Response>();
+        
+
     }
     public void NavigateToLogin()
     {

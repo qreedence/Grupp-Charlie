@@ -14,12 +14,12 @@ namespace API.Configuration
                 new Realtor
                 {
                     Id = "e2680c44-32bb-432e-9cae-53b8ce24a0dd",
-                    Email = "marcus.friberg@xlent.se",
-                    NormalizedEmail = "MARCUS.FRIBERG@XLENT.SE",
-                    UserName= "marcus.friberg@xlent.se",
-                    NormalizedUserName = "MARCUS.FRIBERG@XLENT.SE",
-                    FirstName = "Marcus",
-                    LastName = "Friberg",
+                    Email = "johanna.eriksson@bostadsbubblan.se",
+                    NormalizedEmail = "johanna.eriksson@bostadsbubblan.se",
+                    UserName= "johanna.eriksson@bostadsbubblan.se",
+                    NormalizedUserName = "johanna.eriksson@bostadsbubblan.se",
+                    FirstName = "Johanna",
+                    LastName = "Eriksson",
                     PasswordHash = hasher.HashPassword(null, "Test1234!"),
                     EmailConfirmed= true,
                     Avatar = "https://example.com/avatar.jpg"
