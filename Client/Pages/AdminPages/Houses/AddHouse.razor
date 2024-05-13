@@ -97,28 +97,31 @@
         <InputNumber @bind-Value="House.MonthlyFee"></InputNumber>
     </div>
     <div>
-        <label>Driftkostnad per år</label>
+        <label>Årlig driftkostnad</label>
         <InputNumber @bind-Value="House.OperatingCostPerYear"></InputNumber>
     </div>
     <div>
         <label>Byggår</label>
         <InputNumber @bind-Value="House.YearOfConstruction"></InputNumber>
     </div>
-        <label>Galleri</label>
-        <button type="button" @onclick="AddImageField">Lägg till bild</button>
+    <div>
+        <label>Bildgalleri</label><br />
         @if (Images != null && Images.Count > 0)
-        {
-            <div class="flex-column">
+        {<table>
             @foreach (var image in Images)
             {
                 <div>
-                    <label>Bild-URL</label>
-                    <InputText @bind-Value="image.ImageURL"></InputText>
+                    <label>Bild URL</label><br />
+                    
+                    <tr><td><InputText @bind-Value="image.ImageURL"></InputText></td></tr>
+                  
                 </div>
             }
-            </div>
-        }
+        </table>
 
+        }
+        <button type="button" @onclick="AddImageField">Lägg till bild</button>
+    </div>
 
     <button type="submit">Skapa annons</button>
 </EditForm>
@@ -171,7 +174,7 @@
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"There was an error: {ex}");
+            Console.WriteLine($"Något gick fel: {ex}");
         }
     }
 
