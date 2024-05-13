@@ -70,5 +70,10 @@ namespace API.Data.Repositories
             return await applicationDbContext.Users.Include(a => a.Agency).FirstOrDefaultAsync(r => r.Id == id);
         }
 
+        public async Task<Realtor> GetByNameAsync(string username)
+        {
+            return await applicationDbContext.Users.Include(a => a.Agency).FirstOrDefaultAsync(r => r.UserName == username);
+        }
+
     }
 }
