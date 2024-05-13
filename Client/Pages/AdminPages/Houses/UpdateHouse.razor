@@ -7,9 +7,7 @@
 
 @*Author: Susanna Renström*@
 
-<h3>Uppdatera hus</h3>
 
-    
     @if (House == null)
     {
         <p>Ett ögonblick...</p>
@@ -19,7 +17,7 @@
     @if (showForm)
     {
     <EditForm Model="House" OnSubmit="Submit" FormName="edit" class="card form">
-  
+        <h3>Uppdatera bostad</h3>
         <div>
             <label>Mäklare</label>
             @if (Realtors != null && House.Realtor != null)
