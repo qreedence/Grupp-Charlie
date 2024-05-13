@@ -21,7 +21,7 @@
         }
     </div>
     <div>
-        <label>Kategori</label>
+        <label>Bostadstyp</label>
         @if (Categories != null)
         {
             <select @bind="CategoryId">
@@ -85,7 +85,12 @@
     </div>
     <div>
         <label>Antal rum</label>
-        <InputNumber @bind-Value="House.NumberOfRooms"></InputNumber>
+        <select @bind="House.NumberOfRooms">
+            @for (int i = 1; i<=20; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
     </div>
     <div>
         <label>Månadsavgift</label>
@@ -118,7 +123,7 @@
         <button type="button" @onclick="AddImageField">Lägg till bild</button>
     </div>
 
-    <button type="submit">Skapa nytt hus</button>
+    <button type="submit">Skapa annons</button>
 </EditForm>
 
 @code {
@@ -142,6 +147,8 @@
         Categories = await Http.GetFromJsonAsync<List<Category>>("api/category");
         Counties = await Http.GetFromJsonAsync<List<County>>("api/county");
         Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+        Counties.Sort((c1, c2) => c1.CountyName.CompareTo(c2.CountyName));
+        Municipalities.Sort((m1, m2) => m1.MunicipalityName.CompareTo(m2.MunicipalityName));
     }
 
     void AddImageField()

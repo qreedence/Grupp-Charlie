@@ -1,10 +1,86 @@
-@page "/houses"
+﻿@page "/houses"
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 @using Models;
 @using System.Net.Http.Json
 
-<h3>Houses</h3>
+<style>
+    .center {
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1500px;
+        margin: 0 auto; /* Detta centrera blocket horisontellt */
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 370px;
+        margin-bottom: 20px;
+    }
+
+    .image {
+        width: 260px;
+        height: 360px;
+        border-radius: 2%;
+        object-fit: cover; /* Klipper bilden för att passa in i behållaren */
+        object-position: center; /* Centrerar bilden i behållaren */
+    }
+
+    .logo {
+        max-width: 300px;
+        max-height: 70px;
+        object-fit: scale-down;
+        padding-bottom: 5px;
+    }
+
+    .contact-info {
+        margin-left: 20px;
+    }
+
+    .houses {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .realtor-house-card {
+        border-radius: 2%;
+        width: 400px;
+        height: 267px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        margin: 10px;
+        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
+        background-repeat: no-repeat;
+    }
+
+        .realtor-house-card:hover {
+            box-shadow: 0 0 10px 0px #022c22;
+            cursor: pointer;
+        }
+
+    .house-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        width: 65%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+</style>
 
 @if (ListOfHouses == null)
 {
@@ -13,30 +89,63 @@
 }
 else
 {
+    <div class="house-details card">
+        <div class="houses">
+            @foreach (var house in ListOfHouses)
+            {
+                <div class="realtor-house-card" @onclick="() => NavigateToHouse(house.HouseId)" style="background-image: url('@(house.Gallery.FirstOrDefault()?.ImageURL ?? "https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg")');">
+                    <div class="house-info">
+                        <h3>@house.Adress</h3>
+                        <h2>@(house.Price.ToString("N0") + " kr")</h2>
+                        <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
+                        @if (@house.Category != null)
+                        {
+                            <p class="category-line">
+                                @if (@house.Category.CategoryName == "Villa")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        home
+                                    </span>
+                                }
+                                else if (@house.Category.CategoryName == "Par/Kedje/Radhus")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        other_houses
+                                    </span>
+                                }
+                                else if (@house.Category.CategoryName == "Lägenhet")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        location_city
+                                    </span>
+                                }
+                                else if (@house.Category.CategoryName == "Fritidsboende")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        cottage
+                                    </span>
+                                }
+                                else if (@house.Category.CategoryName == "Gård")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        fence
+                                    </span>
+                                }
+                                @house.Category.CategoryName
+                            </p>
+                            <p>Antal rum: @house.NumberOfRooms | Boarea: @house.LivingArea ㎡</p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+ }
 
-<table>
-    <tr>
-        <th>
-            House Id:
-        </th>     
-    </tr>
-    @foreach (var house in ListOfHouses)
-    {
-        <tr>
-            <td>
-                @house.HouseId
-                </td>
-        </tr>
-        <tr>
-                    <button @onclick="@(() => UpdateHouse(@house.HouseId))">Edit</button>
-                    <button @onclick="@(() => DeleteHouse(@house.HouseId))">Delete</button>
-            
-        </tr>
-    }
-</table>
-<NavLink href="/houses/create" Match="NavLinkMatch.All"><button>Skapa ny bostad</button></NavLink>
-<NavLink href="/soldhouses" Match="NavLinkMatch.All"><button>Visa s�lda bost�der</button></NavLink>
-}
+<div class="button-row">
+    <NavLink href="/houses/create" Match="NavLinkMatch.All"><button>Skapa ny bostad</button></NavLink>
+    <NavLink href="/soldhouses" Match="NavLinkMatch.All"><button>Visa sålda bostäder</button></NavLink>
+</div>
 
 @code {
 
@@ -47,9 +156,7 @@ else
     protected override async Task OnInitializedAsync()
     { 
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
-        // Console.WriteLine("entered OnInitializedAsync method");
-      
-}
+    }
 
     void UpdateHouse(int id)
     {
@@ -58,5 +165,10 @@ else
     void DeleteHouse(int id)
     {
         NavigationManager.NavigateTo($"/houses/delete/{id}");
+    }
+
+    void NavigateToHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/browse/{id}");
     }
 }
