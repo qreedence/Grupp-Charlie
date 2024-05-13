@@ -28,6 +28,7 @@
         @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && HasBeenSold == false)
         {
             <button type="button" @onclick="MarkAsSold">Markera som sålt</button>
+            <button type="button" @onclick="() => NavigateToUpdateHouse(House.HouseId)">Redigera objekt</button>
         }
         @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && HasBeenSold == true)
         {
@@ -127,13 +128,13 @@
             @if(House.Realtor != null)
             {
             <p>Ansvarig mäklare</p>
-            <h2>@House.Realtor.FirstName @House.Realtor.LastName</h2>
+                <h2 @onclick="() => NavigateToRealtorProfile(House.Realtor.Id)">@House.Realtor.FirstName @House.Realtor.LastName</h2>
                 <p><i class="fa-regular fa-envelope"></i> @House.Realtor.Email</p>
                 @if (!string.IsNullOrEmpty(House.Realtor.PhoneNumber))
                 {
                     <p><i class="fa-solid fa-phone"></i> @House.Realtor.PhoneNumber</p>
                 }
-            <div class="realtor-circle">
+                <div class="realtor-circle" @onclick="() => NavigateToRealtorProfile(House.Realtor.Id)">
                     @if (House.Realtor.Avatar == "https://example.com/avatar.jpg")
                     {
                         <img src="https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg" />
@@ -179,4 +180,15 @@
         HasBeenSold = true;
         StateHasChanged();
     }
+
+    void NavigateToRealtorProfile(string id)
+    {
+        NavigationManager.NavigateTo($"/realtor/profile/{id}");
+    }
+
+    void NavigateToUpdateHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/houses/update/{id}");
+    }
+
 }

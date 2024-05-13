@@ -76,7 +76,7 @@
             }
         </div>
         <div>
-            <label>Län</label>
+            <label>Kommun</label>
             @if (Municipalities != null && House.Municipality != null)
             {
                 <select @bind="House.Municipality.MunicipalityId">
@@ -97,7 +97,7 @@
         <div>
             <label>Bildgalleri</label>
             <div class="flex-column form">
-            @foreach (var image in Images)
+            @foreach (var image in HouseGallery)
             {
                 <div>
                     <label>Bild URL</label>
@@ -171,6 +171,7 @@
     private List<Municipality> FilteredMunicipalities { get; set; } = new List<Municipality>();
 
     public List<Image> Images { get; set; } = new List<Image>();
+    public List<Image> HouseGallery { get; set; } = new List<Image>();
 
     private string RealtorId { get; set; }
     private List<Realtor> Realtors { get; set; } = new List<Realtor>();
@@ -190,7 +191,10 @@
 
         var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
         if (result != null)
-        { House = result; }
+        {
+            House = result;
+            HouseGallery = House.Gallery;
+        }
     }
 
     public async Task Submit()
