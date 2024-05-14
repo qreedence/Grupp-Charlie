@@ -7,6 +7,23 @@
 
 @*Author: Susanna Renström*@
 
+<style>
+
+    .center-content {
+        margin: 23px auto;
+        padding: 5px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 500px;        
+    }
+
+    .center-content > p {
+        padding: 10px 0;
+    }
+</style>
+
 
     @if (House == null)
     {
@@ -95,6 +112,9 @@
             }
         </div>
         <div>
+            @*Co-Author: Mikaela Älgekrans
+                Bildgalleri
+            *@
             <label>Bildgalleri</label>
             <div class="flex-column form">
             @foreach (var image in HouseGallery)
@@ -102,9 +122,11 @@
                 <div>
                     <label>Bild URL</label>
                     <InputText @bind-Value="image.ImageURL"></InputText>
+                     <button @onclick="() => RemoveImage(image)">Ta bort</button>
                 </div>
             }
             </div>
+            <button @onclick="AddImage">Lägg till bild</button>
         </div>
         <div>
             <label>Adress</label>
@@ -150,12 +172,11 @@
         <button type="submit">Spara</button>
     </EditForm>
 }}
-<br />
-<br />
-<p>@Message</p>
-<br />
-<button @onclick="NavigateBackToHouses">Tillbaka till översikt</button>
 
+<div class="center-content">
+    <p>@Message</p>
+    <button @onclick="NavigateBackToHouses">Tillbaka till översikt</button>
+</div>
 
 @code {
 
@@ -172,6 +193,7 @@
 
     public List<Image> Images { get; set; } = new List<Image>();
     public List<Image> HouseGallery { get; set; } = new List<Image>();
+    public List<Image> ImagesToRemove { get; set; } = new List<Image>();
 
     private string RealtorId { get; set; }
     private List<Realtor> Realtors { get; set; } = new List<Realtor>();
@@ -208,9 +230,12 @@
 
         if (result.IsSuccessStatusCode)
         {
+            foreach (var image in ImagesToRemove)
+            {
+                await DeleteImageFromDatabase(image.ImageId);
+            }
             showForm = false;
             Message = "Aktuellt hus har uppdaterats!";
-
         }
     }
 
@@ -225,8 +250,30 @@
     {
         NavigationManager.NavigateTo($"/houses");
     }
+        
+    void RemoveImage(Image image)
+    {
+        HouseGallery.Remove(image);
+        ImagesToRemove.Add(image);
+    }
 
+    void AddImage()
+    {
+        HouseGallery.Add(new Image());
+    }
 
+    async Task DeleteImageFromDatabase(int imageId)
+    {
+        var response = await Http.DeleteAsync($"api/image/{imageId}");
+        if (response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Bilden har tagits bort.");
+        }
+        else
+        {
+            Console.WriteLine("Ett fel uppstod när bilden skulle tas bort från databasen.");
+        }
+    }
 }
 
    

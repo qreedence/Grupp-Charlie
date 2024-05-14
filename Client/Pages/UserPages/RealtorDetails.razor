@@ -8,102 +8,134 @@
 
 <style>
 
-.center {
-    padding-top: 30px;
-    padding-bottom: 45px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 1300px;
-    margin: 0 auto; /* Detta centrera blocket horisontellt */      
-    margin-top: 32px;
-    border-radius: 8px;
-    box-shadow: 4px 4px 12px -5px;
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 370px;
-    margin-bottom: 20px;
-}
-
-.image {
-    width: 260px;
-    height: 360px;
-    border-radius: 2%;
-    object-fit: cover; /* Klipper bilden för att passa in i behållaren */
-    object-position: center; /* Centrerar bilden i behållaren */
-}
-
-.logo {
-    max-width: 300px;
-    max-height: 70px;
-    object-fit: scale-down;
-    padding-bottom: 5px;
-}
-.contact-info {
-    margin-left: 20px;
-}
-
-.houses {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    width: 100%;   
-}
-
-.realtor-house-card {
-    border-radius: 2%;
-    width: 400px;
-    height: 267px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    margin: 10px;
-    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
-    background-repeat: no-repeat; 
-}
-
-    .realtor-house-card:hover {
-            box-shadow: 0 0 10px 0px #34d399;
-            cursor: pointer;
+    .center {
+        padding-top: 30px;
+        padding-bottom: 45px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 1300px;
+        margin: 0 auto; /* Detta centrera blocket horisontellt */
+        margin-top: 32px;
+        border-radius: 8px;
+        box-shadow: 4px 4px 12px -5px;
     }
 
-.house-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    width: 65%; 
-    padding: 10px;
-    box-sizing: border-box;
-}
+    .profile-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 370px;
+        margin-bottom: 20px;
+    }
+
+    .image {
+        width: 260px;
+        height: 360px;
+        border-radius: 2%;
+        object-fit: cover; /* Klipper bilden för att passa in i behållaren */
+        object-position: center; /* Centrerar bilden i behållaren */
+    }
+
+    .logo {
+        max-width: 300px;
+        max-height: 70px;
+        object-fit: scale-down;
+        padding-bottom: 5px;
+    }
+
+    .contact-info {
+        margin-left: 20px;
+    }
+
+    .houses {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .realtor-house-card {
+        border-radius: 2%;
+        width: 400px;
+        height: 267px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        margin: 10px;
+        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
+        background-repeat: no-repeat;
+    }
+
+        .realtor-house-card:hover {
+            box-shadow: 0 0 10px 0px #34d399;
+            cursor: pointer;
+        }
+
+    .house-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: white;
+        width: 65%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .center-content {
+        margin: 10px auto;
+        padding: 5px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 800px;
+    }
+
+        .center-content > p {
+            padding: 10px 0;
+        }
+
+    .sold {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        background-color: #34d399;
+        color: white;
+        width: 100px;
+        padding: 10px;
+        border-radius: 2px;
+    }
+
+    .sold h2 {
+        color: white;
+    }
 
 </style>
 
-@if (Realtor == null)
+@if (Realtor == null || Houses == null)
 {
     <p>Ett ögonblick...</p>
 }
 else
 {
-    <div class="center">        
+    <div class="center">
         <div class="profile-info">
             <img src="@Realtor.Avatar" class="image" / onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg';">
             <div class="contact-info">
-            @if (Realtor.Agency != null)
-            {
-                <img src="@Realtor.Agency.Logo"/ class="logo">                
-                <h4>@Realtor.Agency.NameOfAgency</h4><br />
-            }
-            <h2>@Realtor.FirstName @Realtor.LastName</h2>
+                @if (Realtor.Agency != null)
+                {
+                    <img src="@Realtor.Agency.Logo" / class="logo">
+                    <h4>@Realtor.Agency.NameOfAgency</h4>
+
+                    <br />
+                }
+                <h2>@Realtor.FirstName @Realtor.LastName</h2>
                 <p><i class="fa-regular fa-envelope"></i> @Realtor.Email</p>
                 @if (!string.IsNullOrEmpty(Realtor.PhoneNumber))
                 {
@@ -112,70 +144,81 @@ else
                 @if (Realtor.UserName == UserNameFromToken)
                 {
                     <br />
-                    <a href="/realtor/update/@Realtor.Id" Match="NavLinkMatch.All"><button>Redigera info</button></a> 
+                    <a href="/realtor/update/@Realtor.Id" Match="NavLinkMatch.All"><button>Redigera info</button></a>
                 }
             </div>
         </div>
         <h3>Nuvarande objekt:</h3>
         @if (Houses == null)
         {
-            <p>Laddar...</p>
+            <div class="center-content">
+                <p>Laddar...</p>
+            </div>
         }
         else if (RealtorHouses.Count == 0)
         {
-            <p>Denna mäklare har för tillfället inga aktiva objekt tillgängliga på marknaden.</p>
+            <div class="center-content">
+                <p>Denna mäklare har för tillfället inga aktiva objekt tillgängliga på marknaden.</p>
+            </div>
         }
-        else 
+        else
         {
-        <div class="houses">  
-            @foreach (var house in Houses.Where(house => house.Realtor.Id == Realtor.Id))
-            {
-                <div class="realtor-house-card" @onclick="() => NavigateToHouse(house.HouseId)" style="background-image: url('@(house.Gallery.FirstOrDefault()?.ImageURL ?? "https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg")');">
-                    <div class="house-info">
-                        <h3>@house.Adress</h3>
-                        <h2>@(house.Price.ToString("N0") + " kr")</h2>
-                        <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
-                        @if (@house.Category != null)
+            <div class="houses">
+                @foreach (var house in RealtorHouses)
+                {
+                    <div class="realtor-house-card" @onclick="() => NavigateToHouse(house.HouseId)" style="background-image: url('@(house.Gallery.FirstOrDefault()?.ImageURL ?? "https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg")');">
+                        @if (house.HasBeenSold == true)
                         {
-                            <p class="category-line">
-                                @if (@house.Category.CategoryName == "Villa")
-                                {
-                                    <span class="material-symbols-outlined">
-                                        home
-                                    </span>
-                                }
-                                else if (@house.Category.CategoryName == "Par/Kedje/Radhus")
-                                {
-                                    <span class="material-symbols-outlined">
-                                        other_houses
-                                    </span>
-                                }
-                                else if (@house.Category.CategoryName == "Lägenhet")
-                                {
-                                    <span class="material-symbols-outlined">
-                                        location_city
-                                    </span>
-                                }
-                                else if (@house.Category.CategoryName == "Fritidsboende")
-                                {
-                                    <span class="material-symbols-outlined">
-                                        cottage
-                                    </span>
-                                }
-                                else if (@house.Category.CategoryName == "Gård")
-                                {
-                                    <span class="material-symbols-outlined">
-                                        fence
-                                    </span>
-                                }
-                                @house.Category.CategoryName 
-                            </p>
-                            <p>Antal rum: @house.NumberOfRooms | Boarea: @house.LivingArea ㎡</p>                
+                            <div class="sold">
+                                <h2>SÅLD</h2>
+                            </div>
                         }
+                        <div class="house-info">
+                            <h3>@house.Adress</h3>
+                            <h2>@(house.Price.ToString("N0") + " kr")</h2>                            
+                            <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
+                            @if (@house.Category != null)
+                            {
+                                <p class="category-line">
+                                    @if (@house.Category.CategoryName == "Villa")
+                                    {
+                                        <span class="material-symbols-outlined">
+                                            home
+                                        </span>
+                                    }
+                                    else if (@house.Category.CategoryName == "Par/Kedje/Radhus")
+                                    {
+                                        <span class="material-symbols-outlined">
+                                            other_houses
+                                        </span>
+                                    }
+                                    else if (@house.Category.CategoryName == "Lägenhet")
+                                    {
+                                        <span class="material-symbols-outlined">
+                                            location_city
+                                        </span>
+                                    }
+                                    else if (@house.Category.CategoryName == "Fritidsboende")
+                                    {
+                                        <span class="material-symbols-outlined">
+                                            cottage
+                                        </span>
+                                    }
+                                    else if (@house.Category.CategoryName == "Gård")
+                                    {
+                                        <span class="material-symbols-outlined">
+                                            fence
+                                        </span>
+                                    }
+                                    @house.Category.CategoryName
+                                </p>
+                                <p>Antal rum: @house.NumberOfRooms | Boarea: @house.LivingArea ㎡</p>
+                            }
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
+
+                }
+            </div>
         }
     </div>
 }
@@ -183,7 +226,7 @@ else
 
 @code {
     [Parameter]
-    public string Id { get; set; }
+    public string? Id { get; set; }
     Realtor Realtor { get; set; } = new Realtor();
 
     public int AgencyId { get; set; }
@@ -191,33 +234,34 @@ else
 
     public int HouseId { get; set; }
     private List<House> Houses { get; set; } = new List<House>();
+    private List<House> ActiveHouses { get; set; } = new List<House>();
+    private List<House> SoldHouses { get; set; } = new List<House>();
     private List<House> RealtorHouses { get; set; } = new List<House>();
 
     public string UserNameFromToken { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Agencies = await Http.GetFromJsonAsync<List<Agency>>($"api/agency");
-        Houses = await Http.GetFromJsonAsync<List<House>>($"api/house");
+        ActiveHouses = await Http.GetFromJsonAsync<List<House>>($"api/house");
+        SoldHouses = await Http.GetFromJsonAsync<List<House>>($"api/house/getallsold");
+        Houses = ActiveHouses.Concat(SoldHouses).ToList();
 
         var result = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{(string)Id}");
         if (result != null)
         {
             Realtor = result;
+            RealtorHouses = Houses.Where(h => h.Realtor.Id == Realtor.Id).ToList();
         }
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
-        if (!string.IsNullOrEmpty(token))   
+        if (!string.IsNullOrEmpty(token))
         {
             var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
             UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
         }
-
-         RealtorHouses = Houses.Where(h => h.Realtor.Id == Realtor.Id).ToList();
-            StateHasChanged();
     }
 
     void NavigateToHouse(int id)
     {
         NavigationManager.NavigateTo($"/browse/{id}");
-    }    
+    }
 }
