@@ -1,31 +1,9 @@
 ﻿@page "/realtor/update/{id}"
 @inject HttpClient Http
-@inject NavigationManager NavigationManager
 @using System.Net.Http.Json
 @using Client.Models
 
 @*Author: Mikaela Älgekrans*@
-
-<style>
-    .image {
-        margin: 0 auto;
-        width: 260px;
-        height: 360px;
-        border-radius: 2%;
-        object-fit: cover; /* Klipper bilden för att passa in i behållaren */
-        object-position: center; /* Centrerar bilden i behållaren */
-    }
-
-    .center {
-        padding-top: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: 1500px;
-        margin: 0 auto; /* Detta centrera blocket horisontellt */
-    }
-</style>
 
 <div class="center">
     <h3>Uppdatera din profil</h3>
@@ -128,7 +106,7 @@
 
         if (result.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo($"/realtors");
+            NavigationManager.NavigateTo($"/realtor/profile/{(string)Id}");
         }
     }
 }
