@@ -1,16 +1,9 @@
 ﻿@page "/"
 @using Client.Components
-@* @using Microsoft.AspNetCore.Authorization
-<AuthorizeView>
-    <Authorized>
-        <RecentlySold />
-    </Authorized>
-    <NotAuthorized>
-        <p>Du är inte behörig att visa denna komponent. Vänligen logga in först.</p>
-    </NotAuthorized>
-</AuthorizeView> *@
+
 
 <section class="hero">
+    
     <RecentlySold />
 </section>
 

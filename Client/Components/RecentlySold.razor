@@ -1,53 +1,76 @@
 ﻿@inject HttpClient Http
 
 
-<style>
-
-    .realtor-card {
-        border: 1px solid #ccc;
-        margin: 10px;
-        padding: 20px;
-        width: 400px;
-        height: 180px;
-        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
-        display: flex;
-        align-items: center;
-        bottom: 0;
-    }
-
-</style>
 
 @*Author: Susanna Renström*@
+<div class="houses-list">
+    @if (SoldHouses != null)
+    {
+        RecentlySoldHouses = SoldHouses.Where(h => h.HasBeenSold == true && h.SoldDate >= tenDaysAgo).ToList();
 
-@if (SoldHouses != null)
-{
-    RecentlySoldHouses = SoldHouses.Where(h => h.HasBeenSold == true && h.SoldDate >= tenDaysAgo).ToList();
-    <div>
         @if (RecentlySoldHouses.Count != 0)
         {
             <p>Nyligen sålda objekt</p>
-            <table>
-                <tr>
-
-
-                    @foreach (var item in RecentlySoldHouses.OrderByDescending(x => x.SoldDate))
-                    {
-                        @if (item.Gallery != null && item.Gallery.Count > 0)
+ 
+            @foreach (var house in RecentlySoldHouses.OrderByDescending(x => x.SoldDate))
+            {
+                <div class="house-card">
+                    <div class="card-left">
+                        @if (house.Gallery != null && house.Gallery.Count > 0)
                         {
-                            <td>
-                                @item.Adress
-                                <img src="@item.Gallery.FirstOrDefault().ImageURL" class=" realtor-card">
-
-                            </td>
+                            <img src="@house.Gallery.FirstOrDefault().ImageURL">
                         }
-                    }
+                    </div>
+                    <div class="card-left">
+                        <div class="house-info">
+                            <h3>@house.Adress</h3>
+                            <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
+                            <p class="category-line">
+                                @if (house.Category.CategoryName == "Villa")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        home
+                                    </span>
+                                }
+                                else if (house.Category.CategoryName == "Par/Kedje/Radhus")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        other_houses
+                                    </span>
+                                }
+                                else if (house.Category.CategoryName == "Lägenhet")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        location_city
+                                    </span>
+                                }
+                                else if (house.Category.CategoryName == "Fritidsboende")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        cottage
+                                    </span>
+                                }
+                                else if (house.Category.CategoryName == "Gård")
+                                {
+                                    <span class="material-symbols-outlined">
+                                        fence
+                                    </span>
+                                }
+                                @house.Category.CategoryName
+                            </p>
+                            <p>@(house.Price.ToString("N0") + " kr")</p>
+                            <p id="card-description">@(house.Description?.Split('.')[0])</p>
+                        </div>
+                    </div>
+                </div>
 
-                </tr>
-            </table>
 
+            }
         }
-    </div>
-}
+    }
+</div>
+
+
 @code {
     DateTime tenDaysAgo = DateTime.Today.AddDays(-10);
     public DateTime SoldDate { get; set; }
