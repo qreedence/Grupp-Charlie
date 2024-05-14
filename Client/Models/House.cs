@@ -22,6 +22,7 @@ namespace Client.Models
         public Realtor Realtor { get; set; }
         public Municipality Municipality { get; set; }
         public bool HasBeenSold { get; set; } = false;
+        public DateTime? SoldDate { get; set; }
         //public Agency Agency { get; set; } 
 
 

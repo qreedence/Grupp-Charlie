@@ -1,0 +1,63 @@
+﻿@inject HttpClient Http
+@* <h3>Nyligen sålda objekt</h3> *@
+
+<style>
+
+    .realtor-card {
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 20px;
+        width: 400px;
+        height: 180px;
+        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
+        display: flex;
+        align-items: center;
+        bottom: 0;
+    }
+
+</style>
+
+@if (SoldHouses != null)
+{
+    RecentlySoldHouses = SoldHouses.Where(h => h.HasBeenSold == true && h.SoldDate >= tenDaysAgo).ToList();
+    <div>
+        @if (RecentlySoldHouses.Count != 0)
+        {
+            <p>Nyligen sålda objekt</p>
+            <table>
+                <tr>
+
+
+                    @foreach (var item in RecentlySoldHouses.OrderByDescending(x => x.SoldDate))
+                    {
+                        @if (item.Gallery != null && item.Gallery.Count > 0)
+                        {
+                            <td>
+                                @item.Adress
+                                <img src="@item.Gallery.FirstOrDefault().ImageURL" class=" realtor-card">
+
+                            </td>
+                        }
+                    }
+
+                </tr>
+            </table>
+
+        }
+    </div>
+}
+@code {
+    DateTime tenDaysAgo = DateTime.Today.AddDays(-10);
+    public DateTime SoldDate { get; set; }
+    public List<House> SoldHouses { get; set; } = new List<House>();
+    public List<House> RecentlySoldHouses { get; set; } = new List<House>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        SoldHouses = await Http.GetFromJsonAsync<List<House>>("api/house/getallsold");
+
+    }
+
+
+
+}
