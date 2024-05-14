@@ -1,6 +1,5 @@
 ﻿@page "/realtor/update/{id}"
 @inject HttpClient Http
-@inject NavigationManager NavigationManager
 @using System.Net.Http.Json
 @using Client.Models
 
@@ -107,7 +106,7 @@
 
         if (result.IsSuccessStatusCode)
         {
-            NavigationManager.NavigateTo($"/realtors");
+            NavigationManager.NavigateTo($"/realtor/profile/{(string)Id}");
         }
     }
 }

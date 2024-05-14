@@ -37,9 +37,9 @@
         .realtor-card h2 {
             padding-bottom: 10px;
         }
-        
+
         .realtor-card:hover {
-            box-shadow: 0 0 10px 0px #022c22;
+            box-shadow: 0 0 10px 0px #34d399;
             cursor: pointer;
         }
 
@@ -53,8 +53,7 @@
         border-radius: 2%;
         object-fit: cover; /* Klipper bilden för att passa in i behållaren */
         object-position: center; /* Centrerar bilden i behållaren */
-    }       
-
+    }
 </style>
 
 <div class="center">
@@ -88,10 +87,10 @@
                     <div class="realtor-card-content">
                         <h2>@realtor.FirstName @realtor.LastName</h2>
                         <h4>@(realtor.Agency?.NameOfAgency ?? "Ingen byrå tillgänglig")</h4><br />
-                        <p>✉️ @realtor.Email</p>
-                        @if (realtor.PhoneNumber != null)
+                        <p><i class="fa-regular fa-envelope"></i> @realtor.Email</p>
+                        @if (!string.IsNullOrEmpty(realtor.PhoneNumber))
                         {
-                            <p>☎️ @realtor.PhoneNumber</p>
+                            <p><i class="fa-solid fa-phone"></i> @realtor.PhoneNumber</p>
                         }
                         <br />                  
                     </div>
