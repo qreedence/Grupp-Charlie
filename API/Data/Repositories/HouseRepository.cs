@@ -77,6 +77,7 @@ namespace API.Data.Repositories
         {
             House house = await GetByIdAsync(id);
             house.HasBeenSold = true;
+            house.SoldDate = DateTime.Now;
             await UpdateAsync(house);
         }
     }
