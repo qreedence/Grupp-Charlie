@@ -455,7 +455,7 @@ select > option {
     gap: 0.2rem;
 }
 
-.error-box {
+.error-box, .success-box {
     background-color: white;
     border: 1px solid var(--primary-clr-800);
     color: black;
@@ -468,6 +468,16 @@ select > option {
 .error-box > p {
     font-weight: 400;
     text-align: left;
+}
+
+.error-message {
+    color: red;
+    padding: 10px;
+}
+
+.success-message {
+    color: var(--primary-clr-400);
+    padding: 10px;
 }
 
 .center {
