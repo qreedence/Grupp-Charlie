@@ -324,6 +324,16 @@ select > option {
     justify-content: space-between;
 }
 
+.right {
+    position: relative;
+    margin-left: auto;
+    font-size: small;
+}
+
+    .right b {
+        color: var(--primary-clr-800);
+    }
+
 .house-info {
     display: flex;
     flex-direction: column;
