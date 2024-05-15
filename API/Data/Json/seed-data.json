@@ -63,7 +63,7 @@
       "Agency": {
         "AgencyId": 1
       },
-      "Avatar": "",
+      "Avatar": "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
       "Email": "john.doe@example.com",
       "EmailConfirmed": true,
       "FirstName": "John",
@@ -78,7 +78,7 @@
       "Agency": {
         "AgencyId": 1
       },
-      "Avatar": "",
+      "Avatar": "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
       "Email": "debra.doe@example.com",
       "EmailConfirmed": true,
       "FirstName": "Debra",
@@ -93,7 +93,7 @@
       "Agency": {
         "AgencyId": 5
       },
-      "Avatar": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvYnJva2VyaW1hZ2VzL1MxMjAyNS9jYW52YW5kYXJlM2UwaWNscms4dTRzZjgxcS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0Ijoib3V0c2lkZSIsImhlaWdodCI6MjAwLCJ3aWR0aCI6MTUwfX19?signature=4aff9e5b84e576906f2421f55789cf0e8acf5e76864fbb95d035ffffd08d656d",
+      "Avatar": "https://cdn.lansfast-cdn.se/api/image/eyJpbWFnZVVybCI6Imh0dHBzOi8vc3RsYW5zZmFzdG1laWxpc2RldjAwMS5ibG9iLmNvcmUud2luZG93cy5uZXQvYnJva2VyaW1hZ2VzL1MxMjAyNS9jYW52YW5kYXJlM2UwaWNscms4dTRzZjgxcS5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0Ijoib3V0c2lkZSIsImhlaWdodCI6NTIwLCJ3aWR0aCI6NDMwfX19?signature=b955a821d1c6e5c91ed311109862d9cf73c180e49cb6588cac2669c196897a18",
       "Email": "krister.hempel@lansfast.se",
       "EmailConfirmed": true,
       "FirstName": "Krister",
