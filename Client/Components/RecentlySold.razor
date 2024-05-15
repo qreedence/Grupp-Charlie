@@ -18,7 +18,11 @@
                     <div class="card-left">
                         @if (house.Gallery != null && house.Gallery.Count > 0)
                         {
-                            <img src="@house.Gallery.FirstOrDefault().ImageURL">
+                            <img src="@house.Gallery.FirstOrDefault().ImageURL" onerror="this.onerror=null;this.src='https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg';" />
+                        }
+                        else
+                        {
+                            <img src="https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg" />
                         }
                     </div>
                     <div class="card-left">

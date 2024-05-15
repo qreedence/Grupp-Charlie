@@ -5,9 +5,12 @@
 @using System.Net.Http.Json
 
 @*Author: Eden Yusof-Ioannidis*@
+@*Co-Author: Mikaela Älgekrans
+    Updated code to only show realtors and houses within the same agency as logged in user
+*@
 
 <div class="card form">
-    @if (Realtors != null)
+    @if (Realtors != null && SelectedRealtor != null && FilteredHouses != null)
     {
         <div>
         <label>Välj mäklare</label>
@@ -22,12 +25,11 @@
     }
 </div>
 
-
-@if (FilteredList == null)
+@if (FilteredHouses == null)
 {
     <p>Loading...</p>
 }
-else if (FilteredList.Count == 0)
+else if (SelectedHouses.Count == 0)
 {
     <div class="houses-list">
         <p>Denna mäklare har inte sålt några bostäder.</p>
@@ -43,9 +45,9 @@ else
         }
         else
         {
-            <p>Visar tidigare sålda bostäder för @SelectedRealtor.FirstName @SelectedRealtor.LastName</p>
+            <p>Visar tidigare sålda bostäder för @SelectedRealtor.FirstName @SelectedRealtor.LastName.</p>
         }
-        @foreach (var house in FilteredList)
+        @foreach (var house in SelectedHouses ?? Enumerable.Empty<House>())
         {
             <div class="house-card">
                 <div class="card-left">
@@ -60,6 +62,9 @@ else
                 </div>
                 <div class="card-right">
                     <div class="house-info">
+                        <div class="right">
+                            <p>Ansvarig mäklare: <b>@house.Realtor.FirstName @house.Realtor.LastName</b></p>
+                        </div>
                         <h3>@house.Adress</h3>
                         <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
                         <p class="category-line">
@@ -109,27 +114,55 @@ else
 }
 
 @code {
-    private List<House> ListOfHouses { get; set; }
-
-    private List<House> FilteredList { get; set; }
-
+    private List<House> Houses { get; set; } = new List<House>();
+    private List<House> FilteredHouses { get; set; } = new List<House>();
+    private List<House> SelectedHouses { get; set; } = new List<House>();
     private List<Realtor> Realtors { get; set; } = new List<Realtor>();
-
     private Realtor SelectedRealtor { get; set; } = new Realtor();
-
+    private Realtor? User { get; set; } = new Realtor();
+    private string UserNameFromToken { get; set; } = "";
     private string RealtorId { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
-        ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house/getallsold");
-        FilteredList = ListOfHouses.ToList();
-        Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor/");
+        Realtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+        Houses = await Http.GetFromJsonAsync<List<House>>("api/house/getallsold");
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            var currentTokenResponse = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+            if (currentTokenResponse.IsSuccessStatusCode)
+            {
+                UserNameFromToken = await currentTokenResponse.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(UserNameFromToken))
+                {
+                    User = await Http.GetFromJsonAsync<Realtor>($"api/realtor/getbyname?username={UserNameFromToken}");
+                    if (User?.Agency != null)
+                    {
+                        Realtors = Realtors.Where(r => r.Agency?.AgencyId == User.Agency.AgencyId).ToList();
+                        var agencyId = User.Agency.AgencyId;
+                        FilteredHouses = Houses.Where(h => h.Realtor.Agency.AgencyId == agencyId).ToList();
+
+                        SelectedHouses = FilteredHouses;
+                    }
+                }
+            }
+        }
     }
 
     private async Task FilterRealtors()
     {
-        SelectedRealtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
-        FilteredList = ListOfHouses.Where(h => h.Realtor.Id == SelectedRealtor.Id).ToList();
+        if (!string.IsNullOrEmpty(RealtorId))
+        {
+            SelectedRealtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{RealtorId}");
+            SelectedHouses = FilteredHouses.Where(h => h.Realtor.Id == SelectedRealtor.Id).ToList();
+        }
+        else
+        {
+            SelectedRealtor = new Realtor();
+            SelectedHouses = FilteredHouses;
+        }
         StateHasChanged();
     }
 }
