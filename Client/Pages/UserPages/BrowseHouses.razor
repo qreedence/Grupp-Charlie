@@ -38,6 +38,7 @@
         @if (Categories != null)
         {
             <select @bind="CategoryId">
+                <option value="" selected>Välj kategori</option>
                 @foreach (var category in Categories)
                 {
                     <option value="@category.CategoryId">@category.CategoryName</option>

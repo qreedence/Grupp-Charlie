@@ -83,7 +83,13 @@
                     </p>
                 }
                 <div class="description">
-                    <p>@House.Description</p>
+                        @if (!string.IsNullOrEmpty(House?.Description))
+                        {
+                            @foreach (var paragraph in House.Description.Split(new[] { "\r\n\r\n", "\n\n", "\n", "\r" }, StringSplitOptions.None))
+                            {
+                                <p>@paragraph</p>
+                            }
+                        }
                 </div>
             </div>
             <div class="details-right">

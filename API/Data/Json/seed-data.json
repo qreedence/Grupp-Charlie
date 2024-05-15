@@ -41,6 +41,21 @@
       "NameOfAgency": "Länsförsäkringar Fastighetsförmedling",
       "Description": "Länsförsäkringar Fastighetsförmedlings vision är ”Trygga bostadsaffärer genom livet”. Vi vill bidra till en rättvis och hållbar bostadsmarknad där fler kan byta bostad efter behov. De senaste tio åren har vi växt snabbast av alla landets fastighetsmäklare och är nu näst störst i branschen. Med 200 bobutiker och 950 hängivna medarbetare runt om i Sverige finns vi alltid nära våra kunder. Under 2023 förmedlade våra fastighetsmäklare cirka 22 700 objekt till ett försäljningsvärde av 58,6 miljarder kronor. Vi tycker att den lokala närvaron är viktig och tror att det är en av anledningarna till att kunderna gav oss högsta betyg sju år i rad mellan 2016-2022, enligt Svenskt Kvalitetsindex.",
       "Logo": "https://images.eniro.com/yapp/f9c97ccade696b9445f141890ce33251199e247b?name=default"
+    },
+    {
+      "NameOfAgency": "Residence Sweden",
+      "Description": "Residence är en del av Christie's International Real Estate, som är ett helägt dotterbolag till Christie's, ett av världens äldsta auktionshus. Christie's grundades 1766 i London och specialiserar sig på exklusiva konstföremål. Sedan 2009 ägs Christie's av fransmannen Francois Pinault[^1^][7].",
+      "Logo": "https://www.residence.se/wp-content/themes/residence/images/residence-logo.svg"
+    },
+    {
+      "NameOfAgency": "SkandiaMäklarna",
+      "Description": "Genom sina partners kan SkandiaMäklarna erbjuda dig några av de bästa försäkringarna på marknaden. Dra också nytta av våra tjänster inom homestyling och digitala arkitekttjänster så att hemmets potential kommer till sin fulla rätt[^1^][7].",
+      "Logo": "https://www.skandiamaklarna.se/static/images/logo.svg"
+    },
+    {
+      "NameOfAgency": "Bjurfors",
+      "Description": "Bjurfors är en av Sveriges största fastighetsmäklare med kontor över hela landet. De erbjuder en rad tjänster, inklusive försäljning av bostadsrätter, villor, och fritidshus, samt konsultation och rådgivning[^2^][5].",
+      "Logo": "https://bjurfors.se/static/images/logo.svg"
     }
   ],
   "Realtors": [
@@ -48,7 +63,7 @@
       "Agency": {
         "AgencyId": 1
       },
-      "Avatar": "https://example.com/avatar.jpg",
+      "Avatar": "",
       "Email": "john.doe@example.com",
       "EmailConfirmed": true,
       "FirstName": "John",
@@ -56,14 +71,14 @@
       "NormalizedEmail": "JOHN.DOE@EXAMPLE.COM",
       "NormalizedUserName": "JOHN.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "PhoneNumber": "1234567890",
+      "PhoneNumber": "070-2515054",
       "UserName": "john.doe@example.com"
     },
     {
       "Agency": {
         "AgencyId": 1
       },
-      "Avatar": "https://example.com/avatar.jpg",
+      "Avatar": "",
       "Email": "debra.doe@example.com",
       "EmailConfirmed": true,
       "FirstName": "Debra",
@@ -71,7 +86,7 @@
       "NormalizedEmail": "DEBRA.DOE@EXAMPLE.COM",
       "NormalizedUserName": "DEBRA.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "PhoneNumber": "1234567891",
+      "PhoneNumber": "070-2515055",
       "UserName": "debra.doe@example.com"
     },
     {
