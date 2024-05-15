@@ -210,6 +210,12 @@ button:hover{
     margin-block: 1rem;
 }
 
+.success-message {
+    color: var(--primary-clr-400);
+    font-weight: 500;
+    margin-block: 1rem;
+}
+
 .county > ul {
     margin-block: 1rem;
 }
@@ -476,16 +482,6 @@ select > option {
 .error-box > p {
     font-weight: 400;
     text-align: left;
-}
-
-.error-message {
-    color: red;
-    padding: 10px;
-}
-
-.success-message {
-    color: var(--primary-clr-400);
-    padding: 10px;
 }
 
 .center {
