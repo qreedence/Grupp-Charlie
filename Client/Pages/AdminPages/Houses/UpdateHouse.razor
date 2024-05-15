@@ -4,6 +4,7 @@
 @using System.Net.Http.Json
 @using Client.Models
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 @*Author: Susanna Renström*@
 
@@ -31,8 +32,7 @@
     }
     else
     {
-    @if (showForm)
-    {
+
     <EditForm Model="House" OnSubmit="Submit" FormName="edit" class="card form">
         <h3>Uppdatera bostad</h3>
         <div>
@@ -168,14 +168,16 @@
             <label>Byggår</label>
             <InputNumber @bind-Value="House.YearOfConstruction" />
         </div>
-  
-        <button type="submit">Spara</button>
+            <div style="display: flex; gap: 0.1rem;justify-content:center;">
+            <button type="submit">Spara</button>
+            <button @onclick="NavigateBackToCurrentHouse">Avbryt</button>
+        </div>
     </EditForm>
 }}
 
 <div class="center-content">
     <p>@Message</p>
-    <button @onclick="NavigateBackToHouses">Tillbaka till översikt</button>
+   
 </div>
 
 @code {
@@ -200,8 +202,8 @@
 
     private int CategoryId { get; set; }
     private List<Category> Categories { get; set; } = new List<Category>();
-    private bool showForm = true;
-    private string Message { get; set; }
+    // private bool showForm = true;
+    private string Message { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {   
@@ -234,8 +236,10 @@
             {
                 await DeleteImageFromDatabase(image.ImageId);
             }
-            showForm = false;
+            // showForm = false;
             Message = "Aktuellt hus har uppdaterats!";
+            await JSRuntime.InvokeVoidAsync("alert", Message);
+            await NavigateBackToCurrentHouse();
         }
     }
 
@@ -245,10 +249,10 @@
         FilteredMunicipalities = Municipalities.Where(m => m.CountyName == House.County.CountyName).ToList();
         StateHasChanged();
     }
-
-    public async Task NavigateBackToHouses()
+    
+    public async Task NavigateBackToCurrentHouse()
     {
-        NavigationManager.NavigateTo($"/houses");
+        NavigationManager.NavigateTo($"/browse/{House.HouseId}");
     }
         
     void RemoveImage(Image image)
