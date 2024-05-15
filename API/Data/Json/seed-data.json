@@ -56,7 +56,7 @@
       "NormalizedEmail": "JOHN.DOE@EXAMPLE.COM",
       "NormalizedUserName": "JOHN.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "Phonenumber": "1234567890",
+      "PhoneNumber": "1234567890",
       "UserName": "john.doe@example.com"
     },
     {
@@ -71,7 +71,7 @@
       "NormalizedEmail": "DEBRA.DOE@EXAMPLE.COM",
       "NormalizedUserName": "DEBRA.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "Phonenumber": "1234567891",
+      "PhoneNumber": "1234567891",
       "UserName": "debra.doe@example.com"
     },
     {
@@ -86,7 +86,7 @@
       "NormalizedEmail": "KRISTER.HEMPEL@LANSFAST.SE",
       "NormalizedUserName": "KRISTER.HEMPEL@LANSFAST.SE",
       "PasswordHash": "Test1234!",
-      "Phonenumber": "0761121700",
+      "PhoneNumber": "0761121700",
       "UserName": "krister.hempel@lansfast.se"
     },
     {
@@ -101,7 +101,7 @@
       "NormalizedEmail": "LINDA.FLORIC@LANSFAST.SE",
       "NormalizedUserName": "LINDA.FLORIC@LANSFAST.SE",
       "PasswordHash": "Test1234!",
-      "Phonenumber": "0762126755",
+      "PhoneNumber": "0762126755",
       "UserName": "linda.floric@lansfast.se"
     }
   ],
