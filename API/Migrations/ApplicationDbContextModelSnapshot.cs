@@ -157,6 +157,9 @@ namespace API.Migrations
                     b.Property<string>("RealtorId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime?>("SoldDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("YearOfConstruction")
                         .HasColumnType("int");
 
@@ -308,19 +311,19 @@ namespace API.Migrations
                             Id = "e2680c44-32bb-432e-9cae-53b8ce24a0dd",
                             AccessFailedCount = 0,
                             Avatar = "https://example.com/avatar.jpg",
-                            ConcurrencyStamp = "51b63444-aac5-4dc2-8a5c-9761864f4287",
-                            Email = "marcus.friberg@xlent.se",
+                            ConcurrencyStamp = "6ef8f397-62ee-43e4-b045-65c82dba9826",
+                            Email = "johanna.eriksson@bostadsbubblan.se",
                             EmailConfirmed = true,
-                            FirstName = "Marcus",
-                            LastName = "Friberg",
+                            FirstName = "Johanna",
+                            LastName = "Eriksson",
                             LockoutEnabled = false,
-                            NormalizedEmail = "MARCUS.FRIBERG@XLENT.SE",
-                            NormalizedUserName = "MARCUS.FRIBERG@XLENT.SE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBp5itGT78WknVPe7kXR0g0clN0soYB8+oJ9V9zUh+VQJuwB07rdwxn7UyBZjrJZ5w==",
+                            NormalizedEmail = "johanna.eriksson@bostadsbubblan.se",
+                            NormalizedUserName = "johanna.eriksson@bostadsbubblan.se",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN3jahIeSoH5IvXoL7WxH2yP8gCNRJOoB2BYhAmyRElFD/WE2+HOinGcOxpnHHsAmw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3fe6e827-6c50-463c-8363-cbb66ab05b82",
+                            SecurityStamp = "69fd7879-5780-4f9c-89d5-65a5db820dfd",
                             TwoFactorEnabled = false,
-                            UserName = "marcus.friberg@xlent.se"
+                            UserName = "johanna.eriksson@bostadsbubblan.se"
                         });
                 });
 

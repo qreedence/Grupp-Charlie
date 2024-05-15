@@ -83,14 +83,15 @@ namespace API.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
                
-
+                
                 foreach (var userRole in userRoles)
                 {
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
                 var token = GetToken(authClaims);
-
+                //marcus version nedan med valid to datetime now
+                //if(token.ValidTo < DateTime.Now)
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
