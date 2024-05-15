@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject HttpClient Http
+@using System.Net.Http.Json
+@using System.Text.Json
+@inject IJSRuntime JSRuntime
+@using System.Net.Http.Headers
+
+
+
+
+@code {
+    private bool UserAuthenticated { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+        if (!string.IsNullOrEmpty(token))
+        {
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+
+        }
+        var response = await Http.GetAsync("api/authenticate/status");
+        if (response.IsSuccessStatusCode)
+        {
+            UserAuthenticated = true;
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/access-denied");
+        }
+    }
+    }
