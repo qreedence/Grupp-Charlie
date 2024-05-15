@@ -3,6 +3,7 @@
 @inject NavigationManager NavigationManager
 @using Models;
 @using System.Net.Http.Json
+@inject IJSRuntime JSRuntime
 
 @*Author: Eden Yusof-Ioannidis*@
 
@@ -66,11 +67,11 @@
         <NavLink href="/inactive-accounts" Match="NavLinkMatch.All"><button>Godkänn mäklarkonto</button></NavLink>
     </div>
 
-    @if (ListOfRealtors == null)
+    @if (ListOfRealtors == null && Realtor == null)
     {
         <p>Laddar in mäklare...</p>
     }
-    else if (ListOfRealtors.Count == 0)
+    else if (ListOfRealtors.Count == 0 && Realtor != null)
     {
         <p>Inga registrerade mäklare hittades.</p>
     }
@@ -103,11 +104,33 @@
 
 
 @code {
-    private List<Realtor> ListOfRealtors { get; set; }
+    private List<Realtor> ListOfRealtors { get; set; } = new List<Realtor>();
+
+    private string UserNameFromToken { get; set; }
+
+    private Realtor Realtor { get; set; } = new Realtor();
 
     protected override async Task OnInitializedAsync()
     {
-        ListOfRealtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor");
+        ListOfRealtors = await Http.GetFromJsonAsync<List<Realtor>>("api/realtor") ?? new List<Realtor>();
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            var currentTokenResponse = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+            if (currentTokenResponse.IsSuccessStatusCode)
+            {
+                UserNameFromToken = await currentTokenResponse.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(UserNameFromToken))
+                {
+                    Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/getbyname?username={UserNameFromToken}");
+                    if (Realtor?.Agency != null)
+                    {
+                        ListOfRealtors = ListOfRealtors.Where(r => r.Agency?.AgencyId == Realtor.Agency.AgencyId).ToList();
+                    }
+                }
+            }
+        }
     }
 
     void NavigateToRealtorProfile(string id)
