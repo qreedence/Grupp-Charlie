@@ -8,7 +8,7 @@
 @*Co-Author: Eden Yusof-Ioannidis - valideringar*@
 @*RegisterUser*@
 
-
+<CheckAuthorization />
 @if (Response == null)
 {
     <EditForm Model="RegisterModel" OnSubmit="Submit" class="card form">
@@ -87,7 +87,7 @@
     public string ErrorMessage { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {
+    {   
         Agencies = await Http.GetFromJsonAsync<List<Agency>>("api/agency");
     }
 

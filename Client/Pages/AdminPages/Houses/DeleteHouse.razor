@@ -1,12 +1,14 @@
 ﻿@page "/houses/delete/{id:int}"
+@page "/houses/delete"
 @inject HttpClient Http
+@using Client.Components
 @using Models;
 @inject NavigationManager NavigationManager
 @using System.Net.Http.Json
 
 @*Author: Susanna Renström*@
 
-
+<CheckAuthorization/>
 <EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit" class="card form">
     <h3>Radera hus</h3>
     <div>
@@ -21,12 +23,20 @@
     [Parameter]
     public int Id { get; set; }
     House House { get; set; } = new House();
-      
+
     protected override async Task OnParametersSetAsync()
-    {
-        var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
-        if (result != null)
-            House = result;
+    {   try
+        {
+            var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
+            if (result != null)
+                House = result;
+        }
+        catch (Exception)
+        {
+          
+
+        }
+      
     }
 
     public async Task HandleSubmit()
