@@ -12,6 +12,7 @@
         <div>
         <label>Välj mäklare</label>
         <select @bind-value="RealtorId" @onchange="FilterRealtors" @bind-value:event="oninput">
+                <option value="">Välj mäklare</option>
             @foreach (var realtor in Realtors)
             {
                 <option value="@realtor.Id">@realtor.FirstName @realtor.LastName</option>
