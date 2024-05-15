@@ -1,10 +1,11 @@
 ﻿@page "/houses/create"
+@using Client.Components
 @using Models;
 @inject HttpClient Http
 @using System.Net.Http.Json
 
 @*Author: Mikaela Älgekrans*@
-
+<CheckAuthorization/>
 <EditForm Model="House" OnSubmit="Submit" FormName="CreateHouse" class="card form">
 
     <div>
