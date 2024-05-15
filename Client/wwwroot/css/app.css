@@ -384,6 +384,10 @@ select > option {
     margin-top: 2rem;
 }
 
+.description > p {
+    margin-bottom: 12px;
+}
+
 .price {
     font-size: 2rem;
     font-weight: 600;

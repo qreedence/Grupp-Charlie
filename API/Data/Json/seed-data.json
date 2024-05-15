@@ -48,7 +48,7 @@
       "Agency": {
         "AgencyId": 1
       },
-      "Avatar": "https://example.com/avatar.jpg",
+      "Avatar": "",
       "Email": "john.doe@example.com",
       "EmailConfirmed": true,
       "FirstName": "John",
@@ -56,14 +56,14 @@
       "NormalizedEmail": "JOHN.DOE@EXAMPLE.COM",
       "NormalizedUserName": "JOHN.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "Phonenumber": "1234567890",
+      "Phonenumber": "070-2515054",
       "UserName": "john.doe@example.com"
     },
     {
       "Agency": {
         "AgencyId": 1
       },
-      "Avatar": "https://example.com/avatar.jpg",
+      "Avatar": "",
       "Email": "debra.doe@example.com",
       "EmailConfirmed": true,
       "FirstName": "Debra",
@@ -71,7 +71,7 @@
       "NormalizedEmail": "DEBRA.DOE@EXAMPLE.COM",
       "NormalizedUserName": "DEBRA.DOE@EXAMPLE.COM",
       "PasswordHash": "Test1234!",
-      "Phonenumber": "1234567891",
+      "Phonenumber": "070-2515055",
       "UserName": "debra.doe@example.com"
     },
     {
