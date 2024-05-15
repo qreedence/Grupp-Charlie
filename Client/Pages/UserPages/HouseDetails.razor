@@ -194,6 +194,7 @@
         var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
         UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
         HasBeenSold = House.HasBeenSold;
+
         StateHasChanged();
     }
 

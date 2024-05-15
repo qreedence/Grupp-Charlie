@@ -70,9 +70,9 @@
 
         @if (@Response?.Status == "Success")
         {
-            <p>När ditt konto har blivit godkänt kan du logga in</p>
+            <p>Kontot måste godkännas innan användaren kan logga in</p>
             <br />
-            <button @onclick="@(() => NavigateToLogin())">Logga in</button>
+            <button @onclick="@(() => NavigateBackToRealtors())">Tillbaka till översikt</button>
         }
     </div>
 }
@@ -100,9 +100,9 @@
             Response = await result.Content.ReadFromJsonAsync<Response>();
         }
     }
-    public void NavigateToLogin()
+    public void NavigateBackToRealtors()
     {
-        NavigationManager.NavigateTo("/login");
+        NavigationManager.NavigateTo("/realtors");
     }
 
     public bool Validate()
