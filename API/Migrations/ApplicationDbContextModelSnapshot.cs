@@ -311,7 +311,7 @@ namespace API.Migrations
                             Id = "e2680c44-32bb-432e-9cae-53b8ce24a0dd",
                             AccessFailedCount = 0,
                             Avatar = "https://example.com/avatar.jpg",
-                            ConcurrencyStamp = "6ef8f397-62ee-43e4-b045-65c82dba9826",
+                            ConcurrencyStamp = "b0c18253-4500-405a-bd33-69c286dd370e",
                             Email = "johanna.eriksson@bostadsbubblan.se",
                             EmailConfirmed = true,
                             FirstName = "Johanna",
@@ -319,9 +319,9 @@ namespace API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "johanna.eriksson@bostadsbubblan.se",
                             NormalizedUserName = "johanna.eriksson@bostadsbubblan.se",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN3jahIeSoH5IvXoL7WxH2yP8gCNRJOoB2BYhAmyRElFD/WE2+HOinGcOxpnHHsAmw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECbTvUjUTilGsdFpP63SQPzVYp8QEEeQwbzNa65OdQ/PiczFWnT5J8xw9NvkUZHlzw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "69fd7879-5780-4f9c-89d5-65a5db820dfd",
+                            SecurityStamp = "fdf96582-0b8d-41d8-bdfd-00f575c56ded",
                             TwoFactorEnabled = false,
                             UserName = "johanna.eriksson@bostadsbubblan.se"
                         });
