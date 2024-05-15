@@ -1,10 +1,19 @@
 ﻿@page "/browse/{id:int}"
+@using Client.Services
 @using Models;
 @inject HttpClient Http
 @using System.Net.Http.Json
 @inject IJSRuntime JSRuntime
+@inject MessageService MessageService
 
 @*Author: Eden Yusof-Ioannidis*@
+
+@if (Message != null)
+{
+    <div class="center">
+        @Message
+    </div>
+}
 
 <div class="house-details card">
     @if (House == null)
@@ -165,11 +174,19 @@
     public string UserNameFromToken { get; set; }
 
     private House House { get; set; } = new House();
-   
+
     public bool HasBeenSold { get; set; }
+
+    public string? Message { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        var message = MessageService.ReceiveMessage();
+        if (message != null)
+        {
+            Message = message;
+        }
+
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
         APIKey = await Http.GetFromJsonAsync<APIKey>("api/APIKey");
         srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality}");
