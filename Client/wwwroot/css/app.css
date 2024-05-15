@@ -204,10 +204,17 @@ button:hover{
     border: 1px solid black;
 }
 
-.error-message {
-    color: red;
+.error-message, .success-message {
     font-weight: 500;
     margin-block: 1rem;
+}
+
+.error-message {
+    color: red;    
+}
+
+.success-message {
+    color: var(--primary-clr-400);
 }
 
 .county > ul {
@@ -463,7 +470,7 @@ select > option {
     gap: 0.2rem;
 }
 
-.error-box {
+.error-box, .success-box {
     background-color: white;
     border: 1px solid var(--primary-clr-800);
     color: black;

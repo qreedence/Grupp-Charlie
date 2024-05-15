@@ -169,15 +169,10 @@ else
         </div>
             <div style="display: flex; gap: 0.1rem;justify-content:center;">
             <button type="submit">Spara</button>
-            <button @onclick="NavigateBackToCurrentHouse">Avbryt</button>
+            <button @onclick="() => NavigateBackToCurrentHouse(CreateErrorMessage())">Avbryt</button>
         </div>
     </EditForm>
 }
-
-<div class="center-content">
-    <p>@Message</p>
-   
-</div>
 
 @code {
 
@@ -201,7 +196,6 @@ else
 
     private int CategoryId { get; set; }
     private List<Category> Categories { get; set; } = new List<Category>();
-    private string Message { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -235,9 +229,12 @@ else
                 await DeleteImageFromDatabase(image.ImageId);
             }
 
-            Message = "Aktuellt hus har uppdaterats!";
-
-            await NavigateBackToCurrentHouse(Message);
+            var message = new Message
+                {
+                    Text = "Aktuellt hus har uppdaterats!",
+                    Type = MessageType.Success
+                };
+            await NavigateBackToCurrentHouse(message);
         }
     }
 
@@ -246,12 +243,7 @@ else
         House.County = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
         FilteredMunicipalities = Municipalities.Where(m => m.CountyName == House.County.CountyName).ToList();
         StateHasChanged();
-    }
-    
-    public async Task NavigateBackToCurrentHouse()
-    {
-        NavigationManager.NavigateTo($"/browse/{House.HouseId}");
-    }
+    }      
 
     void RemoveImage(Image image)
     {
@@ -259,14 +251,25 @@ else
         ImagesToRemove.Add(image);
     }
 
-    public async Task NavigateBackToCurrentHouse(string message = null)
+    public async Task NavigateBackToCurrentHouse(Message message)
     {
         if (message != null)
-        {
-            MessageService.SendMessage(message); // Sends Message to the Navigated page
+        {           
+            MessageService.SendMessage(message); // Sends Message to the Navigated page          
         }
         NavigationManager.NavigateTo($"/browse/{House.HouseId}");
     }
+
+    void NavigateBackToCurrentHouse()
+    {
+        NavigationManager.NavigateTo($"/browse/{House.HouseId}");
+    }
+
+    public Message CreateErrorMessage()
+    {
+        return new Message { Text = "Uppdateringen avbröts.", Type = MessageType.Error };
+    }
+
 
     void AddImage()
     {
