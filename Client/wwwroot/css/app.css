@@ -204,16 +204,17 @@ button:hover{
     border: 1px solid black;
 }
 
-.error-message {
-    color: red;
+.error-message, .success-message {
     font-weight: 500;
     margin-block: 1rem;
 }
 
+.error-message {
+    color: red;    
+}
+
 .success-message {
     color: var(--primary-clr-400);
-    font-weight: 500;
-    margin-block: 1rem;
 }
 
 .county > ul {
