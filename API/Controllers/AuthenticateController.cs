@@ -10,9 +10,11 @@ using API.Data.Models;
 using API.Data.Interfaces;
 using System.Globalization;
 
+//Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis
+
 namespace API.Controllers
 {
-    //Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticateController : ControllerBase

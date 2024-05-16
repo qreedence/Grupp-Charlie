@@ -1,9 +1,11 @@
 ﻿using API.Data.Models;
 
+//Author: Susanna Renström
+
 namespace API.Data.Interfaces
 {
     public interface IAgency
-    {  //Author; Susanna
+    {  
         public Task AddAsync(Agency agency);
         public Task<List<Agency>> GetAllAsync();
         public Task UpdateAsync(Agency agency);
