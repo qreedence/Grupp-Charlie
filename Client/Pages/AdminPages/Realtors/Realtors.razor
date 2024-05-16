@@ -25,6 +25,7 @@
     }
 
     .realtor-card {
+        position: relative;
         border: 1px solid #ccc;
         margin: 10px;
         padding: 20px;
@@ -56,6 +57,22 @@
         object-fit: cover; /* Klipper bilden för att passa in i behållaren */
         object-position: center; /* Centrerar bilden i behållaren */
     }
+
+    .sold {
+        position: absolute;
+        top: 30px;
+        right: 0;
+        background-color: #34d399;
+        color: white;
+        width: 100px;
+        padding: 10px;
+        border-radius: 2px;
+    }
+
+        .sold h2 {
+            color: white;
+        }
+ 
 </style>
 
 <div class="center">
@@ -84,13 +101,24 @@
         
         <div class="realtor-cards">
             @foreach (var realtor in ListOfRealtors)
-            {
-                <div class="realtor-card" @onclick="() => NavigateToRealtorProfile(realtor.Id)">                    
+            { 
+                <div class="realtor-card" @onclick="() => NavigateToRealtorProfile(realtor.Id)"> 
+                    
                     <img src="@realtor.Avatar" class="realtor-cards-image" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg';" />
-                    <div class="realtor-card-content">
-                      
+                    <div class="realtor-card-content" >
+                        
+                       
+                        
                         <h2>@realtor.FirstName @realtor.LastName</h2>
                         <h4>@(realtor.Agency?.NameOfAgency ?? "Ingen byrå tillgänglig")</h4><br />
+
+                        @if (realtor.EmailConfirmed == false)
+                        {
+                            <div class="sold">
+                                <p style="font-weight: bold;">Ej aktiverad</p>
+                            </div>
+                        }
+                        
                         <p><i class="fa-regular fa-envelope"></i> @realtor.Email</p>
                         @if (!string.IsNullOrEmpty(realtor.PhoneNumber))
                         {
