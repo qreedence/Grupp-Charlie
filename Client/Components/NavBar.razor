@@ -10,12 +10,12 @@
 <div class="nav-bar">
 
     <div class="nav-left">
-        
+       
         <NavLink href="/" Match="NavLinkMatch.All">
-            <button id ="logo-btn">
-                <span class="material-symbols-outlined">
-                    home
-                </span>
+            <button id ="logo-btn" style="margin:0; margin-right:10px; padding:0px;" >
+               
+                    <img src="/img/bostadsbubblan-logo.svg" height="100" lenght="100" />
+                
             </button>
         </NavLink>
         @if (UserAuthenticated == true)
@@ -24,6 +24,7 @@
             <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
         }
         <NavLink href="/browse" Match="NavLinkMatch.All">Sök bostad</NavLink>
+
     </div>
     
     <div class="nav-right">
