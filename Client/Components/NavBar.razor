@@ -8,7 +8,9 @@
 @*Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis*@
 
 <div class="nav-bar">
+
     <div class="nav-left">
+        
         <NavLink href="/" Match="NavLinkMatch.All">
             <button id ="logo-btn">
                 <span class="material-symbols-outlined">
@@ -23,6 +25,7 @@
         }
         <NavLink href="/browse" Match="NavLinkMatch.All">Sök bostad</NavLink>
     </div>
+    
     <div class="nav-right">
         @if (UserAuthenticated == false)
         {

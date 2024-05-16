@@ -65,6 +65,7 @@
     <div class="button-row">
         <NavLink href="/register" Match="NavLinkMatch.All"><button>Skapa ny mäklare</button></NavLink>
         <NavLink href="/inactive-accounts" Match="NavLinkMatch.All"><button>Godkänn mäklarkonto</button></NavLink>
+        
     </div>
 
     @if (ListOfRealtors == null && Realtor == null)
@@ -87,6 +88,7 @@
                 <div class="realtor-card" @onclick="() => NavigateToRealtorProfile(realtor.Id)">                    
                     <img src="@realtor.Avatar" class="realtor-cards-image" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg';" />
                     <div class="realtor-card-content">
+                      
                         <h2>@realtor.FirstName @realtor.LastName</h2>
                         <h4>@(realtor.Agency?.NameOfAgency ?? "Ingen byrå tillgänglig")</h4><br />
                         <p><i class="fa-regular fa-envelope"></i> @realtor.Email</p>
@@ -137,4 +139,5 @@
     {
         NavigationManager.NavigateTo($"/realtor/profile/{id}");
     }
+  
 }
