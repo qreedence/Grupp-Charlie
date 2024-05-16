@@ -2,9 +2,7 @@
 @inject HttpClient Http
 @using System.Net.Http.Json
 @using Client.Models
-@using Client.Services
 @inject IJSRuntime JSRuntime
-@inject MessageService MessageService
 @*Author: Mikaela Älgekrans*@
 
 <style>
@@ -128,27 +126,7 @@
     }
 
 </style>
-@if (Message != null)
-{
-    <div class="center">
-        @if (Message.Type == MessageType.Error)
-        {
-            <div class="error-box">
-                <div class="error-message">
-                    @Message.Text
-                </div>
-            </div>
-        }
-        @if (Message.Type == MessageType.Success)
-        {
-            <div class="success-box">
-                <div class="success-message">
-                    @Message.Text
-                </div>
-            </div>
-        }
-    </div>
-}
+<ReceiveMessage />
 
 @if (Realtor == null || Houses == null)
 {
@@ -258,7 +236,6 @@ else
     </div>
 }
 
-
 @code {
     [Parameter]
     public string? Id { get; set; }
@@ -271,17 +248,11 @@ else
     private List<House> Houses { get; set; } = new List<House>();
     private List<House> ActiveHouses { get; set; } = new List<House>();
     private List<House> SoldHouses { get; set; } = new List<House>();
-    private List<House> RealtorHouses { get; set; } = new List<House>();
-    public Message Message { get; set; }
+    private List<House> RealtorHouses { get; set; } = new List<House>();    
     public string UserNameFromToken { get; set; }
 
     protected override async Task OnInitializedAsync()
-    {
-        var message = MessageService.ReceiveMessage();
-        if (message != null)
-        {
-            Message = message;
-        }
+    {        
         ActiveHouses = await Http.GetFromJsonAsync<List<House>>($"api/house");
         SoldHouses = await Http.GetFromJsonAsync<List<House>>($"api/house/getallsold");
         Houses = ActiveHouses.Concat(SoldHouses).ToList();

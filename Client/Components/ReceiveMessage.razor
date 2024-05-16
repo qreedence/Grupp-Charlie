@@ -1,0 +1,38 @@
+﻿@using Client.Services
+@using Models
+@inject MessageService MessageService
+
+@if (Message != null)
+{
+    <div class="center">
+        @if (Message.Type == MessageType.Error)
+        {
+            <div class="message-box">
+                <div class="error-message">
+                    @Message.Text
+                </div>
+            </div>
+        }
+        @if (Message.Type == MessageType.Success)
+        {
+            <div class="message-box">
+                <div class="success-message">
+                    @Message.Text
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+    public Message Message { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var message = MessageService.ReceiveMessage();
+        if (message != null)
+        {
+            Message = message;
+        }
+    }
+}

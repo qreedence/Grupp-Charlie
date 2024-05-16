@@ -3,9 +3,13 @@
 @using Models;
 @inject HttpClient Http
 @using System.Net.Http.Json
+@using Client.Services
+@inject MessageService MessageService
+
 
 @*Author: Mikaela Älgekrans*@
 <CheckAuthorization/>
+<ReceiveMessage />
 <EditForm Model="House" OnSubmit="Submit" FormName="CreateHouse" class="card form">
 
     <div>
@@ -124,7 +128,10 @@
         <button type="button" @onclick="AddImageField">Lägg till bild</button>
     </div>
 
-    <button type="submit">Skapa annons</button>
+    <div style="display: flex; gap: 0.1rem;justify-content:center;">
+        <button type="submit">Spara</button>
+        <button @onclick="() => NavigateBackToHouses(CreateErrorMessage())">Avbryt</button>
+    </div>
 </EditForm>
 
 @code {
@@ -170,13 +177,38 @@
             var result = await Http.PostAsJsonAsync<House>("api/House", House);
             if (result.IsSuccessStatusCode)
             {
-                NavigationManager.NavigateTo($"/houses");
+                var message = new Message
+                    {
+                        Text = $"Objektet '{House.Adress}' har skapats!",
+                        Type = MessageType.Success
+                    };
+                await NavigateBackToHouses(message);
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Något gick fel: {ex}");
+            CreateErrorMessage();
         }
+    }
+
+    public async Task NavigateBackToHouses(Message message)
+    {
+        if (message != null)
+        {
+            MessageService.SendMessage(message); // Sends Message to the Navigated page
+        }
+        NavigationManager.NavigateTo($"/houses");
+    }
+
+    void NavigateBackToHouses()
+    {
+        NavigationManager.NavigateTo($"/houses");
+    }
+
+    public Message CreateErrorMessage()
+    {
+        return new Message { Text = "Processen för att lägga till ett nytt objekt har avbrutits.", Type = MessageType.Error };
     }
 
     public async Task FilterMunicipalities()

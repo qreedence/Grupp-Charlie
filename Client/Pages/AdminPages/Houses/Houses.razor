@@ -2,7 +2,9 @@
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
+
 <CheckAuthorization />
+<ReceiveMessage />
 <style>
     /* .realtor-house-card {
         border-radius: 2%;
@@ -96,11 +98,8 @@ else
 
     private List<House> ListOfHouses { get; set; }
 
-
-
     protected override async Task OnInitializedAsync()
-    { 
-
+    {        
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
     }
 
