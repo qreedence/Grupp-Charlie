@@ -2,7 +2,8 @@
 @inject HttpClient Http
 @using System.Net.Http.Json
 @using Client.Models
-@inject IJSRuntime JSRuntime
+@using Client.Services
+@inject MessageService MessageService
 
 @*Author: Mikaela Älgekrans*@
 
@@ -63,7 +64,10 @@
         <InputText id="passwordhash" @bind-Value="Realtor.PasswordHash" />
         </div> *@
 
-            <button type="submit">Spara</button>
+            <div style="display: flex; gap: 0.1rem;justify-content:center;">
+                <button type="submit">Spara</button>
+                <button @onclick="() => NavigateBackToRealtor(CreateErrorMessage())">Avbryt</button>
+            </div>
         </EditForm>
     }
 </div>
@@ -106,10 +110,34 @@
         var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
 
         if (result.IsSuccessStatusCode)
-        {
-            Message = "Användaruppgifterna har uppdaterats!";
-            await JSRuntime.InvokeVoidAsync("alert", Message);
-            NavigationManager.NavigateTo($"/realtor/profile/{(string)Id}");
+        {            
+            var message = new Message
+                {
+                    Text = "Användaruppgifterna har uppdaterats!",
+                    Type = MessageType.Success
+                };
+            await NavigateBackToRealtor(message);
         }
     }
+
+    public async Task NavigateBackToRealtor(Message message)
+    {
+        if (message != null)
+        {
+            MessageService.SendMessage(message); // Sends Message to the Navigated page
+        }
+        NavigationManager.NavigateTo($"/realtor/profile/{(string)Id}");
+    }
+
+    void NavigateBackToRealtor()
+    {
+        NavigationManager.NavigateTo($"/realtor/profile/{(string)Id}");
+    }
+
+    public Message CreateErrorMessage()
+    {
+        return new Message { Text = "Uppdateringen avbröts.", Type = MessageType.Error };
+    }
+
+    
 }
