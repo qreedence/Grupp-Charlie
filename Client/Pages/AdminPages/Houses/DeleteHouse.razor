@@ -2,21 +2,27 @@
 @page "/houses/delete"
 @inject HttpClient Http
 @using Client.Components
+@using Client.Services
 @using Models;
 @inject NavigationManager NavigationManager
 @using System.Net.Http.Json
-
+@inject MessageService MessageService
 @*Author: Susanna Renström*@
 
 <CheckAuthorization/>
-<EditForm Model="House" OnSubmit="HandleSubmit" FormName="edit" class="card form">
-    <h3>Radera hus</h3>
+<EditForm Model="House" OnSubmit="Submit" FormName="edit" class="card form">
+    <h3>Är du säker på att du vill radera detta objekt?</h3>
     <div>
-       @*  <InputNumber id="houseid" @bind-Value="House.County.CountyName" />
-        <InputNumber id="houseid" @bind-Value="House.Adress" /> *@
-        <InputNumber id="houseid" @bind-Value="House.HouseId" />
+        
+       
+        <InputNumber id="houseid" @bind-Value="House.HouseId" hidden/>
+        
     </div>
-    <button type="submit">Save</button>
+    <div style="display: flex; gap: 0.1rem;justify-content:center;">
+        <button type="submit">Radera</button>
+        <button @onclick="() => NavigateBackToCurrentRealtor(CreateErrorMessage())">Avbryt</button>
+    </div>
+   
 </EditForm> 
 
 @code {
@@ -33,16 +39,38 @@
         }
         catch (Exception)
         {
-          
+
 
         }
-      
+
     }
 
-    public async Task HandleSubmit()
+    public async Task Submit()
     {
         await Http.DeleteAsync($"api/house/{Id}");
-        NavigationManager.NavigateTo($"/houses");
+
+        var message = new Message
+            {
+                Text = "Aktuellt hus har har raderats!",
+                Type = MessageType.Success
+            };
+        await NavigateBackToCurrentRealtor(message);
+    }
+        
+    
+    public async Task NavigateBackToCurrentRealtor(Message message)
+    {
+        if (message != null)
+        {
+            MessageService.SendMessage(message); // Sends Message to the Navigated page
+        }
+        NavigationManager.NavigateTo($"/realtor/profile/{House.Realtor.Id}");
     }
 
+    public Message CreateErrorMessage()
+    {
+        return new Message { Text = "Raderingen avbröts.", Type = MessageType.Error };
+    }
+
+    
 }

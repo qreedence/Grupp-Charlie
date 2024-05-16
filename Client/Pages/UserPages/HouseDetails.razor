@@ -55,6 +55,8 @@
             {
                 <button type="button" @onclick="MarkAsSold">Markera som sålt</button>
                 <button type="button" @onclick="() => NavigateToUpdateHouse(House.HouseId)">Redigera objekt</button>
+                <button type="button" @onclick="() => NavigateToDeleteHouse(House.HouseId)">Radera objekt</button>
+
             }
             @if (House.Realtor != null && House.Realtor.UserName == UserNameFromToken && HasBeenSold == true)
             {
@@ -230,5 +232,10 @@
     void NavigateToUpdateHouse(int id)
     {
         NavigationManager.NavigateTo($"/houses/update/{id}");
+    }
+
+    void NavigateToDeleteHouse(int id)
+    {
+        NavigationManager.NavigateTo($"/houses/delete/{id}");
     }
 }
