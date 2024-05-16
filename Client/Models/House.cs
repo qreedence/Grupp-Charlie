@@ -4,7 +4,6 @@ namespace Client.Models
 {
     public class House
     {
-       
         public int HouseId { get; set; }
         public Category Category { get; set; }
         public string Adress { get; set; }
@@ -23,8 +22,7 @@ namespace Client.Models
         public Municipality Municipality { get; set; }
         public bool HasBeenSold { get; set; } = false;
         public DateTime? SoldDate { get; set; }
-        //public Agency Agency { get; set; } 
-
+       
 
     }
     

@@ -9,17 +9,15 @@
 
 @*Author: Susanna Renström*@
 @*Co-Author: Eden Yusof-Ioannidis - valideringar*@
-@*RegisterUser*@
 
-<CheckAuthorization />
+
+
 @{
 FilteredAgencies = Realtors.Where(u => u.UserName == UserNameFromToken).ToList();
+    //Set current agency
     @foreach (var realtor in FilteredAgencies)
     {
-        AgencyId = realtor.Agency.AgencyId;
-        //Filters list based on current logged-in users agency
-        
-       
+        AgencyId = realtor.Agency.AgencyId;              
     }
 }
 @if (Response == null)
@@ -56,9 +54,7 @@ FilteredAgencies = Realtors.Where(u => u.UserName == UserNameFromToken).ToList()
         </div>
         <div>
             <label>Mäklarfirma</label>
-            <select @bind="AgencyId" disabled>
-               @*  <option value="">Ange mäklarfirma</option> *@
-                
+            <select @bind="AgencyId" disabled>                             
                 @foreach (var agency in Agencies.Where(a => a.AgencyId == AgencyId))
                 {
                     <option value="@agency.AgencyId">@agency.NameOfAgency</option>

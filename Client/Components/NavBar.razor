@@ -10,40 +10,39 @@
 <div class="nav-bar">
 
     <div class="nav-left">
-       
+
         <NavLink href="/" Match="NavLinkMatch.All">
-            <button id ="logo-btn" style="margin:0; margin-right:10px; padding:0px;" >
-               
-                    <img src="/img/bostadsbubblan-logo.svg" height="100" lenght="100" />
-                
+            <button id="logo-btn" style="margin:0; margin-right:10px; padding:0px;">
+
+                <img src="/img/bostadsbubblan-logo.svg" height="100" lenght="100" />
+
             </button>
         </NavLink>
         @if (UserAuthenticated == true)
         {
-            
+
             <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
         }
         <NavLink href="/browse" Match="NavLinkMatch.All">Sök bostad</NavLink>
 
     </div>
-    
+
     <div class="nav-right">
         @if (UserAuthenticated == false)
         {
-               <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
+            <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
             <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
-            
+
         }
-        @if(UserAuthenticated == true && Realtor != null)
+        @if (UserAuthenticated == true && Realtor != null)
         {
             <a href="/realtor/profile/@Realtor.Id">
-                @* <img src="@Realtor.Avatar" /> *@
                 <span class="material-symbols-outlined">
                     account_circle
                 </span>
                 Mina sidor
             </a>
-            
+
             <button @onclick="Logout" id="navbar-btn">Logga ut</button>
         }
 
@@ -65,7 +64,7 @@
     private async Task UpdateAuthenticationStatusAsync()
     {
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
-        if (!string.IsNullOrEmpty(token))   
+        if (!string.IsNullOrEmpty(token))
         {
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");

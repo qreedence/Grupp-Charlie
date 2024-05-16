@@ -59,11 +59,6 @@
                 <label>Telefonnummer</label>
                 <InputText id="phonenumber" @bind-Value="Realtor.PhoneNumber" />
             </div>
-            @*    <div>
-        <label>Lösenord</label>
-        <InputText id="passwordhash" @bind-Value="Realtor.PasswordHash" />
-        </div> *@
-
             <div style="display: flex; gap: 0.1rem;justify-content:center;">
                 <button type="submit">Spara</button>
                 <button @onclick="() => NavigateBackToRealtor(CreateErrorMessage())">Avbryt</button>

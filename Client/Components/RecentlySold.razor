@@ -1,8 +1,8 @@
 ﻿@inject HttpClient Http
 
 
-
 @*Author: Susanna Renström*@
+
 <div class="houses-list">
     @if (SoldHouses != null)
     {
@@ -74,7 +74,6 @@
     }
 </div>
 
-
 @code {
     DateTime tenDaysAgo = DateTime.Today.AddDays(-10);
     public DateTime SoldDate { get; set; }
@@ -84,7 +83,6 @@
     protected override async Task OnInitializedAsync()
     {
         SoldHouses = await Http.GetFromJsonAsync<List<House>>("api/house/getallsold");
-
     }
 
 
