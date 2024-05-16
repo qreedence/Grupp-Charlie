@@ -18,6 +18,7 @@
         </NavLink>
         @if (UserAuthenticated == true)
         {
+            
             <NavLink href="/adminpages" Match="NavLinkMatch.All">Admin-sidor</NavLink>
         }
         <NavLink href="/browse" Match="NavLinkMatch.All">Sök bostad</NavLink>
@@ -25,8 +26,9 @@
     <div class="nav-right">
         @if (UserAuthenticated == false)
         {
+               <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
             <NavLink href="/login" Match="NavLinkMatch.All">Logga in</NavLink>
-            <NavLink href="/register" Match="NavLinkMatch.All">Registrera konto</NavLink>
+            
         }
         @if(UserAuthenticated == true && Realtor != null)
         {
