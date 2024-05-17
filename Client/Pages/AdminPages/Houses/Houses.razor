@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @using Models;
 @using System.Net.Http.Json
+@inject IJSRuntime JSRuntime
 
 <CheckAuthorization />
 <ReceiveMessage />
@@ -75,9 +76,25 @@ else
 
     private List<House> ListOfHouses { get; set; }
 
+    private Realtor Realtor { get; set; } = new Realtor();
+
     protected override async Task OnInitializedAsync()
     {        
         ListOfHouses = await Http.GetFromJsonAsync<List<House>>("api/house");
+        var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
+        if (!string.IsNullOrEmpty(token))
+        {
+            var currentTokenResponse = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+            if (currentTokenResponse.IsSuccessStatusCode)
+            {
+                string username = await currentTokenResponse.Content.ReadAsStringAsync();
+                if (!string.IsNullOrEmpty(username))
+                {
+                    Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/getbyname?username={username}");
+                }
+            }
+        }
+        ListOfHouses = ListOfHouses.Where(h => h.Realtor.Agency.AgencyId == Realtor.Agency.AgencyId).ToList();
     }
 
     void UpdateHouse(int id)
