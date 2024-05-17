@@ -52,10 +52,6 @@
                 <InputText id="lastName" @bind-Value="Realtor.LastName" required />
             </div>
             <div>
-                <label>Epostadress</label>
-                <InputText id="email" @bind-Value="Realtor.Email" />
-            </div>
-            <div>
                 <label>Telefonnummer</label>
                 <InputText id="phonenumber" @bind-Value="Realtor.PhoneNumber" />
             </div>
@@ -74,6 +70,8 @@
     private string Message { get; set; } = "";
     public int AgencyId { get; set; }
     private List<Agency> Agencies { get; set; } = new List<Agency>();
+   
+
 
     private void UpdateImage(ChangeEventArgs e)
     {
@@ -90,7 +88,7 @@
     protected override async Task OnInitializedAsync()
     {
         Agencies = await Http.GetFromJsonAsync<List<Agency>>($"api/agency");
-
+       
         var result = await Http.GetFromJsonAsync<Realtor>($"api/realtor/{(string)Id}");
         if (result != null)
         {
@@ -100,18 +98,20 @@
 
     public async Task Submit()
     {
-        Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");
+               
+            Realtor.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{Realtor.Agency.AgencyId}");
 
-        var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
+            var result = await Http.PutAsJsonAsync<Realtor>($"api/realtor/{(string)Id}", Realtor);
 
-        if (result.IsSuccessStatusCode)
-        {            
-            var message = new Message
-                {
-                    Text = "Användaruppgifterna har uppdaterats!",
-                    Type = MessageType.Success
-                };
-            await NavigateBackToRealtor(message);
+            if (result.IsSuccessStatusCode)
+            {
+                var message = new Message
+                    {
+                        Text = "Användaruppgifterna har uppdaterats!",
+                        Type = MessageType.Success
+                    };
+                await NavigateBackToRealtor(message);
+            
         }
     }
 
@@ -133,6 +133,10 @@
     {
         return new Message { Text = "Uppdateringen avbröts.", Type = MessageType.Error };
     }
-
+   
+        
     
+    
+
+    }
 }
