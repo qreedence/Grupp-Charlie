@@ -302,6 +302,7 @@ select > option {
 
 .house-card {
     border: 1px solid var(--primary-clr-800);
+    background-color: white;
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -334,6 +335,10 @@ select > option {
     justify-content: space-between;
 }
 
+    .house-card p, .house-card h3 {
+        color: black !important;
+    }
+
 .right {
     position: relative;
     margin-left: auto;
@@ -361,6 +366,10 @@ select > option {
     justify-content: center;
 }
 
+.padding {
+    padding: 20px;
+}
+
 .agency-logo {
     max-height: 100px;
 }
@@ -374,9 +383,19 @@ select > option {
     margin-inline: auto;
     margin-block: 2rem;
     background-color: white;
-    width: 1200px;
+    max-width: 1255px;
     display: grid;
-    grid-template-columns: 950px 200px;
+    grid-template-columns: 950px 300px;
+}
+
+.house-card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    width: 65%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .main-left > img {
@@ -424,6 +443,12 @@ select > option {
 
 .main-right {
     align-self: start;
+    width: 350px;
+}
+
+.main-right p {
+  min-width: 200px;
+  max-width: 350px;
 }
 
 .main-right h2 {
@@ -506,13 +531,21 @@ select > option {
 }
 
 .center {
-    padding-top: 30px;
+    padding-bottom: 23px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 1500px;
-    margin: 0 auto; /* Detta centrera blocket horisontellt */
+    max-width: 1390px;
+    margin: 0 auto 23px;
+}
+
+.box {
+    margin: 23px auto 0;
+}
+
+.white {
+    background-color: white;
 }
 
 .realtor-cards {
@@ -522,6 +555,8 @@ select > option {
 }
 
 .realtor-card {
+    border-radius: 8px;
+    position: relative;
     border: 1px solid #ccc;
     margin: 10px;
     padding: 20px;
@@ -577,6 +612,7 @@ select > option {
     max-height: 70px;
     object-fit: scale-down;
     padding-bottom: 5px;
+
 }
 
 .contact-info {
@@ -589,11 +625,10 @@ select > option {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
 .realtor-house-card {
-    border-radius: 2%;
+    border-radius: 8px;
     width: 400px;
     height: 267px;
     background-size: cover;

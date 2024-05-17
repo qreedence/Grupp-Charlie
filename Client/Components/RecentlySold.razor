@@ -10,7 +10,7 @@
 
         @if (RecentlySoldHouses.Count != 0)
         {
-            <p>Nyligen sålda objekt</p>
+            <h1>Nyligen sålda objekt</h1>
  
             @foreach (var house in RecentlySoldHouses.OrderByDescending(x => x.SoldDate))
             {
@@ -25,7 +25,7 @@
                             <img src="https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg" />
                         }
                     </div>
-                    <div class="card-left">
+                    <div class="card-right">
                         <div class="house-info">
                             <h3>@house.Adress</h3>
                             <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
@@ -63,7 +63,20 @@
                                 @house.Category.CategoryName
                             </p>
                             <p>@(house.Price.ToString("N0") + " kr")</p>
-                            <p id="card-description">@(house.Description?.Split('.')[0])</p>
+                            @{ /* Co-Author: Mikaela Älgekrans */
+                                var description = house.Description;
+                                if (description?.Length > 400)
+                                {
+                                    var lastSpaceIndex = description.LastIndexOf(' ', 400);
+                                    description = description.Substring(0, lastSpaceIndex) + "...";
+                                }
+
+                                var paragraphs = description.Split(new[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                            }
+                            @foreach (var paragraph in paragraphs)
+                            {
+                                <p id="card-description">@paragraph</p>
+                            }
                         </div>
                     </div>
                 </div>
