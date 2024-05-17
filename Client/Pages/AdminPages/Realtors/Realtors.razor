@@ -32,6 +32,16 @@
             realtor-cards html and css
         *@
 
+        @if(ListOfRealtors.FirstOrDefault().Agency != null)
+        {
+            <h2>@ListOfRealtors.FirstOrDefault().Agency.NameOfAgency</h2>
+            <div class="agency-description">
+                <img src="@ListOfRealtors.FirstOrDefault().Agency.Logo" />
+                <p>@ListOfRealtors.FirstOrDefault().Agency.Description</p>
+            </div>
+        }
+
+
         <div class="realtor-cards">
             @foreach (var realtor in ListOfRealtors)
             {

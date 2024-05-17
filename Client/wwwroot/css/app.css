@@ -644,3 +644,14 @@ select > option {
     cursor: pointer;
 }
 
+.agency-description {
+    display: flex;
+    gap: 1rem;
+    margin-block: 2rem;
+    padding-inline: 1rem;
+}
+
+.agency-description > img {
+    height: 10rem;
+}
+
