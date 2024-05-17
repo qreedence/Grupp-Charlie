@@ -122,9 +122,9 @@ else
                         <p>@(house.Price.ToString("N0") + " kr")</p>
                         @{ /* Co-Author: Mikaela Älgekrans */
                             var description = house.Description;
-                            if (description?.Length > 340)
+                            if (description?.Length > 300)
                             {
-                                var lastSpaceIndex = description.LastIndexOf(' ', 340);
+                                var lastSpaceIndex = description.LastIndexOf(' ', 300);
                                 description = description.Substring(0, lastSpaceIndex) + "...";
                             }
 
