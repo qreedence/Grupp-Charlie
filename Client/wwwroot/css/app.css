@@ -383,7 +383,8 @@ select > option {
     margin-inline: auto;
     margin-block: 2rem;
     background-color: white;
-    max-width: 1255px;
+    min-width: 1255px;
+    max-width: max-content;
     display: grid;
     grid-template-columns: 950px 300px;
 }
@@ -443,12 +444,15 @@ select > option {
 
 .main-right {
     align-self: start;
-    width: 350px;
 }
 
 .main-right p {
-  min-width: 200px;
-  max-width: 350px;
+    max-width: max-content;
+    padding-right: 20px;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }
 
 .main-right h2 {
@@ -567,17 +571,18 @@ select > option {
     align-items: center;
 }
 
-    .realtor-card h2 {
-        padding-bottom: 10px;
-    }
+.realtor-card h2 {
+    padding-bottom: 10px;
+}
 
-    .realtor-card:hover {
-        box-shadow: 0 0 10px 0px #022c22;
-        cursor: pointer;
-    }
+.realtor-card:hover {
+    box-shadow: 0 0 10px 0px #022c22;
+    cursor: pointer;
+}
 
 .realtor-card-content {
     margin-left: 10px;
+    overflow: hidden;
 }
 
 .realtor-cards-image {
@@ -652,7 +657,8 @@ select > option {
 }
 
 .agency-description > img {
-    height: 10rem;
+    max-height: 10rem;
+    max-width: 34rem;
 }
 
 .hero-main {
@@ -689,4 +695,12 @@ select > option {
     font-size: 2rem;
     font-weight: 700;
     color: var(--primary-clr-700);
+}
+
+#email{
+    overflow:auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem;
 }
