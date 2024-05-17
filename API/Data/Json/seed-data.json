@@ -118,6 +118,96 @@
       "PasswordHash": "Test1234!",
       "PhoneNumber": "0762126755",
       "UserName": "linda.floric@lansfast.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 1
+      },
+      "Avatar": "https://vitec-cdn.kowboy.se/img/G12-MED3843DFB124984317807FA631B1589803-20231221122044-w2400-q85.jpg",
+      "Email": "charlotte.platoff@smh.se",
+      "EmailConfirmed": true,
+      "FirstName": "Charlotte",
+      "LastName": "Platoff",
+      "NormalizedEmail": "CHARLOTTE.PLATOFF@SMH.SE",
+      "NormalizedUserName": "CHARLOTTE.PLATOFF@SMH.SE",
+      "PasswordHash": "Test1234!",
+      "PhoneNumber": "0708-384196",
+      "UserName": "charlotte.platoff@smh.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 1
+      },
+      "Avatar": "https://vitec-cdn.kowboy.se/img/G12-MED60281410B5C3443FA9257C1C6F0F9291-20210823084640-w2400-q85.jpg",
+      "Email": "cherry.lindstrom@smh.se",
+      "EmailConfirmed": true,
+      "FirstName": "Cherry",
+      "LastName": "Lindström",
+      "NormalizedEmail": "CHERRY.LINDSTROM@SMH.SE",
+      "NormalizedUserName": "CHERRY.LINDSTROM@SMH.SE",
+      "PasswordHash": "Test1234!",
+      "PhoneNumber": "0735118228",
+      "UserName": "cherry.lindstrom@smh.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 1
+      },
+      "Avatar": "https://vitec-cdn.kowboy.se/img/G12-MED0A174EC86308485E8D781D60593F14CA-20230310080700-w2400-q85.jpg",
+      "Email": "noomi.uneus@smh.se",
+      "EmailConfirmed": true,
+      "FirstName": "Noomi",
+      "LastName": "Unéus",
+      "NormalizedEmail": "NOOMI.UNEUS@SMH.SE",
+      "NormalizedUserName": "NOOMI.UNEUS@SMH.SE",
+      "PasswordHash": "Test1234!",
+      "PhoneNumber": "0722-766776",
+      "UserName": "noomi.uneus@smh.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 1
+      },
+      "Avatar": "https://vitec-cdn.kowboy.se/img/G12-MED8ECED676A75340EC812AED0E35906FE4-20230906110751-w2400-q85.jpg",
+      "Email": "maximilian.eriksson@smh.se",
+      "EmailConfirmed": true,
+      "FirstName": "Maximilian",
+      "LastName": "Eriksson",
+      "NormalizedEmail": "MAXIMILIAN.ERIKSSON@SMH.SE",
+      "NormalizedUserName": "MAXIMILIAN.ERIKSSON@SMH.SE",
+      "PasswordHash": "Test1234!",
+      "PhoneNumber": "076-5355659",
+      "UserName": "maximilian.eriksson@smh.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 1
+      },
+      "Avatar": "https://vitec-cdn.kowboy.se/img/G12-MED0C99339AF18047E081C10E4AD3C182D5-20210816185007-w2400-q85.jpg",
+      "Email": "jan.myrberg@smh.se",
+      "EmailConfirmed": true,
+      "FirstName": "Jan",
+      "LastName": "Myrberg",
+      "NormalizedEmail": "JAN.MYRBERG@SMH.SE",
+      "NormalizedUserName": "JAN.MYRBERG@SMH.SE",
+      "PasswordHash": "Test1234!",
+      "PhoneNumber": "070-3006644",
+      "UserName": "jan.myrberg@smh.se"
+    },
+    {
+      "Agency": {
+        "AgencyId": 2
+      },
+      "Avatar": "https://media.fastighetsbyran.se/21676995.jpg",
+      "Email": "thomas.sandelius@fastighetsbyran.se",
+      "EmailConfirmed": true,
+      "FirstName": "Thomas",
+      "LastName": "Sandelius",
+      "NormalizedEmail": "THOMAS.SANDELIUS@FASTIGHETSBYRAN.SE",
+      "NormalizedUserName": "THOMAS.SANDELIUS@FASTIGHETSBYRAN.SE",
+      "PasswordHash": "Test1234!",
+      "PhoneNumber": "070-7748045",
+      "UserName": "thomas.sandelius@fastighetsbyran.se"
     }
   ],
   "Houses": [
@@ -204,6 +294,393 @@
       ],
       "Realtor": {
         "Email": "linda.floric@lansfast.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 3
+      },
+      "Adress": "Spångavägen 12 3/3",
+      "County": {
+        "CountyName": "Stockholms län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Stockholm"
+      },
+      "Price": 2375000,
+      "LivingArea": 41,
+      "AuxiliaryArea": 0,
+      "PlotArea": 0,
+      "Description": "Otroligt härlig bostad högst upp med allt man kan önska! Här erbjuds välplanerade kvadratmeter, vacker fiskbensparkett, stor balkong i söderläge samt inbjudande fungerande öppen spis! tack vare det höga läget på bostaden ges ett oerhört härligt ljusinsläpp. Bostaden är genomgående med fräscha ytskikt, fräscht kök med all utrustning du kan tänkas behöva, kaklat badrum samt separat sovrum med plats för dubbelsäng i lugnt läge mot skogsparti.\nBrf Flossamattan 31 erbjuder tillgång till egen parkeringsplats för endast 250kr/mån. I källaren finns två förråd som hör till bostaden.\nMysigt område med koloniområde, grönområden och naturreservat (Judarskogens, kyrksjölöten), tunnelbanan på 400 meters avstånd och Brommaplan med matbutik, gym, restauranger, vårdcentral och apotek. Perfekt läge mellan lugna skogen och kommunikationerna kring Brommaplan!\nVarmt välkommen på visning!",
+      "NumberOfRooms": 2,
+      "MonthlyFee": 3097,
+      "OperatingCostPerYear": 37164,
+      "YearOfConstruction": 1941,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDD5B3DFBEF2E84CD295B8E469852E3796-20240502114627-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDA8ADD30D2C5D44C5AA862F9C093E20C9-20240502114627-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED9C89CB0B1FEE4E05B0B70789C7FFC199-20240502114744-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED2200F3EE3BB744668AC5D63ED6FFEB2D-20240503141734-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED52837324F9FB4C909C7CA289EFD4278D-20240502114744-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDEB92B0BFEDDE4C8592F80C4CC34824C7-20240503141734-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED9264AF67A5C340ACA3F10B9B5C434B23-20240502114744-w1280-q90.jpg"
+        }
+      ],
+      "Realtor": {
+        "Email": "noomi.uneus@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 3
+      },
+      "Adress": "Gubbkärrsvägen 29G 4/4",
+      "County": {
+        "CountyName": "Stockholms län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Stockholm"
+      },
+      "Price": 1950000,
+      "LivingArea": 28,
+      "AuxiliaryArea": 0,
+      "PlotArea": 0,
+      "Description": "Varmt välkommen till denna ljusa och välplanerade 1:a om 34 kvm i hjärtat av Vällingby. Lägenheten erbjuder allt man kan önska sig så som ett mycket ljust och luftigt allrumrum som erbjuder gott om plats för både matplats, soffgrupp och säng samt ett toppmodernt badrum med tvättmaskin. Från lägenheten har man även alla bekvämligheter så som kommunikationer och service inom ett par minuters promenadavstånd.\nAllt detta gör lägenheten helt enkelt till ett perfekt första boendet.\nVarmt välkommen på visning.",
+      "NumberOfRooms": 1,
+      "MonthlyFee": 2448,
+      "OperatingCostPerYear": 29376,
+      "YearOfConstruction": 1950,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED6FCA681979C444D592BE73AB324960F8-20240510114135-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED0CB1324EE8D746E3A4362D5418D13820-20240510114135-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED6E2A91A3C4DE407C8199D9807F4C21B1-20240502125620-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED2EFD27369DDB44F7A9C2AC94755C961E-20240502125620-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED548AB8A1211246A3A04E0663425330B1-20240508104854-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED3AC0F263C38A472B9EC149308BB3EBEA-20240430115742-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDAC26BC8F076344F08BA17DA926F8799C-20240430115742-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDBD9109FBEAA8467C8FB321D15F8DD7C1-20240430115742-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDE4D033875BC04B14B2BD2449747B75D1-20240430115742-w1280-q90.jpg"
+        }
+      ],
+      "Realtor": {
+        "Email": "noomi.uneus@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 3
+      },
+      "Adress": "Frestavägen 30",
+      "County": {
+        "CountyName": "Stockholms län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Sollentuna"
+      },
+      "Price": 2800000,
+      "LivingArea": 71,
+      "AuxiliaryArea": 0,
+      "PlotArea": 0,
+      "Description": "Ljus, öppen och välplanerad 3:a med möblerbar balkong med trätrall, eftermiddagssol och närhet till det mesta. Genomgående för bostaden är stora fönster och ljusa, öppna ytor.\nVälkomnande och möblerbar hall med ett praktiskt förråd. Stort och ljust vardagsrum som är öppet mot modernt kök med matplats för 6-8 personer och med utgång till balkong. Köket är stilrent, välplanerat och fullt utrustat. Stort och helkaklat badrum med tvättpelare. 2 st ljusa sovrum. Golvvärme i hela lägenheten.",
+      "NumberOfRooms": 3,
+      "MonthlyFee": 4938,
+      "OperatingCostPerYear": 59256,
+      "YearOfConstruction": 2011,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED75166C8AA5514807B81BE7A4AD1A035C-20240418112716-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED0F9A32B5191141B4922A11DE906EEB85-20240418112716-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED4E0ECABDDA6744058D4A6CE7268B5A9E-20240418112716-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED33C80560990640AAB8D9B84A6348D059-20240418112716-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDEC326EC2999D4F6C827906C144348B2B-20240418112716-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED1C55ADACB98A4F2CB74C3448DDFDD7AE-20240418112716-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED59639FBDE68A4FFBB076392002C8F20C-20240418112716-w1280-q90.jpg"
+        }
+      ],
+      "Realtor": {
+        "Email": "cherry.lindstrom@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 1
+      },
+      "Adress": "Bangatan 2",
+      "County": {
+        "CountyName": "Skåne län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Kristianstad"
+      },
+      "Price": 1495000,
+      "LivingArea": 87,
+      "AuxiliaryArea": 87,
+      "PlotArea": 822,
+      "Description": "Varmt välkommen till denna underbara enplansvilla med källare i fridfulla Tollarp. Här har du en lagom stor trädgårdstomt komplett med garage, uterum och även förråd för extra förvaringsutrymme. Intill uterummet finns ett trädäck som är det perfekta stället för att njuta av sommaren.\nInteriört bjuder huset på en välkomnande öppen planlösning med kök och matplats som smidigt övergår till vardagsrummet komplett med en mysig eldstad. I anslutning finns det ytterligare ett rum som kan användas som antingen vardagsrum eller sovrum, eller varför inte dela upp det i två? Utöver detta finns ett till sovrum som erbjuder flexibilitet och bekvämlighet. Självklart finns även ett badrum för den dagliga komforten!\nKällarvåningen utgör en guldgruva av möjligheter, med högt i tak och gott om utrymme för att skapa extra bostadsyta. Här finns plats för fler sovrum, trevliga sällskapsytor eller till och med en hobbyverksamhet. Komplett med toalett, tvättstuga och gott om förrådsutrymmen, är denna villa redo att välkomna er till ett hem att trivas i.",
+      "NumberOfRooms": 3,
+      "MonthlyFee": 2463,
+      "OperatingCostPerYear": 29559,
+      "YearOfConstruction": 1965,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED29B4CF45A07140159887578751B84532-20240425113710-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDBF91E7C9865B4A579E124F68629489B3-20240425114016-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDF18C23C6F7A84258905DA2A9273D5A44-20240425114029-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDCFF6A18355F34C8DA849EF71632C80E0-20240425113722-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED9DE3446C7E044F08A87DCD098B24342B-20240425113741-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDF252AA5512484693B1AE6C0E9A2CB85D-20240425113810-w1280-q90.jpg"
+        }
+
+      ],
+      "Realtor": {
+        "Email": "charlotte.platoff@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 5
+      },
+      "Adress": "Torgasträdet 14",
+      "County": {
+        "CountyName": "Skåne län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Kristianstad"
+      },
+      "Price": 4495000,
+      "LivingArea": 176,
+      "AuxiliaryArea": 30,
+      "PlotArea": 2893,
+      "Description": "Steg in i historien och gör din dröm till verklighet med detta enastående historiska hem i hjärtat av Yngsjö by!",
+      "NumberOfRooms": 6,
+      "MonthlyFee": 3907,
+      "OperatingCostPerYear": 46894,
+      "YearOfConstruction": 1909,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDE8E9B1BDF89F4DAFA2DB536FA94EF196-20240515170552-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDF2624CA0A5F246CEABC6CFD553A7017D-20240515124837-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED234D24C2442148C6B32F3C41E786AF7C-20240515124837-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED7C6F38C7479A43898D233AA21FA8053B-20240515130053-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED73319E039453407E85EB725502E72CF2-20240515170953-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED29D1F474293D4D1F82D1A86ABB3EEC4F-20240515170953-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED523BF38858EB404FAC849A1986F0ACE9-20240515170953-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED171EFDABA75440B397E89C91EEF93314-20240515171256-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED1B0B85F3AA6A48CCBCB0815E5034AF4D-20240515174514-w1280-q90.jpg"
+        }
+
+      ],
+      "Realtor": {
+        "Email": "charlotte.platoff@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 5
+      },
+      "Adress": "Marsvinsvägen 5",
+      "County": {
+        "CountyName": "Skåne län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Kristianstad"
+      },
+      "Price": 2500000,
+      "LivingArea": 0,
+      "AuxiliaryArea": 0,
+      "PlotArea": 1166,
+      "Description": "Nu finns möjlighet att förverkliga dina husdrömmar i lugna och havsnära Yngsjö! På Marsvinsvägen 5 finner man en 1 166 kvadratmeter stor tomt som är obebyggd. Här kan man bygga sitt egna drömhem på en lugn och lågtrafikerad återvändsgata med naturen som en nära granne. Genom en kort promenad når man dessutom Yngsjös vita sandstränder.\nFastigheten ligger inom detaljplanerat område som tillåter byggnation av hus med en byggnadsarea upp till 250 kvm. Alltså finns det möjlighet att bygga ett hus där hela familjen har plats att trivas! Marken på fastigheten är plan och redo att bebyggas.\nFrån Marsvinsvägen 5 når man Åhus på cirka 10 minuters bilfärd, och centrala Kristianstad når man på under 30 minuter. Dessutom finns det goda bussförbindelser till både Åhus och Kristianstad.\nFör mer information om hur du kan förverkliga dina husdrömmar på Marsvinsvägen 5, var vänlig och kontakta ansvarig mäklare.\nPs. Följ oss gärna på Instagram: smhkristianstad. Där uppdaterar vi om just denna och andra pågående förmedlingar.",
+      "NumberOfRooms": 0,
+      "MonthlyFee": 563,
+      "OperatingCostPerYear": 6760,
+      "YearOfConstruction": 0,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED46550A964AC64538A65C0FC1FAF5F980-20240326110653-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDEAE114746DB34D2A87ACEEA4CD211CD0-20240326110702-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED0495209D7AEB4EE4A72E720467DE2C15-20240326110706-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDC924354F43D347AF849165A24D0365A2-20240326110802-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED3E2CA8A819DF47E687A7FF5DD68BB59B-20240326110412-w1280-q90.png"
+        }
+      ],
+      "Realtor": {
+        "Email": "charlotte.platoff@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 3
+      },
+      "Adress": "Smältverksgatan 106",
+      "County": {
+        "CountyName": "Västmanlands län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Västerås"
+      },
+      "Price": 700000,
+      "LivingArea": 61,
+      "AuxiliaryArea": 0,
+      "PlotArea": 0,
+      "Description": "-PRISSÄNKT-\nRenoveringsbehov ger dig möjlighet att skapa ditt drömhem med djup inglasad balkong och barnvänligt läge.",
+      "NumberOfRooms": 2,
+      "MonthlyFee": 4497,
+      "OperatingCostPerYear": 53964,
+      "YearOfConstruction": 1973,
+      "Gallery": [
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDBF829D1E9391460E8C22A6318F2B5D61-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED6D00A1504BBC44E5A383D6D93D77AE5F-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED9FFB38159469464E9E0DD598C8FEEB3E-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED9F30BAC8C9884018880EB9D34DA63A1C-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED61E4FB0F100545F59355E2BFB10B1D44-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED8BB2BD58858B43149629E4739B7926DE-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MED6BA734C45C624495B88FA392EBF8E089-20240315150951-w1280-q90.jpg"
+        },
+        {
+          "ImageURL": "https://vitec-cdn.kowboy.se/img/G12-MEDAFFA3B648ABC46A2A28BC289039B80B9-20240315205742-w1280-q90.jpg"
+        }
+      ],
+      "Realtor": {
+        "Email": "maximilian.eriksson@smh.se"
+      }
+    },
+    {
+      "Category": {
+        "CategoryId": 3
+      },
+      "Adress": "Stora Törnekvior 13A",
+      "County": {
+        "CountyName": "Gotlands län"
+      },
+      "Municipality": {
+        "MunicipalityName": "Gotland"
+      },
+      "Price": 700000,
+      "LivingArea": 87,
+      "AuxiliaryArea": 0,
+      "PlotArea": 0,
+      "Description": "Välkommen till denna härliga 4-rumslägenhet med dubbla balkonger och öppen planlösning! Med en boyta på 87,5 kvadratmeter finns gott om plats för både umgänge och vila. Lägenheten, som ligger högst upp på fjärde våningen, har två underbara balkonger där du kan njuta av soliga dagar och kvällar. Här bor du bekvämt med närhet till grönområden, service och kommunikationer.",
+      "NumberOfRooms": 4,
+      "MonthlyFee": 6302,
+      "OperatingCostPerYear": 14443,
+      "YearOfConstruction": 2004,
+      "Gallery": [
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42422565.jpg?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364966.jpg?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364954.jpg?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364962.JPG?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364960.JPG?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364963.JPG?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364950.JPG?Bredd=1680"
+        },
+        {
+          "ImageURL": "https://media.fastighetsbyran.se/42364952.JPG?Bredd=1680"
+        }
+      ],
+      "Realtor": {
+        "Email": "thomas.sandelius@fastighetsbyran.se"
       }
     }
   ]
