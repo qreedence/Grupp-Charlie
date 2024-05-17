@@ -308,7 +308,7 @@ select > option {
     align-items: start;
     border-radius: 10px;
     height: 360px;
-    width: 60%;
+    width: 60%;    
 }
 
 .house-card > .card-left {
@@ -347,6 +347,21 @@ select > option {
 
     .right b {
         color: var(--primary-clr-800);
+    }
+
+.sold {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #34d399;
+    color: white;
+    width: 100px;
+    padding: 10px;
+    border-radius: 2px;
+}
+
+    .sold h2 {
+        color: white;
     }
 
 .house-info {
