@@ -3,10 +3,12 @@ using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
+//Author: Susanna Renström
+
 namespace API.Data.Repositories
 {   
     public class AgencyRepository : IAgency
-    {   //Author: Susanna Renström
+    {   
         private ApplicationDbContext applicationDbContext;
 
         public AgencyRepository(ApplicationDbContext ApplicationDbContext)

@@ -2,10 +2,12 @@
 using API.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
+//Author: Susanna Renström
+
 namespace API.Data.Repositories
 {   
     public class CategoryRepository : ICategory
-    {   //Author: Susanna Renström
+    {   
         private readonly ApplicationDbContext applicationDbContext;
 
         public CategoryRepository(ApplicationDbContext applicationDbContext)

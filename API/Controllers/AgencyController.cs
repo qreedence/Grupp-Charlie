@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using API.Data.Repositories;
 using API.Data.Models;
 
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+//Author: Susanna Renström
 namespace API.Controllers
-{   //Author; Susanna
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class AgencyController : ControllerBase

@@ -1,9 +1,11 @@
 ﻿using API.Data.Models;
 
+//Author: Susanna Renström
+
 namespace API.Data.Interfaces
 {
     public interface ICategory
-    {   //Author; Susanna
+    {   
         public Task AddAsync(Category category);
         public Task<List<Category>> GetAllAsync();
         public Task UpdateAsync(Category category);

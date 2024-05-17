@@ -9,21 +9,18 @@
 @inject MessageService MessageService
 @*Author: Susanna Renström*@
 
-<CheckAuthorization/>
+<CheckAuthorization />
 <EditForm Model="House" OnSubmit="Submit" FormName="edit" class="card form">
     <h3>Är du säker på att du vill radera detta objekt?</h3>
     <div>
-        
-       
-        <InputNumber id="houseid" @bind-Value="House.HouseId" hidden/>
-        
+        <InputNumber id="houseid" @bind-Value="House.HouseId" hidden />
     </div>
     <div style="display: flex; gap: 0.1rem;justify-content:center;">
         <button type="submit">Radera</button>
         <button @onclick="() => NavigateBackToCurrentRealtor(CreateErrorMessage())">Avbryt</button>
     </div>
-   
-</EditForm> 
+
+</EditForm>
 
 @code {
     [Parameter]
@@ -31,7 +28,8 @@
     House House { get; set; } = new House();
 
     protected override async Task OnParametersSetAsync()
-    {   try
+    {
+        try
         {
             var result = await Http.GetFromJsonAsync<House>($"api/house/{(int)Id}");
             if (result != null)
@@ -56,8 +54,8 @@
             };
         await NavigateBackToCurrentRealtor(message);
     }
-        
-    
+
+
     public async Task NavigateBackToCurrentRealtor(Message message)
     {
         if (message != null)
@@ -72,5 +70,5 @@
         return new Message { Text = "Raderingen avbröts.", Type = MessageType.Error };
     }
 
-    
+
 }
