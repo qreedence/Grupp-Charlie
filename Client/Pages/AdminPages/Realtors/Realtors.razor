@@ -44,10 +44,10 @@
 
                         <h2>@realtor.FirstName @realtor.LastName</h2>
                         <h4>@(realtor.Agency?.NameOfAgency ?? "Ingen byrå tillgänglig")</h4><br />
-
+                        
                         @if (realtor.EmailConfirmed == false)
                         {
-                            <div class="sold">
+                            <div class="sold" style="position:inherit;">
                                 <p style="font-weight: bold;">Ej aktiverad</p>
                             </div>
                         }
