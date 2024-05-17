@@ -114,10 +114,13 @@ FilteredAgencies = Realtors.Where(u => u.UserName == UserNameFromToken).ToList()
             UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
         }
     }
-
+    
     public async Task Submit()
     {
         if (Validate() == true)
+        {
+
+        }
         if(CheckIfEmailIsUnique() == true)
         {
             RegisterModel.Agency = await Http.GetFromJsonAsync<Agency>($"api/agency/{AgencyId}");

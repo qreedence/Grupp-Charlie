@@ -209,7 +209,7 @@
 
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
         APIKey = await Http.GetFromJsonAsync<APIKey>("api/APIKey");
-        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality}");
+        srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality.MunicipalityName}");
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
         var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
         UserNameFromToken = await currentToken.Content.ReadAsStringAsync();

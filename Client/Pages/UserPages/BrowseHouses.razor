@@ -24,7 +24,7 @@
         <label>Välj kommun</label>
         @if (Municipalities != null)
         {
-            <select @bind="MunicipalityId">
+            <select @bind-value="MunicipalityId" @onchange="SetMunicipality" @bind-value:event="oninput">
                 <option value="" selected>Välj kommun</option>
                 @foreach (var municipality in FilteredMunicipalities)
                 {
@@ -160,6 +160,7 @@ else
     private int CategoryId { get; set; }
 
     private string SelectedCounty { get; set; } = "";
+    private string SelectedMunicipality { get; set; } = "";
 
     public string srcUrl { get; set; }
 
@@ -199,6 +200,18 @@ else
             FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == SelectedCounty).ToList();
             StateHasChanged();
         }
+
+        if (ListOfHouses != null && !string.IsNullOrEmpty(SelectedCounty) && !string.IsNullOrEmpty(SelectedMunicipality) && CategoryId == 0)
+        {
+            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == SelectedCounty && h.Municipality != null && h.Municipality.MunicipalityName == SelectedMunicipality).ToList();
+            StateHasChanged();
+        }
+
+        if (ListOfHouses != null && !string.IsNullOrEmpty(SelectedCounty) && !string.IsNullOrEmpty(SelectedMunicipality) && CategoryId != 0)
+        {
+            FilteredList = ListOfHouses.Where(h => h.County != null && h.County.CountyName == SelectedCounty && h.Municipality != null && h.Municipality.MunicipalityName == SelectedMunicipality && h.Category.CategoryId == CategoryId).ToList();
+            StateHasChanged();
+        }
     }
 
     public async Task NoFilter()
@@ -212,6 +225,13 @@ else
         var result = await Http.GetFromJsonAsync<County>($"api/county/{CountyId}");
         SelectedCounty = result.CountyName;
         FilteredMunicipalities = Municipalities.Where(m => m.CountyName == SelectedCounty).ToList();
+        StateHasChanged();
+    }
+
+    public async Task SetMunicipality()
+    {
+        var resultMunicipality = await Http.GetFromJsonAsync<Municipality>($"api/municipality/{MunicipalityId}");
+        SelectedMunicipality = resultMunicipality.MunicipalityName;
         StateHasChanged();
     }
 }

@@ -32,6 +32,16 @@
             realtor-cards html and css
         *@
 
+        @if(ListOfRealtors.FirstOrDefault().Agency != null)
+        {
+            <h2>@ListOfRealtors.FirstOrDefault().Agency.NameOfAgency</h2>
+            <div class="agency-description">
+                <img src="@ListOfRealtors.FirstOrDefault().Agency.Logo" />
+                <p>@ListOfRealtors.FirstOrDefault().Agency.Description</p>
+            </div>
+        }
+
+
         <div class="realtor-cards">
             @foreach (var realtor in ListOfRealtors)
             {
@@ -48,11 +58,11 @@
                         @if (realtor.EmailConfirmed == false)
                         {
                             <div class="sold" style="position:inherit;">
-                                <p style="font-weight: bold;">Ej aktiverad</p>
+                                <p style="font-weight: bold; color:red;" >Ej aktiverad</p>
                             </div>
                         }
 
-                        <p><i class="fa-regular fa-envelope"></i> @realtor.Email</p>
+                        <p id="email"><i class="fa-regular fa-envelope"></i> @realtor.Email</p>
                         @if (!string.IsNullOrEmpty(realtor.PhoneNumber))
                         {
                             <p><i class="fa-solid fa-phone"></i> @realtor.PhoneNumber</p>
