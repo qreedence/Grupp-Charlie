@@ -11,20 +11,24 @@
 @*Author: Mikaela Älgekrans*@
 <CheckAuthorization/>
 <ReceiveMessage />
+@{
+    FilteredRealtors = Realtors.Where(u => u.UserName == UserNameFromToken).ToList();
+    //Set current agency
+    @foreach (var realtor in FilteredRealtors)
+    {
+        RealtorId = realtor.Id;
+    }
+}
 <EditForm Model="House" OnSubmit="Submit" FormName="CreateHouse" class="card form">
 
     <div>
         <label>Mäklare</label>
-        @if (Realtors != null)
+        @if (FilteredRealtors != null)
         {
-            <select @bind="RealtorId" >
-                @foreach (var realtor in Realtors)
+            <select @bind="RealtorId" disabled>
+                @foreach (var realtor in FilteredRealtors.Where(a => a.Id == RealtorId))
                 {
-                    if (Realtor != null && realtor.Id == Realtor.Id)
-                    {
-                        <option value="@realtor.Id" selected disabled>@realtor.FirstName @realtor.LastName</option>
-                    }
-                    @* <option value="@realtor.Id" disabled>@realtor.FirstName @realtor.LastName</option> *@
+                    <option value="@realtor.Id">@realtor.FirstName @realtor.LastName</option>
                 }
             </select>
         }
@@ -151,6 +155,8 @@
     private int CountyId { get; set; }
     private string RealtorId { get; set; }
     private int MunicipalityId { get; set; }
+    public string UserNameFromToken { get; set; }
+    public List<Realtor> FilteredRealtors { get; set; }
 
     public List<Image> Images { get; set; } = new List<Image>();
 
@@ -166,16 +172,11 @@
         var token = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "authToken");
         if (!string.IsNullOrEmpty(token))
         {
-            var currentTokenResponse = await Http.GetAsync($"api/authenticate/getusername?token={token}");
-            if (currentTokenResponse.IsSuccessStatusCode)
-            {
-                string username = await currentTokenResponse.Content.ReadAsStringAsync();
-                if (!string.IsNullOrEmpty(username))
-                {
-                    Realtor = await Http.GetFromJsonAsync<Realtor>($"api/realtor/getbyname?username={username}");
-                }
-            }
-        }
+            
+                var currentToken = await Http.GetAsync($"api/authenticate/getusername?token={token}");
+                UserNameFromToken = await currentToken.Content.ReadAsStringAsync();
+          }
+        
     }
 
     void AddImageField()
