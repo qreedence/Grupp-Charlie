@@ -15,7 +15,7 @@
         <div>
         <label>Välj mäklare</label>
         <select @bind-value="RealtorId" @onchange="FilterRealtors" @bind-value:event="oninput">
-                <option value="">Välj mäklare</option>
+                <option value="">Visa alla</option>
             @foreach (var realtor in Realtors)
             {
                 <option value="@realtor.Id">@realtor.FirstName @realtor.LastName</option>
@@ -101,7 +101,21 @@ else
                             @house.Category.CategoryName
                         </p>
                         <p>@(house.Price.ToString("N0") + " kr")</p>
-                        <p id="card-description">@(house.Description?.Split('.')[0])</p>
+                        @{
+                            /* Co-Author: Mikaela Älgekrans */
+                            var description = house.Description;
+                            if (description?.Length > 280)
+                            {
+                                var lastSpaceIndex = description.LastIndexOf(' ', 280);
+                                description = description.Substring(0, lastSpaceIndex) + "...";
+                            }
+
+                            var paragraphs = description.Split(new[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        }
+                        @foreach (var paragraph in paragraphs)
+                        {
+                            <p id="card-description">@paragraph</p>
+                        }
                     </div>
                     <div>
                         <a href="/browse/@house.HouseId"><button>Se detaljer</button></a>

@@ -7,86 +7,17 @@
 
 @*Author: Eden Yusof-Ioannidis*@
 
-<style>
-    .center {
-        padding-top: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: 1500px;
-        margin: 0 auto; /* Detta centrera blocket horisontellt */
-    }
-
-    .realtor-cards {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
-
-    .realtor-card {
-        position: relative;
-        border: 1px solid #ccc;
-        margin: 10px;
-        padding: 20px;
-        width: 400px;
-        height: 180px;
-        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
-        display: flex;
-        align-items: center;
-        border-radius: 8px;
-    }
-
-        .realtor-card h2 {
-            padding-bottom: 10px;
-        }
-
-        .realtor-card:hover {
-            box-shadow: 0 0 10px 0px #34d399;
-            cursor: pointer;
-        }
-
-    .realtor-card-content {
-        margin-left: 10px;
-    }
-
-    .realtor-cards-image {
-        width: 130px;
-        height: 180px;
-        border-radius: 2%;
-        object-fit: cover; /* Klipper bilden för att passa in i behållaren */
-        object-position: center; /* Centrerar bilden i behållaren */
-    }
-
-    .sold {
-        position: absolute;
-        top: 30px;
-        right: 0;
-        background-color: #34d399;
-        color: white;
-        width: 100px;
-        padding: 10px;
-        border-radius: 2px;
-    }
-
-        .sold h2 {
-            color: white;
-        }
- 
-</style>
-
 <ReceiveMessage />
 
-<div class="center">
+<div class="center box">
+    <h1>Mäklare</h1>
     <div>
-        <h1>Mäklare</h1>
-    </div>
-    <div class="button-row">
         <NavLink href="/register" Match="NavLinkMatch.All"><button>Skapa ny mäklare</button></NavLink>
         <NavLink href="/inactive-accounts" Match="NavLinkMatch.All"><button>Godkänn mäklarkonto</button></NavLink>
-        
     </div>
+</div>
 
+<div class="center card white">
     @if (ListOfRealtors == null && Realtor == null)
     {
         <p>Laddar in mäklare...</p>
@@ -100,17 +31,17 @@
         @*Author: Mikaela Älgekrans
             realtor-cards html and css
         *@
-        
+
         <div class="realtor-cards">
             @foreach (var realtor in ListOfRealtors)
-            { 
-                <div class="realtor-card" @onclick="() => NavigateToRealtorProfile(realtor.Id)"> 
-                    
+            {
+                <div class="realtor-card" @onclick="() => NavigateToRealtorProfile(realtor.Id)">
+
                     <img src="@realtor.Avatar" class="realtor-cards-image" onerror="this.onerror=null; this.src='https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg';" />
-                    <div class="realtor-card-content" >
-                        
-                       
-                        
+                    <div class="realtor-card-content">
+
+
+
                         <h2>@realtor.FirstName @realtor.LastName</h2>
                         <h4>@(realtor.Agency?.NameOfAgency ?? "Ingen byrå tillgänglig")</h4><br />
 
@@ -120,13 +51,13 @@
                                 <p style="font-weight: bold;">Ej aktiverad</p>
                             </div>
                         }
-                        
+
                         <p><i class="fa-regular fa-envelope"></i> @realtor.Email</p>
                         @if (!string.IsNullOrEmpty(realtor.PhoneNumber))
                         {
                             <p><i class="fa-solid fa-phone"></i> @realtor.PhoneNumber</p>
                         }
-                        <br />                  
+                        <br />
                     </div>
                 </div>
             }
@@ -169,5 +100,5 @@
     {
         NavigationManager.NavigateTo($"/realtor/profile/{id}");
     }
-  
+
 }

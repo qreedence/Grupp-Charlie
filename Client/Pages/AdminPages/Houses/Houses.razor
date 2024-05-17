@@ -5,29 +5,11 @@
 
 <CheckAuthorization />
 <ReceiveMessage />
-<style>
-    /* .realtor-house-card {
-        border-radius: 2%;
-        width: 400px;
-        height: 267px;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        margin: 10px;
-        box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.20);
-        background-repeat: no-repeat;
-    }
- */
-    .house-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background-color: white;
-        width: 65%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-</style>
+
+<div class="button-row padding">
+    <NavLink href="/houses/create" Match="NavLinkMatch.All"><button>Skapa ny bostad</button></NavLink>
+    <NavLink href="/soldhouses" Match="NavLinkMatch.All"><button>Visa sålda bostäder</button></NavLink>
+</div>
 
 @if (ListOfHouses == null)
 {
@@ -36,12 +18,12 @@
 }
 else
 {    
-    <div class="house-details card">
+    <div class="center card white">
         <div class="houses">
             @foreach (var house in ListOfHouses)
             {
                 <div class="realtor-house-card" @onclick="() => NavigateToHouse(house.HouseId)" style="background-image: url('@(house.Gallery.FirstOrDefault()?.ImageURL ?? "https://bphomes.co.uk/wp-content/uploads/2023/03/placeholder-867x600.jpg")');">
-                    <div class="house-info">
+                    <div class="house-card-info">
                         <h3>@house.Adress</h3>
                         <h2>@(house.Price.ToString("N0") + " kr")</h2>
                         <p>@house.Municipality.MunicipalityName, @house.County.CountyName</p>
@@ -88,11 +70,6 @@ else
         </div>
     </div>
  }
-
-<div class="button-row">
-    <NavLink href="/houses/create" Match="NavLinkMatch.All"><button>Skapa ny bostad</button></NavLink>
-    <NavLink href="/soldhouses" Match="NavLinkMatch.All"><button>Visa sålda bostäder</button></NavLink>
-</div>
 
 @code {
 
