@@ -8,27 +8,7 @@
 
 @*Author: Eden Yusof-Ioannidis*@
 
-@if (Message != null)
-{
-    <div class="center">
-        @if (Message.Type == MessageType.Error)
-        {
-            <div class="error-box">
-                <div class="error-message">
-                    @Message.Text
-                </div>
-            </div>
-        }
-        @if (Message.Type == MessageType.Success)
-        {
-            <div class="success-box">
-                <div class="success-message">
-                    @Message.Text
-                </div>
-            </div>
-        }
-    </div>
-}
+<ReceiveMessage />
 
 <div class="house-details card">
     @if (House == null)
@@ -196,16 +176,11 @@
 
     public bool HasBeenSold { get; set; }
 
-    public Message Message { get; set; }
+ 
 
     protected override async Task OnInitializedAsync()
     {
-        var message = MessageService.ReceiveMessage();
-        if (message != null)
-        {
-            Message = message;
-        }
-
+        
         House = await Http.GetFromJsonAsync<House>($"api/house/{Id}");
         APIKey = await Http.GetFromJsonAsync<APIKey>("api/APIKey");
         srcUrl = ($"https://www.google.com/maps/embed/v1/place?key={APIKey.Key}&q={House.Adress},{House.Municipality.MunicipalityName}");

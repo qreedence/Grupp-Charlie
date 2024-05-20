@@ -26,9 +26,7 @@ namespace API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
-            //builder.Services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
-            //   .AddRoles<IdentityRole>()
-            //   .AddEntityFrameworkStores<ApplicationDbContext>();
+          
             // For Identity
             builder.Services.AddIdentity<Realtor, IdentityRole>(options => options.SignIn.RequireConfirmedEmail = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -67,7 +65,7 @@ namespace API
 
 
             var app = builder.Build();
-            //La till denna för att lösa "loading" problemet
+            // Solved cors related problem
             app.UseCors(policy =>
             policy.WithOrigins("https://localhost:7023", "https://localhost:7256")
                 .AllowAnyMethod()

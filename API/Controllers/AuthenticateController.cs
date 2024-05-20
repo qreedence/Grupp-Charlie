@@ -64,10 +64,7 @@ namespace API.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            //var user = await _userManager.FindByNameAsync(model.Username);
-            //if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-            //{
-
+            
             var user = await _userManager.FindByNameAsync(model.Username);
             // if user email is not yet confirmed, deny access
             if (!await _userManager.IsEmailConfirmedAsync(user))
@@ -92,8 +89,7 @@ namespace API.Controllers
                 }
 
                 var token = GetToken(authClaims);
-                //marcus version nedan med valid to datetime now
-                //if(token.ValidTo < DateTime.Now)
+                
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),

@@ -8,22 +8,6 @@
 
 @*Author: Susanna Renström*@
 
-<style>
-
-    .center-content {
-        margin: 23px auto;
-        padding: 5px 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: 500px;
-    }
-
-        .center-content > p {
-            padding: 10px 0;
-        }
-</style>
 <CheckAuthorization />
 
 @if (House == null)
@@ -196,6 +180,7 @@ else
 
     private int CategoryId { get; set; }
     private List<Category> Categories { get; set; } = new List<Category>();
+    private string Message { get; set; } = "";
 
     protected override async Task OnInitializedAsync()
     {
