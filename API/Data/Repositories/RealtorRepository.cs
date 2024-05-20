@@ -3,6 +3,8 @@ using API.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+//Authors: Susanna Renström, Mikaela Älgekrans, Eden Yusof-Ioannidis
+
 namespace API.Data.Repositories
 {
     public class RealtorRepository : IRealtor

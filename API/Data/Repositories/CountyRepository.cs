@@ -3,6 +3,8 @@ using API.Data.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
+// Author: Mikaela Älgekrans
+
 namespace API.Data.Repositories
 {
     public class CountyRepository : ICounty
